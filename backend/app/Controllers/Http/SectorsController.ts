@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema } from '@ioc:Adonis/Core/Validator'
-import Department from 'App/Models/Department'
 import Sector from 'App/Models/Sector'
+import Department from 'App/Models/Department'
 
 export default class SectorsController {
   public async index({}: HttpContextContract) {

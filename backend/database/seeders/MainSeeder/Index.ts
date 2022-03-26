@@ -18,5 +18,6 @@ export default class IndexSeeder extends BaseSeeder {
     await this.runSeeder(await import('../Product'))
     await this.runSeeder(await import('../Department'))
     await this.runSeeder(await import('../Sector'))
+    await this.runSeeder(await import('../Worker'))
   }
 }
