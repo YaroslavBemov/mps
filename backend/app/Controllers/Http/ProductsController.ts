@@ -3,7 +3,7 @@ import Product from 'App/Models/Product'
 import CreateProductValidator from 'App/Validators/CreateProductValidator'
 
 export default class ProductsController {
-  public async index({ }: HttpContextContract) {
+  public async index({}: HttpContextContract) {
     const products = await Product.all()
 
     return products

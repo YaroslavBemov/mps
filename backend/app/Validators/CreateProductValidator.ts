@@ -2,7 +2,7 @@ import { schema } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class CreateProductValidator {
-  constructor(protected ctx: HttpContextContract) { }
+  constructor(protected ctx: HttpContextContract) {}
 
   /*
    * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
@@ -24,7 +24,7 @@ export default class CreateProductValidator {
    *    ```
    */
   public schema = schema.create({
-    title: schema.string({ trim: true })
+    title: schema.string({ trim: true }),
   })
 
   /**

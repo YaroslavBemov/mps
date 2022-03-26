@@ -5,14 +5,14 @@ export default class ProductSeeder extends BaseSeeder {
   public async run() {
     await Product.createMany([
       {
-        title: 'ERVA.357468.001'
+        title: 'ERVA.357468.001',
       },
       {
-        title: 'ERVA.357468.002'
+        title: 'ERVA.357468.002',
       },
       {
-        title: 'ERVA.357468.003'
-      }
+        title: 'ERVA.357468.003',
+      },
     ])
   }
 }

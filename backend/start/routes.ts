@@ -24,8 +24,16 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+// Product
 Route.group(() => {
   Route.group(() => {
     Route.resource('products', 'ProductsController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
+
+// Department
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('departments', 'DepartmentsController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
