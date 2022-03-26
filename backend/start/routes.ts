@@ -37,3 +37,10 @@ Route.group(() => {
     Route.resource('departments', 'DepartmentsController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
+
+// Sector
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('sectors', 'SectorsController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')

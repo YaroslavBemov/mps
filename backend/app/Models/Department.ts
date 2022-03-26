@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Sector from 'App/Models/Sector'
 
 export default class Department extends BaseModel {
   @column({ isPrimary: true })
@@ -13,4 +14,7 @@ export default class Department extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Sector)
+  public sectors: HasMany<typeof Sector>
 }
