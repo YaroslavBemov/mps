@@ -24,6 +24,13 @@ export default class WorkersController {
       return { message: `There are not sector with this id - ${payload.sectorId}` }
     }
 
+    const worker = await Worker.findBy('title', payload.title)
+
+    if (worker) {
+      response.status(409)
+      return { message: 'Worker already exist' }
+    }
+
     const newWorker = await Worker.create(payload)
     return newWorker
   }

@@ -44,3 +44,17 @@ Route.group(() => {
     Route.resource('sectors', 'SectorsController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
+
+// Worker
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('workers', 'WorkersController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
+
+// Status
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('statuses', 'StatusesController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
