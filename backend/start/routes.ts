@@ -58,3 +58,17 @@ Route.group(() => {
     Route.resource('statuses', 'StatusesController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
+
+// Base MTP
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('base-mtps', 'BaseMtpsController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
+
+// Base Procedure
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('base-procedures', 'BaseProceduresController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')

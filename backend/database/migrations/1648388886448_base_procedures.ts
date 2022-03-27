@@ -1,14 +1,18 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Sectors extends BaseSchema {
-  protected tableName = 'sectors'
+export default class BaseProcedures extends BaseSchema {
+  protected tableName = 'base_procedures'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      table.integer('base_mtp_id').unsigned().references('base_mtps.id').onDelete('CASCADE')
+      table.integer('position').unsigned()
       table.string('title')
-      table.integer('step').unsigned()
-      table.integer('department_id').unsigned().references('departments.id').onDelete('CASCADE')
+      table.integer('sector_id').unsigned().references('sectors.id').onDelete('CASCADE')
+      table.integer('time_total').unsigned()
+      table.integer('time_per_product').unsigned()
+      table.text('comment')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
