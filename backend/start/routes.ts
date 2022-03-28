@@ -86,3 +86,10 @@ Route.group(() => {
     Route.resource('mtps', 'MtpsController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
+
+// Procedure
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('procedures', 'ProceduresController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
