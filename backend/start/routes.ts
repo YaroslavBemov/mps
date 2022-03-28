@@ -72,3 +72,17 @@ Route.group(() => {
     Route.resource('base-procedures', 'BaseProceduresController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
+
+// Order
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('orders', 'OrdersController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
+
+// MTP
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('mtps', 'MtpsController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
