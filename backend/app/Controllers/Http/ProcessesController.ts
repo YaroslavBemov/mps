@@ -15,9 +15,7 @@ export default class ProcessesController {
     const newProcessSchema = schema.create({
       procedureId: schema.number(),
       workerId: schema.number(),
-      timeStart: schema.date(),
-      timeFinish: schema.date(),
-      comment: schema.string({ trim: true })
+      comment: schema.string.optional({ trim: true })
     })
 
     const payload = await request.validate({ schema: newProcessSchema })
@@ -34,8 +32,14 @@ export default class ProcessesController {
       return { message: `There are not worker with this id - ${payload.workerId}` }
     }
 
-    const process = await Process.create(payload)
-    return process
+    const process = await Process.findBy('procedure_id', payload.procedureId)
+    if (process) {
+      response.status(409)
+      return { message: `Process with this procedure ID - ${payload.workerId} already exist` }
+    }
+
+    const newProcess = await Process.create(payload)
+    return newProcess
   }
 
   public async show({ request, response }: HttpContextContract) {
@@ -61,10 +65,10 @@ export default class ProcessesController {
 
     const newProcessSchema = schema.create({
       procedureId: schema.number(),
-      workerId: schema.number(),
-      timeStart: schema.date(),
+      workerId: schema.number.optional(),
+      timeStart: schema.date.optional(),
       timeFinish: schema.date(),
-      comment: schema.string({ trim: true })
+      comment: schema.string.optional({ trim: true })
     })
 
     const payload = await request.validate({ schema: newProcessSchema })

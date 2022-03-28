@@ -18,8 +18,7 @@ export default class ProceduresController {
       position: schema.number(),
       title: schema.string({ trim: true }),
       sectorId: schema.number(),
-      statusId: schema.number(),
-      comment: schema.string({ trim: true })
+      comment: schema.string.optional({ trim: true })
     })
 
     const payload = await request.validate({ schema: newProcedureSchema })
@@ -36,10 +35,14 @@ export default class ProceduresController {
       return { message: `There are not sector with this id - ${payload.mtpId}` }
     }
 
-    const status = await Status.find(payload.statusId)
-    if (!status) {
+    const procedureWithPayloadPosition = await Procedure.query()
+      .where('mtp_id', payload.mtpId)
+      .andWhere('position', payload.position)
+      .first()
+
+    if (procedureWithPayloadPosition) {
       response.status(409)
-      return { message: `There are not status with this id - ${payload.mtpId}` }
+      return { message: `Procedure with position - ${payload.position} already exist in this MTP` }
     }
 
     const procedure = await Procedure.create(payload)
@@ -94,6 +97,16 @@ export default class ProceduresController {
     if (!status) {
       response.status(409)
       return { message: `There are not status with this id - ${payload.mtpId}` }
+    }
+
+    const procedureWithPayloadPosition = await Procedure.query()
+      .where('mtp_id', payload.mtpId)
+      .andWhere('position', payload.position)
+      .first()
+
+    if (procedureWithPayloadPosition) {
+      response.status(409)
+      return { message: `Procedure with position - ${payload.position} already exist in this MTP` }
     }
 
     await procedure.merge(payload).save()
