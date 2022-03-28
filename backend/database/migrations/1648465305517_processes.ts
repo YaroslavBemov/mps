@@ -6,8 +6,8 @@ export default class Processes extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('procedure_id').unsigned().references('procedures.id').onDelete('CASCADE')
-      table.integer('worker_id').unsigned().references('workers.id').onDelete('CASCADE')
+      table.integer('procedure_id').unsigned().references('procedures.id').onDelete('CASCADE').notNullable()
+      table.integer('worker_id').unsigned().references('workers.id').onDelete('CASCADE').notNullable()
       table.timestamp('time_start', { useTz: true })
       table.timestamp('time_finish', { useTz: true })
       table.text('comment')

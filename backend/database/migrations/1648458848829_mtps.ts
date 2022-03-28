@@ -6,8 +6,8 @@ export default class Mtps extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('order_id').unsigned().references('orders.id').onDelete('CASCADE')
-      table.integer('serial').unsigned()
+      table.integer('order_id').unsigned().references('orders.id').onDelete('CASCADE').notNullable()
+      table.integer('serial').unsigned().notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

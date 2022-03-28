@@ -11,7 +11,7 @@ export default class Process extends BaseModel {
   @column()
   public workerId: number
 
-  @column.dateTime()
+  @column.dateTime({ autoCreate: true })
   public timeStart: DateTime
 
   @column.dateTime()

@@ -7,8 +7,8 @@ export default class BaseProcedures extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('base_mtp_id').unsigned().references('base_mtps.id').onDelete('CASCADE')
-      table.integer('position').unsigned()
-      table.string('title')
+      table.integer('position').unsigned().notNullable()
+      table.string('title').notNullable()
       table.integer('sector_id').unsigned().references('sectors.id').onDelete('CASCADE')
       table.integer('time_total').unsigned()
       table.integer('time_per_product').unsigned()

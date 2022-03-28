@@ -25,5 +25,6 @@ export default class IndexSeeder extends BaseSeeder {
     await this.runSeeder(await import('../Order'))
     await this.runSeeder(await import('../Mtp'))
     await this.runSeeder(await import('../Procedure'))
+    await this.runSeeder(await import('../Process'))
   }
 }

@@ -6,9 +6,9 @@ export default class Orders extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('title')
-      table.integer('product_id').unsigned().references('products.id').onDelete('CASCADE')
-      table.integer('count').unsigned()
+      table.string('title').notNullable()
+      table.integer('product_id').unsigned().references('products.id').onDelete('CASCADE').notNullable()
+      table.integer('count').unsigned().notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -6,7 +6,7 @@ export default class Workers extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('title')
+      table.string('title').notNullable()
       table.integer('sector_id').unsigned().references('sectors.id').onDelete('CASCADE')
 
       /**

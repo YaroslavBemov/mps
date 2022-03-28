@@ -93,3 +93,10 @@ Route.group(() => {
     Route.resource('procedures', 'ProceduresController').apiOnly()
   }).prefix('v1')
 }).prefix('api')
+
+// Process
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('processes', 'ProcessesController').apiOnly()
+  }).prefix('v1')
+}).prefix('api')
