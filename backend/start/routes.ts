@@ -24,79 +24,29 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-// Product
 Route.group(() => {
   Route.group(() => {
+    // Product
     Route.resource('products', 'ProductsController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Department
-Route.group(() => {
-  Route.group(() => {
+    // Department
     Route.resource('departments', 'DepartmentsController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Sector
-Route.group(() => {
-  Route.group(() => {
+    // Sector
     Route.resource('sectors', 'SectorsController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Worker
-Route.group(() => {
-  Route.group(() => {
+    // Worker
     Route.resource('workers', 'WorkersController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Status
-Route.group(() => {
-  Route.group(() => {
+    // Status
     Route.resource('statuses', 'StatusesController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Base MTP
-Route.group(() => {
-  Route.group(() => {
+    // Base MTP
     Route.resource('base-mtps', 'BaseMtpsController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Base Procedure
-Route.group(() => {
-  Route.group(() => {
+    // Base Procedure
     Route.resource('base-procedures', 'BaseProceduresController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Order
-Route.group(() => {
-  Route.group(() => {
+    // Order
     Route.resource('orders', 'OrdersController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// MTP
-Route.group(() => {
-  Route.group(() => {
+    // MTP
     Route.resource('mtps', 'MtpsController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Procedure
-Route.group(() => {
-  Route.group(() => {
+    // Procedure
     Route.resource('procedures', 'ProceduresController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
-
-// Process
-Route.group(() => {
-  Route.group(() => {
+    // Process
     Route.resource('processes', 'ProcessesController').apiOnly()
-  }).prefix('v1')
-}).prefix('api')
+  }).prefix('api/v1')
+}).middleware('auth')
