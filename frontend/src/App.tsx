@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import './App.css';
-import Button from '@mui/material/Button';
 import Login from './features/login/Login'
 import OutlinedCard from './components/card/OutlinedCard'
 import MenuAppBar from './components/header/MenuAppBar';
+import { observer } from 'mobx-react-lite';
+import { Context } from '.';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
-  const [auth, setAuth] = useState(false)
+  const { store } = React.useContext(Context);
 
   return (
-    <div className="App">
-      <MenuAppBar />
-      {auth ? (
-        <OutlinedCard />
-      ) : (
-        <Login />
-      )}
-      <Button onClick={()=>setAuth(!auth)}>auth</Button>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <div className="App">
+        <MenuAppBar />
+        {store.authStore.isAuth ? (
+          <OutlinedCard />
+        ) : (
+          <Login />
+        )}
+      </div>
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default observer(App);

@@ -11,13 +11,20 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { useStore } from '../../hooks/useStore'
+import { observer } from 'mobx-react-lite';
+import { Context } from '../..';
 
-export default function MenuAppBar() {
-  const [auth, setAuth] = React.useState(true);
+function MenuAppBar() {
+  // const [auth, setAuth] = React.useState(true);
+  // const { authStore } = useStore()
+  const { store } = React.useContext(Context);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
+    store.authStore.setAuth(event.target.checked);
+    console.log(store.authStore.isAuth)
   };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,12 +41,12 @@ export default function MenuAppBar() {
         <FormControlLabel
           control={
             <Switch
-              checked={auth}
+              checked={store.authStore.isAuth}
               onChange={handleChange}
               aria-label="login switch"
             />
           }
-          label={auth ? 'Logout' : 'Login'}
+          label={store.authStore.isAuth ? 'Logout' : 'Login'}
         />
       </FormGroup>
       <AppBar position="static">
@@ -56,7 +63,7 @@ export default function MenuAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Photos
           </Typography>
-          {auth && (
+          {store.authStore.isAuth && (
             <div>
               <IconButton
                 size="large"
@@ -93,3 +100,5 @@ export default function MenuAppBar() {
     </Box>
   );
 }
+
+export default observer(MenuAppBar)
