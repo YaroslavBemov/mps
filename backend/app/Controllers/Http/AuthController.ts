@@ -1,8 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-
+// TODO rework
 export default class AuthController {
-  public async login({ auth, request, response }: HttpContextContract) {
+  public async login({ auth, request, response }) {
     // const name = request.input('name')
     // const password = request.input('password')
 
@@ -19,10 +19,7 @@ export default class AuthController {
     const password = request.input('password')
 
     // Lookup user manually
-    const user = await User
-      .query()
-      .where('name', name)
-      .firstOrFail()
+    const user = await User.query().where('name', name).firstOrFail()
 
     // Verify password
     // if (!(await Hash.verify(user.password, password))) {
@@ -35,15 +32,15 @@ export default class AuthController {
 
     // Generate token
     const token = await auth.use('api').generate(user, {
-      expiresIn: '7days'
+      expiresIn: '7days',
     })
     return token
   }
 
-  public async logout({ auth }: HttpContextContract) {
+  public async logout({ auth }) {
     await auth.use('api').revoke()
     return {
-      revoked: true
+      revoked: true,
     }
   }
 
@@ -59,9 +56,7 @@ export default class AuthController {
     const name = request.input('name')
     // const password = request.input('password')
 
-    const user = await User.query()
-      .where('name', name)
-      .firstOrFail()
+    const user = await User.query().where('name', name).firstOrFail()
     return user
   }
 }

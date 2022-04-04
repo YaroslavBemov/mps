@@ -57,4 +57,3 @@ Route.group(() => {
   Route.post('login', 'AuthController.login')
   Route.post('logout', 'AuthController.logout').middleware('auth')
 }).prefix('api/v1')
-
