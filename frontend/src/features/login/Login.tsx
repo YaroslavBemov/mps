@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useStore } from '../../hooks/useStore';
 
 function Copyright(props: any) {
   return (
@@ -26,13 +27,17 @@ function Copyright(props: any) {
 
 
 export default function SignIn() {
+  const {authStore} = useStore()
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const name = String(data.get('name'))
+    const password = String(data.get('password'))
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      name,
+      password
     });
+    authStore.login(name, password)
   };
 
   return (
@@ -57,10 +62,10 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="name"
             label="Name"
-            name="email"
-            autoComplete="email"
+            name="name"
+            autoComplete="name"
             autoFocus
           />
           <TextField

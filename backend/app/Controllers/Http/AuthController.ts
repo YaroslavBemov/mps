@@ -34,7 +34,7 @@ export default class AuthController {
     const token = await auth.use('api').generate(user, {
       expiresIn: '7days',
     })
-    return token
+    return { ...token }
   }
 
   public async logout({ auth }) {

@@ -21,7 +21,6 @@ function MenuAppBar() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     authStore.setAuth(event.target.checked);
-    console.log(authStore.isAuth)
   };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -89,6 +88,7 @@ function MenuAppBar() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={() => authStore.logout()}>Logout</MenuItem>
               </Menu>
             </div>
           )}
