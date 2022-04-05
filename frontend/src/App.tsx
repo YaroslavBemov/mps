@@ -5,7 +5,7 @@ import LoggedIn from './routes/logged-in'
 import { observer } from 'mobx-react-lite';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useStore } from './hooks/useStore';
-import AdminLine from './components/header/AdminLine';
+// import AdminLine from './components/header/AdminLine';
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         ) : (
           <LoggedOut />
         )}
-        <AdminLine />
+        {/* <AdminLine /> */}
       </div>
     </ThemeProvider>
   );
