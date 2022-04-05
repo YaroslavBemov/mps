@@ -9,8 +9,8 @@ export default function LoggedIn() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {routes.map((route) => (
-            <Route path={route.path} element={<route.component />} />
+          {routes.map((route, index) => (
+            <Route path={route.path} element={<route.component />} key={index} />
           ))}
         </Route>
         <Route path="*" element={<NoMatch />} />

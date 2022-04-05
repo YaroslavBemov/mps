@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,13 +14,17 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
-import { mainListItems, secondaryListItems } from './listItems';
 import Copyright from '../../components/copyright/Copyright';
 
+import { routes } from '../../routes/routes'
 
 const drawerWidth: number = 240;
 
@@ -76,8 +80,20 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
+  const [selectedIndex, setSelectedIndex] = React.useState('/');
+  const [selectedItem, setSelectedItem] = React.useState('Dashboard');
+  const navigate = useNavigate()
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    path: string,
+    name: string
+  ) => {
+    setSelectedIndex(path);
+    setSelectedItem(name)
+    navigate(path)
   };
 
   return (
@@ -109,7 +125,7 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {selectedItem}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -133,9 +149,18 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {routes.map((route, index) => (
+              <ListItemButton
+                selected={selectedIndex === route.path}
+                onClick={(event) => handleListItemClick(event, route.path, route.sidebarName)}
+                key={index}
+              >
+                <ListItemIcon>
+                  {<route.icon />}
+                </ListItemIcon>
+                <ListItemText primary={route.sidebarName} />
+              </ListItemButton>
+            ))}
           </List>
         </Drawer>
         <Box
