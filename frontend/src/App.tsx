@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import Login from './features/login/Login'
-import TableTest from './components/dataGridTest/TableTest'
-import MenuAppBar from './components/header/MenuAppBar';
+import LoggedOut from './routes/logged-out'
+import LoggedIn from './routes/logged-in'
 import { observer } from 'mobx-react-lite';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useStore } from './hooks/useStore';
+import AdminLine from './components/header/AdminLine';
 
 
 function App() {
   const { authStore, uiStore } = useStore()
-  const {mode} = uiStore
-  
+  const { mode } = uiStore
+
   const theme = createTheme({
     palette: {
       mode
@@ -21,12 +21,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <MenuAppBar />
         {authStore.isAuth ? (
-          <TableTest />
+          <LoggedIn />
         ) : (
-          <Login />
+          <LoggedOut />
         )}
+        <AdminLine />
       </div>
     </ThemeProvider>
   );
