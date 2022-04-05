@@ -1,27 +1,29 @@
 import React from 'react';
 import './App.css';
 import Login from './features/login/Login'
-import OutlinedCard from './components/card/OutlinedCard'
+import TableTest from './components/dataGridTest/TableTest'
 import MenuAppBar from './components/header/MenuAppBar';
 import { observer } from 'mobx-react-lite';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useStore } from './hooks/useStore';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 
 function App() {
-  const { authStore } = useStore()
+  const { authStore, uiStore } = useStore()
+  const {mode} = uiStore
+  
+  const theme = createTheme({
+    palette: {
+      mode
+    }
+  });
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <div className="App">
         <MenuAppBar />
         {authStore.isAuth ? (
-          <OutlinedCard />
+          <TableTest />
         ) : (
           <Login />
         )}

@@ -14,8 +14,13 @@ import Menu from '@mui/material/Menu';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../hooks/useStore';
 
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 function MenuAppBar() {
-  const { authStore } = useStore()
+
+  const { authStore, uiStore } = useStore()
+  const {mode} = uiStore
   
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -32,7 +37,16 @@ function MenuAppBar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{
+      display: 'flex',
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      bgcolor: 'background.default',
+      color: 'text.primary',
+      borderRadius: 1,
+      p: 3,
+    }}>
       <FormGroup>
         <FormControlLabel
           control={
@@ -44,6 +58,10 @@ function MenuAppBar() {
           }
           label={authStore.isAuth ? 'Logout' : 'Login'}
         />
+        {mode} mode
+      <IconButton sx={{ ml: 1 }} onClick={() => uiStore.toggleMode()} color="inherit">
+        {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+      </IconButton>
       </FormGroup>
       <AppBar position="static">
         <Toolbar>
