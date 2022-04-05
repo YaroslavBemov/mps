@@ -20,8 +20,8 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 function MenuAppBar() {
 
   const { authStore, uiStore } = useStore()
-  const {mode} = uiStore
-  
+  const { mode } = uiStore
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,31 +38,30 @@ function MenuAppBar() {
 
   return (
     <Box sx={{
-      display: 'flex',
-      width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      bgcolor: 'background.default',
-      color: 'text.primary',
-      borderRadius: 1,
-      p: 3,
+      flexGrow: 1
     }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={authStore.isAuth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={authStore.isAuth ? 'Logout' : 'Login'}
-        />
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+      }}>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={authStore.isAuth}
+                onChange={handleChange}
+                aria-label="login switch"
+              />
+            }
+            label={authStore.isAuth ? 'Logout' : 'Login'}
+          />
+        </FormGroup>
         {mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={() => uiStore.toggleMode()} color="inherit">
-        {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
-      </FormGroup>
+        <IconButton sx={{ ml: 1 }} onClick={() => uiStore.toggleMode()} color="inherit">
+          {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+      </Box>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -112,7 +111,7 @@ function MenuAppBar() {
           )}
         </Toolbar>
       </AppBar>
-    </Box>
+    </Box >
   );
 }
 
