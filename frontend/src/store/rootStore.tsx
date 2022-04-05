@@ -1,4 +1,4 @@
-import AuthStore from './AuthStore'
+import AuthStore from './authStore'
 
 export default class RootStore {
   authStore: AuthStore

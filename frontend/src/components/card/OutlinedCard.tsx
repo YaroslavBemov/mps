@@ -16,8 +16,6 @@ const bull = (
   </Box>
 );
 
-
-
 const card = (
   <React.Fragment>
     <CardContent>

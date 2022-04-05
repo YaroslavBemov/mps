@@ -4,22 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import RootStore from './store/RootStore'
+import RootStore from './store/rootStore'
 
-interface State {
-  store: RootStore
-  authStore?: any
-}
+const store = new RootStore()
 
-export const store = new RootStore()
-
-export const Context = createContext<State>({ store })
+export const RootStoreContext = createContext(store)
 
 ReactDOM.render(
   <React.StrictMode>
-    <Context.Provider value={{ store }}>
+    <RootStoreContext.Provider value={ store }>
       <App />
-    </Context.Provider>
+    </RootStoreContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
