@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import LoggedOut from './routes/logged-out'
 import LoggedIn from './routes/logged-in'
@@ -11,6 +11,12 @@ import { useStore } from './hooks/useStore';
 function App() {
   const { authStore, uiStore } = useStore()
   const { mode } = uiStore
+
+  useEffect(() => {
+    if(localStorage.getItem('token')) {
+      authStore.refresh()
+    }
+  }, [])
 
   const theme = createTheme({
     palette: {

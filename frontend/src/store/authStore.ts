@@ -27,11 +27,8 @@ export default class AuthStore {
   async login(name: string, password: string) {
     try {
       const response = await AuthService.login(name, password)
-      console.log(response);
       localStorage.setItem('token', response.data.token)
-      console.log(this.isAuth);
       this.setAuth(true)
-      console.log(this.isAuth);
       this.setUser(response.data.user)
     } catch (error) {
       console.log(error);
@@ -42,10 +39,19 @@ export default class AuthStore {
     try {
       await AuthService.logout()
       localStorage.removeItem('token')
-      console.log(this.isAuth);
       this.setAuth(false)
-      console.log(this.isAuth);
       this.setUser({} as IUser)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async refresh() {
+    try {
+      const response = await AuthService.refresh()
+      console.log(response);
+      this.setAuth(true)
+      this.setUser(response.data.user)
     } catch (error) {
       console.log(error);
     }

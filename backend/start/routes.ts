@@ -56,4 +56,5 @@ Route.group(() => {
   Route.post('test', 'AuthController.test')
   Route.post('login', 'AuthController.login')
   Route.post('logout', 'AuthController.logout').middleware('auth')
+  Route.post('refresh', 'AuthController.refresh').middleware('auth')
 }).prefix('api/v1')

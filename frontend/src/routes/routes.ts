@@ -1,8 +1,8 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-import OutlinedCard from "../components/card/OutlinedCard"
 import Home from "../features/home/Home"
+import Product from '../features/product/product';
 
 export const routes = [
   {
@@ -14,7 +14,7 @@ export const routes = [
   {
     path: 'products',
     sidebarName: 'Products',
-    component: OutlinedCard,
+    component: Product,
     icon: ShoppingCartIcon
   },
 ]
