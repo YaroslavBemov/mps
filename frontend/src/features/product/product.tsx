@@ -1,4 +1,8 @@
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { useStore } from '../../hooks/useStore';
 
 const rows: GridRowsProp = [
   { id: 1, col1: 'Hello', col2: 'World' },
@@ -7,16 +11,23 @@ const rows: GridRowsProp = [
 ];
 
 const columns: GridColDef[] = [
-  { field: 'col1', headerName: 'Column 1', width: 150 },
-  { field: 'col2', headerName: 'Column 2', width: 150 },
+  { field: 'title', headerName: 'Title', width: 150 },
+  { field: 'created_at', headerName: 'Created at', width: 150 },
+  { field: 'updated_at', headerName: 'Updated at', width: 150 },
 ];
 
 const Product = () => {
+  const {productStore} = useStore()
+
+  useEffect(() => {
+    productStore.getAll()
+  }, [])
+
   return (
     <div style={{ height: 300, width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} />
+      <DataGrid rows={toJS(productStore.products)} columns={columns} />
     </div>
   );
 }
 
-export default Product
+export default observer(Product)
