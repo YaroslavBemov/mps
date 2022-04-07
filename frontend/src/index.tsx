@@ -1,10 +1,12 @@
 import React, { createContext } from 'react';
+import {BrowserRouter} from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import RootStore from './store/rootStore'
+
 
 const store = new RootStore()
 
@@ -13,7 +15,9 @@ export const RootStoreContext = createContext(store)
 ReactDOM.render(
   <React.StrictMode>
     <RootStoreContext.Provider value={ store }>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </RootStoreContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')

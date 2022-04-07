@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import LoggedOut from './routes/logged-out'
+import Login from './features/login/Login'
 import LoggedIn from './routes/logged-in'
 import { observer } from 'mobx-react-lite';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -30,7 +30,7 @@ function App() {
         {authStore.isAuth ? (
           <LoggedIn />
         ) : (
-          <LoggedOut />
+          <Login />
         )}
         {/* <AdminLine /> */}
       </div>

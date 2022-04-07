@@ -205,7 +205,7 @@ function DashboardContent() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {routes.map((route, index) => (
+          {/* {routes.map((route, index) => (
             <ListItemButton
               selected={selectedIndex === route.path}
               onClick={(event) => handleListItemClick(event, route.path, route.sidebarName)}
@@ -216,7 +216,7 @@ function DashboardContent() {
               </ListItemIcon>
               <ListItemText primary={route.sidebarName} />
             </ListItemButton>
-          ))}
+          ))} */}
         </List>
       </Drawer>
       <Box
