@@ -33,6 +33,7 @@ import Copyright from '../../components/copyright/Copyright';
 import { routes } from '../../routes/routes'
 
 import { useStore } from '../../hooks/useStore';
+import Nav from '../../components/nav/Nav';
 
 const drawerWidth: number = 240;
 
@@ -87,26 +88,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
-  const [selectedIndex, setSelectedIndex] = React.useState('/');
-  const [selectedItem, setSelectedItem] = React.useState('Dashboard');
+
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { authStore, uiStore } = useStore()
   const { mode } = uiStore
-  const navigate = useNavigate()
+
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    path: string,
-    name: string
-  ) => {
-    setSelectedIndex(path);
-    setSelectedItem(name)
-    navigate(path)
-  };
+
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -144,7 +137,7 @@ function DashboardContent() {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            {selectedItem}
+            Dashboard
           </Typography>
 
           <IconButton color="inherit">
@@ -205,18 +198,7 @@ function DashboardContent() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {/* {routes.map((route, index) => (
-            <ListItemButton
-              selected={selectedIndex === route.path}
-              onClick={(event) => handleListItemClick(event, route.path, route.sidebarName)}
-              key={index}
-            >
-              <ListItemIcon>
-                {<route.icon />}
-              </ListItemIcon>
-              <ListItemText primary={route.sidebarName} />
-            </ListItemButton>
-          ))} */}
+          <Nav />
         </List>
       </Drawer>
       <Box

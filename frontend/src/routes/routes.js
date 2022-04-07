@@ -1,6 +1,3 @@
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
 import Home from "../features/home/Home"
 import Products from '../features/product/Products';
 import Product from '../features/product/Product';
@@ -16,14 +13,10 @@ export const routes = [
       {
         index: true,
         element: <Home />,
-        // sidebarName: 'Dashboard',
-        // icon: DashboardIcon,
       },
       {
         path: 'products',
         element: <Products />,
-        // sidebarName: 'Products',
-        // icon: ShoppingCartIcon,
       },
       {
         path: 'products/:id',
