@@ -1,4 +1,8 @@
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
@@ -27,17 +31,28 @@ const Product = () => {
   }, [])
 
   return (
-    <div style={{ height: 300, width: '100%' }}>
-      <DataGrid
-        onCellDoubleClick={(params, event) => {
-          if (!event.ctrlKey) {
-            event.defaultMuiPrevented = true;
-            navigate(`${params.id}`)
-          }
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center'
         }}
-        rows={toJS(productStore.products)}
-        columns={columns} />
-    </div>
+      >
+        <TextField label="fullWidth" id="fullWidth" variant="outlined" />
+        <Button variant="contained">Contained</Button>
+      </Box>
+      <div style={{ height: 300, width: '100%' }}>
+        <DataGrid
+          onCellClick={(params, event) => {
+            if (!event.ctrlKey) {
+              event.defaultMuiPrevented = true;
+              navigate(`${params.id}`)
+            }
+          }}
+          rows={toJS(productStore.products)}
+          columns={columns} />
+      </div>
+    </>
   );
 }
 
