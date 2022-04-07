@@ -3,6 +3,7 @@ import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { useStore } from '../../hooks/useStore';
+import { useNavigate } from 'react-router-dom';
 
 const rows: GridRowsProp = [
   { id: 1, col1: 'Hello', col2: 'World' },
@@ -17,7 +18,9 @@ const columns: GridColDef[] = [
 ];
 
 const Product = () => {
-  const {productStore} = useStore()
+  const { productStore } = useStore()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     productStore.getAll()
@@ -25,7 +28,15 @@ const Product = () => {
 
   return (
     <div style={{ height: 300, width: '100%' }}>
-      <DataGrid rows={toJS(productStore.products)} columns={columns} />
+      <DataGrid
+        onCellDoubleClick={(params, event) => {
+          if (!event.ctrlKey) {
+            event.defaultMuiPrevented = true;
+            navigate(`${params.id}`)
+          }
+        }}
+        rows={toJS(productStore.products)}
+        columns={columns} />
     </div>
   );
 }
