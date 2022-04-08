@@ -15,26 +15,26 @@ const columns: GridColDef[] = [
   { field: 'updated_at', headerName: 'Updated at', width: 150 },
 ];
 
-const Product = () => {
-  const [newProduct, setNewProduct] = useState('')
+const Department = () => {
+  const [newDepartment, setNewDepartment] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
-  const { productStore } = useStore()
+  const { departmentStore } = useStore()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    productStore.getAllProducts()
+    departmentStore.getAllDepartments()
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target
-    setNewProduct(value)
+    setNewDepartment(value)
     setIsDisabled(value === '')
   }
 
   const handleClick = () => {
-    productStore.storeProduct(newProduct)
-    setNewProduct('')
+    departmentStore.storeDepartment(newDepartment)
+    setNewDepartment('')
     setIsDisabled(true)
   }
 
@@ -52,10 +52,10 @@ const Product = () => {
       >
         <TextField 
         fullWidth 
-        label="New product" 
+        label="New department" 
         id="fullWidth" 
         variant="standard" 
-        value={newProduct}
+        value={newDepartment}
         onChange={handleChange}
         />
         <Box sx={{
@@ -78,11 +78,11 @@ const Product = () => {
               navigate(`${params.id}`)
             }
           }}
-          rows={toJS(productStore.products)}
+          rows={toJS(departmentStore.departments)}
           columns={columns} />
       </div>
     </>
   );
 }
 
-export default observer(Product)
+export default observer(Department)

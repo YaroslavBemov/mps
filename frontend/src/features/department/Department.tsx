@@ -5,53 +5,53 @@ import { useStore } from "../../hooks/useStore"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const Product = () => {
+const Department = () => {
   const [updated, setUpdated] = useState('')
   const [isInputDisabled, setIsInputDisabled] = useState(true)
   const [isSaveDisabled, setIsSaveDisabled] = useState(true)
-  const {productStore} = useStore()
+  const {departmentStore} = useStore()
   const {id} = useParams()
   const navigate = useNavigate()
 
   useEffect(()=>{
-    productStore.getProduct(id)
+    departmentStore.getDepartment(id)
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target
     setUpdated(value)
-    setIsSaveDisabled(value === productStore.product.title)
+    setIsSaveDisabled(value === departmentStore.department.title)
   }
 
   const handleClickUpdate = () => {
-    setUpdated(productStore.product.title)
+    setUpdated(departmentStore.department.title)
     setIsInputDisabled(false)
   }
 
   const handleClickSave = async () => {
-    await productStore.updateProduct(id, updated)
-    await productStore.getProduct(id)
+    await departmentStore.updateDepartment(id, updated)
+    await departmentStore.getDepartment(id)
     setUpdated('')
     setIsInputDisabled(true)
     setIsSaveDisabled(true)
   }
 
   const handleClickDelete = async () => {
-    await productStore.deleteProduct(id)
+    await departmentStore.deleteDepartment(id)
     setUpdated('')
-    navigate('/products')
+    navigate('/')
   }
 
   return (
     <>
       <div>
-        {productStore.product?.title}
+        {departmentStore.department?.title}
       </div>
 
       <TextField 
         sx={{marginBottom: 2}}
         fullWidth 
-        label="Updated product" 
+        label="Updated department" 
         id="fullWidth" 
         variant="standard" 
         disabled={isInputDisabled}
@@ -80,4 +80,4 @@ const Product = () => {
   )
 }
 
-export default observer(Product)
+export default observer(Department)

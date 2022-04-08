@@ -4,7 +4,7 @@ type Mode = 'light' | 'dark'
 
 export default class UIStore {
   rootStore: any
-  mode: Mode = 'light'
+  mode: Mode = 'dark'
 
   constructor(rootStore: any) {
     makeAutoObservable(this)

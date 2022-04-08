@@ -43,6 +43,16 @@ const Nav = () => {
         </ListItemIcon>
         <ListItemText primary='Products' />
       </ListItemButton>
+
+      <ListItemButton
+        selected={selectedIndex === 2}
+        onClick={(event) => handleListItemClick(event, 2, 'departments')}
+      >
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary='Departments' />
+      </ListItemButton>
     </>
   )
 }

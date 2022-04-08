@@ -10,7 +10,7 @@ interface IProduct {
 
 export default class ProductStore{
   rootStore
-  products = []
+  products: IProduct[] = []
   product = {} as IProduct
 
   constructor(rootStore: any) {
@@ -18,7 +18,7 @@ export default class ProductStore{
     this.rootStore = rootStore
   }
 
- async getAll () {
+ async getAllProducts () {
    try {
      const response = await ProductService.getAll()
      this.setProducts(response.data)
@@ -41,7 +41,7 @@ export default class ProductStore{
  async storeProduct (title: string) {
   try {
     await ProductService.storeProduct(title)
-    await this.getAll()
+    await this.getAllProducts()
   } catch (error) {
     console.log(error);
     
