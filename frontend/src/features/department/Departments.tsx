@@ -27,7 +27,7 @@ const Departments = () => {
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target
+    const { value } = event.target
     setNewDepartment(value)
     setIsDisabled(value === '')
   }
@@ -50,23 +50,23 @@ const Departments = () => {
           maxWidth: 500
         }}
       >
-        <TextField 
-        fullWidth 
-        label="New department" 
-        id="fullWidth" 
-        variant="standard" 
-        value={newDepartment}
-        onChange={handleChange}
+        <TextField
+          fullWidth
+          label="New department"
+          id="fullWidth"
+          variant="standard"
+          value={newDepartment}
+          onChange={handleChange}
         />
         <Box sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <Button 
-          variant="contained" 
-          onClick={handleClick}
-          disabled={isDisabled}
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            disabled={isDisabled}
           >Add</Button>
         </Box>
       </Box>
@@ -75,7 +75,7 @@ const Departments = () => {
           onCellClick={(params, event) => {
             if (!event.ctrlKey) {
               event.defaultMuiPrevented = true;
-              navigate(`${params.id}`)
+              navigate(`/departments/${params.id}`)
             }
           }}
           rows={toJS(departmentStore.departments)}

@@ -86,7 +86,7 @@ const Sectors = () => {
           onCellClick={(params, event) => {
             if (!event.ctrlKey) {
               event.defaultMuiPrevented = true;
-              navigate(`${params.id}`)
+              navigate(`/sectors/${params.id}`)
             }
           }}
           rows={toJS(sectorStore.sectors)}
