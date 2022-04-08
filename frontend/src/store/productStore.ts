@@ -21,7 +21,6 @@ export default class ProductStore{
  async getAll () {
    try {
      const response = await ProductService.getAll()
-    //  console.log(response);
      this.setProducts(response.data)
    } catch (error) {
      console.log(error);
@@ -32,13 +31,40 @@ export default class ProductStore{
  async getProduct (id: any) {
    try {
      const response = await ProductService.getProduct(id)
-     console.log(response);
      this.setProduct(response.data)
    } catch (error) {
      console.log(error);
      
    }
  }
+
+ async storeProduct (title: string) {
+  try {
+    await ProductService.storeProduct(title)
+    await this.getAll()
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+ async updateProduct (id: any, title: string) {
+  try {
+    await ProductService.updateProduct(id, title)
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+ async deleteProduct (id: any) {
+  try {
+    await ProductService.deleteProduct(id)
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 
  setProducts(products: any) {
   this.products = products

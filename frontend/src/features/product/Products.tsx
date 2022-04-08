@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from '../../hooks/useStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,6 +22,8 @@ const columns: GridColDef[] = [
 ];
 
 const Product = () => {
+  const [newProduct, setNewProduct] = useState('')
+  const [isDisabled, setIsDisabled] = useState(true)
   const { productStore } = useStore()
 
   const navigate = useNavigate()
@@ -30,18 +32,50 @@ const Product = () => {
     productStore.getAll()
   }, [])
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {value} = event.target
+    setNewProduct(value)
+    setIsDisabled(value === '')
+  }
+
+  const handleClick = () => {
+    productStore.storeProduct(newProduct)
+    setNewProduct('')
+  }
+
   return (
     <>
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 2,
+          gap: 1,
+          maxWidth: 500
         }}
       >
-        <TextField label="fullWidth" id="fullWidth" variant="outlined" />
-        <Button variant="contained">Contained</Button>
+        <TextField 
+        fullWidth 
+        label="New product" 
+        id="fullWidth" 
+        variant="standard" 
+        value={newProduct}
+        onChange={handleChange}
+        />
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <Button 
+          variant="contained" 
+          onClick={handleClick}
+          disabled={isDisabled}
+          >Add</Button>
+        </Box>
       </Box>
-      <div style={{ height: 300, width: '100%' }}>
+      <div style={{ height: 700, width: '100%' }}>
         <DataGrid
           onCellClick={(params, event) => {
             if (!event.ctrlKey) {
