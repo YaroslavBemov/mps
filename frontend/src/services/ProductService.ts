@@ -1,7 +1,7 @@
 import $api from "../http";
 
 export default class ProductService {
-  static async getAll() {
+  static async getAllProducts() {
     return $api.get('products')
   }
 

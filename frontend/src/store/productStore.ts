@@ -20,7 +20,7 @@ export default class ProductStore{
 
  async getAllProducts () {
    try {
-     const response = await ProductService.getAll()
+     const response = await ProductService.getAllProducts()
      this.setProducts(response.data)
    } catch (error) {
      console.log(error);

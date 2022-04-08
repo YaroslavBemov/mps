@@ -10,31 +10,33 @@ import { useStore } from '../../hooks/useStore';
 import { useNavigate } from 'react-router-dom';
 
 const columns: GridColDef[] = [
+  { field: 'step', headerName: 'Step', width: 250 },
   { field: 'title', headerName: 'Title', width: 250 },
+  { field: 'department_id', headerName: 'Department', width: 250 },
   { field: 'created_at', headerName: 'Created at', width: 150 },
   { field: 'updated_at', headerName: 'Updated at', width: 150 },
 ];
 
-const Departments = () => {
-  const [newDepartment, setNewDepartment] = useState('')
+const Sectors = () => {
+  const [newSector, setNewSector] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
-  const { departmentStore } = useStore()
+  const { sectorStore } = useStore()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    departmentStore.getAllDepartments()
+    sectorStore.getAllSectors()
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value} = event.target
-    setNewDepartment(value)
+    setNewSector(value)
     setIsDisabled(value === '')
   }
 
   const handleClick = () => {
-    departmentStore.storeDepartment(newDepartment)
-    setNewDepartment('')
+    // sectorStore.storeSector(newSector)
+    setNewSector('')
     setIsDisabled(true)
   }
 
@@ -52,10 +54,10 @@ const Departments = () => {
       >
         <TextField 
         fullWidth 
-        label="New department" 
+        label="New sector" 
         id="fullWidth" 
         variant="standard" 
-        value={newDepartment}
+        value={newSector}
         onChange={handleChange}
         />
         <Box sx={{
@@ -72,17 +74,22 @@ const Departments = () => {
       </Box>
       <div style={{ height: 700, width: '100%' }}>
         <DataGrid
+          initialState={{
+            sorting: {
+              sortModel: [{ field: 'step', sort: 'asc' }],
+            },
+          }}
           onCellClick={(params, event) => {
             if (!event.ctrlKey) {
               event.defaultMuiPrevented = true;
               navigate(`${params.id}`)
             }
           }}
-          rows={toJS(departmentStore.departments)}
+          rows={toJS(sectorStore.sectors)}
           columns={columns} />
       </div>
     </>
   );
 }
 
-export default observer(Departments)
+export default observer(Sectors)

@@ -20,7 +20,7 @@ export default class DepartmentStore{
 
   async getAllDepartments () {
     try {
-      const response = await DepartmentService.getAll()
+      const response = await DepartmentService.getAllDepartments()
       this.setDepartments(response.data)
     } catch (error) {
       console.log(error);

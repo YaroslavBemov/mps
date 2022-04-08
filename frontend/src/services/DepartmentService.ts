@@ -1,7 +1,7 @@
 import $api from '../http'
 
 export default class DepartmentService {
-  static async getAll() {
+  static async getAllDepartments() {
     return $api.get('departments')
   }
 

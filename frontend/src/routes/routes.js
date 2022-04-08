@@ -6,6 +6,8 @@ import Layout from '../features/layout/Layout'
 import NoMatch from '../features/no-match/No-match';
 import Departments from "../features/department/Departments";
 import Department from "../features/department/Department";
+import Sectors from "../features/sector/Sectors";
+import Sector from "../features/sector/Sector";
 
 export const routes = [
   {
@@ -31,6 +33,14 @@ export const routes = [
       {
         path: 'departments/:id',
         element: <Department />
+      },
+      {
+        path: 'sectors',
+        element: <Sectors />,
+      },
+      {
+        path: 'sectors/:id',
+        element: <Sector />
       }
     ]
   },

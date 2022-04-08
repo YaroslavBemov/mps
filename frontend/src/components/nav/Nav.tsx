@@ -7,6 +7,9 @@ import ListItemText from '@mui/material/ListItemText';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FactoryIcon from '@mui/icons-material/Factory';
+import CategoryIcon from '@mui/icons-material/Category';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 const Nav = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -39,7 +42,7 @@ const Nav = () => {
         onClick={(event) => handleListItemClick(event, 1, 'products')}
       >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <CategoryIcon />
         </ListItemIcon>
         <ListItemText primary='Products' />
       </ListItemButton>
@@ -49,9 +52,19 @@ const Nav = () => {
         onClick={(event) => handleListItemClick(event, 2, 'departments')}
       >
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <FactoryIcon />
         </ListItemIcon>
         <ListItemText primary='Departments' />
+      </ListItemButton>
+
+      <ListItemButton
+        selected={selectedIndex === 3}
+        onClick={(event) => handleListItemClick(event, 3, 'sectors')}
+      >
+        <ListItemIcon>
+          <AccountTreeIcon />
+        </ListItemIcon>
+        <ListItemText primary='Sectors' />
       </ListItemButton>
     </>
   )
