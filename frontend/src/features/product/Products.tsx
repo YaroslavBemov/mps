@@ -41,6 +41,7 @@ const Product = () => {
   const handleClick = () => {
     productStore.storeProduct(newProduct)
     setNewProduct('')
+    setIsDisabled(true)
   }
 
   return (
