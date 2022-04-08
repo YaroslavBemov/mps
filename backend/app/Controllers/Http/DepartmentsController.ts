@@ -3,7 +3,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Department from 'App/Models/Department'
 
 export default class DepartmentsController {
-  public async index({}: HttpContextContract) {
+  public async index({ }: HttpContextContract) {
     const departments = await Department.all()
 
     return departments
@@ -34,6 +34,8 @@ export default class DepartmentsController {
       response.status(404)
       return { message: 'Not found' }
     }
+
+    // await department.load('sectors')
 
     return department
   }

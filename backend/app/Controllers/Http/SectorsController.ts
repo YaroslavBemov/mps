@@ -4,9 +4,9 @@ import Sector from 'App/Models/Sector'
 import Department from 'App/Models/Department'
 
 export default class SectorsController {
-  public async index({}: HttpContextContract) {
-    const sectors = await Sector.all()
-
+  public async index({ }: HttpContextContract) {
+    // const sectors = await Sector.all()
+    const sectors = await Sector.query().preload('department')
     return sectors
   }
 
@@ -44,6 +44,8 @@ export default class SectorsController {
       response.status(404)
       return { message: 'Not found' }
     }
+
+    await sector.load('department')
 
     return sector
   }

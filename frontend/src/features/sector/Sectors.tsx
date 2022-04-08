@@ -1,4 +1,4 @@
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridRowsProp, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,10 +9,14 @@ import React, { useEffect, useState } from 'react';
 import { useStore } from '../../hooks/useStore';
 import { useNavigate } from 'react-router-dom';
 
+function getDepartmentTitle(params: GridValueGetterParams) {
+  return params.row.department.title ?? ''
+}
+
 const columns: GridColDef[] = [
   { field: 'step', headerName: 'Step', width: 250 },
   { field: 'title', headerName: 'Title', width: 250 },
-  { field: 'department_id', headerName: 'Department', width: 250 },
+  { field: 'department', headerName: 'Department', width: 250, valueGetter: getDepartmentTitle },
   { field: 'created_at', headerName: 'Created at', width: 150 },
   { field: 'updated_at', headerName: 'Updated at', width: 150 },
 ];
@@ -29,7 +33,7 @@ const Sectors = () => {
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target
+    const { value } = event.target
     setNewSector(value)
     setIsDisabled(value === '')
   }
@@ -52,23 +56,23 @@ const Sectors = () => {
           maxWidth: 500
         }}
       >
-        <TextField 
-        fullWidth 
-        label="New sector" 
-        id="fullWidth" 
-        variant="standard" 
-        value={newSector}
-        onChange={handleChange}
+        <TextField
+          fullWidth
+          label="New sector"
+          id="fullWidth"
+          variant="standard"
+          value={newSector}
+          onChange={handleChange}
         />
         <Box sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <Button 
-          variant="contained" 
-          onClick={handleClick}
-          disabled={isDisabled}
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            disabled={isDisabled}
           >Add</Button>
         </Box>
       </Box>
