@@ -5,12 +5,18 @@ import Button from '@mui/material/Button';
 
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '../../hooks/useStore';
 import { useNavigate } from 'react-router-dom';
 
+const rows: GridRowsProp = [
+  { id: 1, col1: 'Hello', col2: 'World' },
+  { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
+  { id: 3, col1: 'MUI', col2: 'is Amazing' },
+];
+
 const columns: GridColDef[] = [
-  { field: 'title', headerName: 'Title', width: 250 },
+  { field: 'title', headerName: 'Title', width: 150 },
   { field: 'created_at', headerName: 'Created at', width: 150 },
   { field: 'updated_at', headerName: 'Updated at', width: 150 },
 ];
@@ -27,7 +33,7 @@ const Product = () => {
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target
+    const { value } = event.target
     setNewProduct(value)
     setIsDisabled(value === '')
   }
@@ -50,23 +56,23 @@ const Product = () => {
           maxWidth: 500
         }}
       >
-        <TextField 
-        fullWidth 
-        label="New product" 
-        id="fullWidth" 
-        variant="standard" 
-        value={newProduct}
-        onChange={handleChange}
+        <TextField
+          fullWidth
+          label="New product"
+          id="fullWidth"
+          variant="standard"
+          value={newProduct}
+          onChange={handleChange}
         />
         <Box sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <Button 
-          variant="contained" 
-          onClick={handleClick}
-          disabled={isDisabled}
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            disabled={isDisabled}
           >Add</Button>
         </Box>
       </Box>
