@@ -19,7 +19,7 @@ const Sector = () => {
 
   useEffect(() => {
     sectorStore.getSector(id);
-  }, []);
+  }, [id]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -65,7 +65,8 @@ const Sector = () => {
 
   return (
     <>
-      <div>{sectorStore.sector?.title}</div>
+      <div>Step: {sectorStore.sector?.step}</div>
+      <div>Sector: {sectorStore.sector?.title}</div>
 
       <Box
         component="form"
@@ -106,9 +107,9 @@ const Sector = () => {
           <MenuItem value={1}>PKRV</MenuItem>
         </Select>
 
-        <Button variant="contained" onClick={handleClickUpdate}>
+        {/* <Button variant="contained" onClick={handleClickUpdate}>
           Edit
-        </Button>
+        </Button> */}
 
         <Button
           type="submit"
@@ -118,11 +119,10 @@ const Sector = () => {
         >
           Save
         </Button>
+        <Button color="error" variant="contained" onClick={handleClickDelete}>
+          Delete
+        </Button>
       </Box>
-
-      <Button color="error" variant="contained" onClick={handleClickDelete}>
-        Delete
-      </Button>
     </>
   );
 };

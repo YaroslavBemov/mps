@@ -17,7 +17,7 @@ const Product = () => {
 
   return (
     <>
-      <div>{productStore.product?.title}</div>
+      <div>Product: {productStore.product?.title}</div>
       <ProductUpdate />
     </>
   );

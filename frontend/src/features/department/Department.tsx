@@ -11,11 +11,11 @@ const Department = () => {
 
   useEffect(() => {
     departmentStore.getDepartment(id);
-  }, []);
+  }, [id]);
 
   return (
     <>
-      <div>{departmentStore.department?.title}</div>
+      <div>Department: {departmentStore.department?.title}</div>
       <DepartmentUpdate />
       <hr />
       <Sectors />

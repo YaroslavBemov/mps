@@ -6,25 +6,11 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
-import { useState } from "react";
+// import { useState } from "react";
 
-const SectorAdd = () => {
+const SectorUpdate = () => {
   // const [isDisabled, setIsDisabled] = useState(true);
-  const [formData, setFormData] = useState({
-    step: 0,
-    title: "",
-    departmentId: 1,
-  });
   const { sectorStore } = useStore();
-
-  const handleChange = (event: any) => {
-    // const { name, value } = event.target;
-    // setFormData((prevState) => ({
-    //   ...prevState,
-    //   [name]: value,
-    // }));
-    // setIsDisabled(formData.step === 0 || formData.title === "");
-  };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -53,16 +39,14 @@ const SectorAdd = () => {
       }}
     >
       <TextField
-        value={formData.step}
-        onChange={handleChange}
+        // fullWidth
         name="step"
         label="New sector step"
         variant="standard"
       />
 
       <TextField
-        value={formData.title}
-        onChange={handleChange}
+        // fullWidth
         name="title"
         label="New sector title"
         variant="standard"
@@ -74,7 +58,6 @@ const SectorAdd = () => {
         label="Department"
         name="departmentId"
         defaultValue={1}
-        onChange={handleChange}
       >
         <MenuItem value={1}>PKRV</MenuItem>
       </Select>
@@ -90,4 +73,4 @@ const SectorAdd = () => {
   );
 };
 
-export default observer(SectorAdd);
+export default observer(SectorUpdate);
