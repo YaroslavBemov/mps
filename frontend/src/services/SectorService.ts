@@ -14,7 +14,7 @@ export default class SectorService {
   }
 
   static async updateSector(id: any, title: string, step: number, departmentId: number) {
-    return $api.put(`sectors/${id}`, { title, step, department_id: departmentId })
+    return $api.put(`sectors/${id}`, { title, step, departmentId })
   }
 
   static async deleteSector(id: any) {

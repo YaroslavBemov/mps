@@ -8,7 +8,7 @@ interface IDepartment {
   updated_at: string
 }
 
-export default class DepartmentStore{
+export default class DepartmentStore {
   rootStore
   departments: IDepartment[] = []
   department = {} as IDepartment
@@ -18,59 +18,58 @@ export default class DepartmentStore{
     this.rootStore = rootStore
   }
 
-  async getAllDepartments () {
+  async getAllDepartments() {
     try {
       const response = await DepartmentService.getAllDepartments()
       this.setDepartments(response.data)
     } catch (error) {
       console.log(error);
-      
+
     }
   }
- 
-  async getDepartment (id: any) {
+
+  async getDepartment(id: any) {
     try {
       const response = await DepartmentService.getDepartment(id)
       this.setDepartment(response.data)
     } catch (error) {
       console.log(error);
-      
+
     }
   }
- 
-  async storeDepartment (title: string) {
-   try {
-     await DepartmentService.storeDepartment(title)
-     await this.getAllDepartments()
-   } catch (error) {
-     console.log(error);
-     
-   }
- }
- 
-  async updateDepartment (id: any, title: string) {
-   try {
-     await DepartmentService.updateDepartment(id, title)
-   } catch (error) {
-     console.log(error);
-     
-   }
- }
- 
-  async deleteDepartment (id: any) {
-   try {
-     await DepartmentService.deleteDepartment(id)
-   } catch (error) {
-     console.log(error);
-     
-   }
- }
- 
-  setDepartments(departments: any) {
-   this.departments = departments
+
+  async storeDepartment(title: string) {
+    try {
+      await DepartmentService.storeDepartment(title)
+    } catch (error) {
+      console.log(error);
+
+    }
   }
- 
+
+  async updateDepartment(id: any, title: string) {
+    try {
+      await DepartmentService.updateDepartment(id, title)
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+
+  async deleteDepartment(id: any) {
+    try {
+      await DepartmentService.deleteDepartment(id)
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+
+  setDepartments(departments: any) {
+    this.departments = departments
+  }
+
   setDepartment(department: any) {
-   this.department = department
+    this.department = department
   }
 }

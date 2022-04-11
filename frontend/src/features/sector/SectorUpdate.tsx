@@ -6,13 +6,46 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
-// import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SectorUpdate = () => {
   // const [isDisabled, setIsDisabled] = useState(true);
+  const [step, setStep] = useState(0)
+  const [title, setTitle] = useState('')
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { sectorStore } = useStore();
 
-  const handleSubmit = (event: any) => {
+  useEffect(() => {
+    setStep(sectorStore.sector?.step)
+    setTitle(sectorStore.sector?.title)
+  }, [sectorStore.sector.title, sectorStore.sector.step])
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === 'step') {
+      setStep(+value)
+    }
+    if (name === 'title') {
+      setTitle(value)
+    }
+    // setIsDisabled(title === sectorStore.sector.title || step === sectorStore.sector.step);
+  };
+
+  // const handleClickSave = async () => {
+  //   await sectorStore.updateSector(id, updated);
+  //   await sectorStore.getSector(id);
+  // };
+
+  const handleClickDelete = async () => {
+    await sectorStore.deleteSector(id);
+    setStep(0)
+    setTitle('')
+    navigate("/sectors");
+  };
+
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const title = String(data.get("title"));
@@ -20,7 +53,8 @@ const SectorUpdate = () => {
     const departmentId = Number(data.get("departmentId"));
 
     if (title && step && departmentId) {
-      sectorStore.storeSector(title, step, departmentId);
+      await sectorStore.updateSector(id, title, step, departmentId);
+      await sectorStore.getSector(id)
       // setIsDisabled(true);
     }
   };
@@ -39,14 +73,16 @@ const SectorUpdate = () => {
       }}
     >
       <TextField
-        // fullWidth
+        onChange={handleChange}
+        value={step}
         name="step"
         label="New sector step"
         variant="standard"
       />
 
       <TextField
-        // fullWidth
+        onChange={handleChange}
+        value={title}
         name="title"
         label="New sector title"
         variant="standard"
@@ -65,9 +101,13 @@ const SectorUpdate = () => {
       <Button
         type="submit"
         variant="contained"
-        // disabled={isDisabled}
+      // disabled={isDisabled}
       >
-        Add
+        Save
+      </Button>
+
+      <Button color="error" variant="contained" onClick={handleClickDelete}>
+        Delete
       </Button>
     </Box>
   );

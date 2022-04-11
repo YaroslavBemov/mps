@@ -16,8 +16,9 @@ const ProductAdd = () => {
     setIsDisabled(value === "");
   };
 
-  const handleClick = () => {
-    productStore.storeProduct(newProduct);
+  const handleClick = async () => {
+    await productStore.storeProduct(newProduct);
+    await productStore.getAllProducts()
     setNewProduct("");
     setIsDisabled(true);
   };

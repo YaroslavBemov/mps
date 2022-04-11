@@ -16,8 +16,9 @@ const DepartmentAdd = () => {
     setIsDisabled(value === "");
   };
 
-  const handleClick = () => {
-    departmentStore.storeDepartment(newDepartment);
+  const handleClick = async () => {
+    await departmentStore.storeDepartment(newDepartment);
+    await departmentStore.getAllDepartments()
     setNewDepartment("");
     setIsDisabled(true);
   };

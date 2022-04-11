@@ -18,11 +18,11 @@ const SectorAdd = () => {
   const { sectorStore } = useStore();
 
   const handleChange = (event: any) => {
-    // const { name, value } = event.target;
-    // setFormData((prevState) => ({
-    //   ...prevState,
-    //   [name]: value,
-    // }));
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
     // setIsDisabled(formData.step === 0 || formData.title === "");
   };
 
@@ -74,7 +74,6 @@ const SectorAdd = () => {
         label="Department"
         name="departmentId"
         defaultValue={1}
-        onChange={handleChange}
       >
         <MenuItem value={1}>PKRV</MenuItem>
       </Select>
@@ -82,7 +81,7 @@ const SectorAdd = () => {
       <Button
         type="submit"
         variant="contained"
-        // disabled={isDisabled}
+      // disabled={isDisabled}
       >
         Add
       </Button>
