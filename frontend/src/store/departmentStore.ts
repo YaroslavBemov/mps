@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import DepartmentService from '../services/DepartmentService'
 
-interface IDepartment {
+export interface IDepartment {
   id: number,
   title: string,
   created_at: string,

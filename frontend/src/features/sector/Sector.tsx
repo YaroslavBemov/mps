@@ -22,6 +22,7 @@ const Sector = () => {
     <>
       <div>Step: {sectorStore.sector?.step}</div>
       <div>Sector: {sectorStore.sector?.title}</div>
+      <div>Department: {sectorStore.sector?.department?.title}</div>
 
       <SectorUpdate />
 
