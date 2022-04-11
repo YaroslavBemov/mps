@@ -6,7 +6,9 @@ const DepartmentPage = () => {
   return (
     <>
       <Department />
+      <hr />
       <DepartmentUpdate />
+      <hr />
       <Sectors />
     </>
   )

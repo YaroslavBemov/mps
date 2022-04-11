@@ -5,6 +5,7 @@ const SectorsPage = () => {
   return (
     <>
       <Sector />
+      <hr />
       <SectorUpdate />
     </>
   )

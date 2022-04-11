@@ -5,6 +5,7 @@ const ProductPage = () => {
   return (
     <>
       <ProductAdd />
+      <hr />
       <Products />
     </>
   )

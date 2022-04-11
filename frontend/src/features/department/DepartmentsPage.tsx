@@ -5,6 +5,7 @@ const DepartmentsPage = () => {
   return (
     <>
       <DepartmentAdd />
+      <hr />
       <Departments />
     </>
   )
