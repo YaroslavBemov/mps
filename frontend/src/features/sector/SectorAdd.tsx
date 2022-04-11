@@ -6,12 +6,12 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SectorAdd = () => {
-  // const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    step: 0,
+    step: '',
     title: "",
     departmentId: 1,
   });
@@ -23,7 +23,6 @@ const SectorAdd = () => {
       ...prevState,
       [name]: value,
     }));
-    // setIsDisabled(formData.step === 0 || formData.title === "");
   };
 
   const handleSubmit = (event: any) => {
@@ -35,9 +34,13 @@ const SectorAdd = () => {
 
     if (title && step && departmentId) {
       sectorStore.storeSector(title, step, departmentId);
-      // setIsDisabled(true);
     }
   };
+
+  useEffect(() => {
+    setIsDisabled(formData.title === '' || formData.step === '')
+  })
+
 
   return (
     <Box
@@ -49,7 +52,6 @@ const SectorAdd = () => {
         alignItems: "center",
         padding: 2,
         gap: 1,
-        // maxWidth: 500
       }}
     >
       <TextField
@@ -81,7 +83,7 @@ const SectorAdd = () => {
       <Button
         type="submit"
         variant="contained"
-      // disabled={isDisabled}
+        disabled={isDisabled}
       >
         Add
       </Button>
