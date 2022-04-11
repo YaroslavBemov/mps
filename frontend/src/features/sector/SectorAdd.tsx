@@ -12,7 +12,7 @@ const SectorAdd = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     step: '',
-    title: "",
+    title: '',
     departmentId: 1,
   });
   const { sectorStore } = useStore();

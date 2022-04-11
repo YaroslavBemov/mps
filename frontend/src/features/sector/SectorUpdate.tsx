@@ -10,38 +10,46 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const SectorUpdate = () => {
-  // const [isDisabled, setIsDisabled] = useState(true);
-  const [step, setStep] = useState(0)
-  const [title, setTitle] = useState('')
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [formData, setFormData] = useState({
+    step: 0,
+    title: '',
+    departmentId: 1,
+  });
   const { id } = useParams();
   const navigate = useNavigate();
   const { sectorStore } = useStore();
 
   useEffect(() => {
-    setStep(sectorStore.sector?.step)
-    setTitle(sectorStore.sector?.title)
+    setFormData({
+      step: sectorStore.sector?.step,
+      title: sectorStore.sector?.title,
+      departmentId: 1,
+    })
   }, [sectorStore.sector.title, sectorStore.sector.step])
+
+  useEffect(() => {
+    setIsDisabled(
+      formData.title === sectorStore.sector.title &&
+      formData.step === sectorStore.sector.step
+    )
+  })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'step') {
-      setStep(+value)
-    }
-    if (name === 'title') {
-      setTitle(value)
-    }
-    // setIsDisabled(title === sectorStore.sector.title || step === sectorStore.sector.step);
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-
-  // const handleClickSave = async () => {
-  //   await sectorStore.updateSector(id, updated);
-  //   await sectorStore.getSector(id);
-  // };
 
   const handleClickDelete = async () => {
     await sectorStore.deleteSector(id);
-    setStep(0)
-    setTitle('')
+    setFormData({
+      step: 0,
+      title: '',
+      departmentId: 1,
+    })
     navigate("/sectors");
   };
 
@@ -55,7 +63,6 @@ const SectorUpdate = () => {
     if (title && step && departmentId) {
       await sectorStore.updateSector(id, title, step, departmentId);
       await sectorStore.getSector(id)
-      // setIsDisabled(true);
     }
   };
 
@@ -74,7 +81,7 @@ const SectorUpdate = () => {
     >
       <TextField
         onChange={handleChange}
-        value={step}
+        value={formData.step}
         name="step"
         label="New sector step"
         variant="standard"
@@ -82,7 +89,7 @@ const SectorUpdate = () => {
 
       <TextField
         onChange={handleChange}
-        value={title}
+        value={formData.title}
         name="title"
         label="New sector title"
         variant="standard"
@@ -101,7 +108,7 @@ const SectorUpdate = () => {
       <Button
         type="submit"
         variant="contained"
-      // disabled={isDisabled}
+        disabled={isDisabled}
       >
         Save
       </Button>
