@@ -5,20 +5,20 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useStore } from "../../hooks/useStore";
 
-const ProductAdd = () => {
-  const [newProduct, setNewProduct] = useState("");
+const DepartmentAdd = () => {
+  const [newDepartment, setNewDepartment] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
-  const { productStore } = useStore();
+  const { departmentStore } = useStore();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setNewProduct(value);
+    setNewDepartment(value);
     setIsDisabled(value === "");
   };
 
   const handleClick = () => {
-    productStore.storeProduct(newProduct);
-    setNewProduct("");
+    departmentStore.storeDepartment(newDepartment);
+    setNewDepartment("");
     setIsDisabled(true);
   };
 
@@ -36,10 +36,10 @@ const ProductAdd = () => {
       >
         <TextField
           fullWidth
-          label="New product"
+          label="New department"
           id="fullWidth"
           variant="standard"
-          value={newProduct}
+          value={newDepartment}
           onChange={handleChange}
         />
         <Box
@@ -62,4 +62,4 @@ const ProductAdd = () => {
   );
 };
 
-export default observer(ProductAdd);
+export default observer(DepartmentAdd);

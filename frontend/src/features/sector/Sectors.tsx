@@ -20,8 +20,8 @@ const columns: GridColDef[] = [
     width: 250,
     valueGetter: getDepartmentTitle,
   },
-  { field: "created_at", headerName: "Created at", width: 150 },
-  { field: "updated_at", headerName: "Updated at", width: 150 },
+  // { field: "created_at", headerName: "Created at", width: 150 },
+  // { field: "updated_at", headerName: "Updated at", width: 150 },
 ];
 
 const Sectors = () => {
