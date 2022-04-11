@@ -30,7 +30,6 @@ const Products = () => {
 
   return (
     <>
-      <ProductAdd />
       <div style={{ height: 700, width: "100%" }}>
         <DataGrid
           onCellClick={(params, event) => {

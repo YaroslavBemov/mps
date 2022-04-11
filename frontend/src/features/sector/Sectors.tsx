@@ -35,7 +35,6 @@ const Sectors = () => {
 
   return (
     <>
-      <SectorAdd />
       <div style={{ height: 700, width: "100%" }}>
         <DataGrid
           initialState={{

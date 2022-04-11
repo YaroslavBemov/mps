@@ -16,9 +16,6 @@ const Department = () => {
   return (
     <>
       <div>Department: {departmentStore.department?.title}</div>
-      <DepartmentUpdate />
-      <hr />
-      <Sectors />
     </>
   );
 };

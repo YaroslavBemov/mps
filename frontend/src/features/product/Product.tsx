@@ -18,7 +18,6 @@ const Product = () => {
   return (
     <>
       <div>Product: {productStore.product?.title}</div>
-      <ProductUpdate />
     </>
   );
 };

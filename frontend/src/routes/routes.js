@@ -1,13 +1,13 @@
 import Home from "../features/home/Home"
-import Products from '../features/product/Products';
-import Product from '../features/product/Product';
 
 import Layout from '../features/layout/Layout'
 import NoMatch from '../features/no-match/No-match';
-import Departments from "../features/department/Departments";
-import Department from "../features/department/Department";
-import Sectors from "../features/sector/Sectors";
-import Sector from "../features/sector/Sector";
+import DepartmentsPage from "../features/department/DepartmentsPage";
+import DepartmentPage from "../features/department/DepartmentPage";
+import SectorsPage from "../features/sector/SectorsPage";
+import SectorPage from "../features/sector/SectorPage";
+import ProductsPage from "../features/product/ProductsPage";
+import ProductPage from "../features/product/ProductPage";
 
 export const routes = [
   {
@@ -20,27 +20,27 @@ export const routes = [
       },
       {
         path: 'products',
-        element: <Products />,
+        element: <ProductsPage />,
       },
       {
         path: 'products/:id',
-        element: <Product />
+        element: <ProductPage />
       },
       {
         path: 'departments',
-        element: <Departments />,
+        element: <DepartmentsPage />,
       },
       {
         path: 'departments/:id',
-        element: <Department />
+        element: <DepartmentPage />
       },
       {
         path: 'sectors',
-        element: <Sectors />,
+        element: <SectorsPage />,
       },
       {
         path: 'sectors/:id',
-        element: <Sector />
+        element: <SectorPage />
       }
     ]
   },
