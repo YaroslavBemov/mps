@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import ProductService from "../services/ProductService"
 
-interface IProduct {
+export interface IProduct {
   id: number,
   title: string,
   created_at: string,

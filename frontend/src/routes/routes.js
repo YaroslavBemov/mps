@@ -8,6 +8,8 @@ import SectorsPage from "../features/sector/SectorsPage";
 import SectorPage from "../features/sector/SectorPage";
 import ProductsPage from "../features/product/ProductsPage";
 import ProductPage from "../features/product/ProductPage";
+import BaseMTPPage from '../features/base-mtp/BaseMTPPage'
+import BaseMTPsPage from '../features/base-mtp/BaseMTPsPage'
 
 export const routes = [
   {
@@ -41,6 +43,14 @@ export const routes = [
       {
         path: 'sectors/:id',
         element: <SectorPage />
+      },
+      {
+        path: 'base-mtps',
+        element: <SectorsPage />,
+      },
+      {
+        path: 'base-mtps/:id',
+        element: <BaseMTPPage />
       }
     ]
   },

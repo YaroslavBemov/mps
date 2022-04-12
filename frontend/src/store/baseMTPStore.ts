@@ -1,10 +1,11 @@
 import { makeAutoObservable, toJS } from "mobx";
 import BaseMTPService from "../services/BaseMTPService";
+import { IProduct } from './productStore'
 
 interface IBaseMTP {
   id: number;
   title: string;
-  product_id: number;
+  product: IProduct;
   created_at: string;
   updated_at: string;
 }
@@ -71,7 +72,7 @@ export default class BaseMTPStore {
 
   get byProduct() {
     return this.baseMTPs.filter((mtp) => {
-      return mtp.product_id === this.rootStore.productStore.product.id;
+      return mtp.product.id === this.rootStore.productStore.product.id;
     });
   }
 }

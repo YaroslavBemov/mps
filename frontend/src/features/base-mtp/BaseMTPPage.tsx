@@ -1,8 +1,6 @@
 import Paper from "@mui/material/Paper";
-
-import Sectors from "../sector/Sectors";
-// import Department from "./Department";
-// import DepartmentUpdate from "./DepartmentUpdate";
+import BaseMTP from "./BaseMTP";
+import BaseMTPUpdate from "./BaseMTPUpdate";
 
 const DepartmentPage = () => {
   return (
@@ -14,25 +12,15 @@ const DepartmentPage = () => {
           mb: 2,
         }}
       >
-        {/* <Department /> */}
+        <BaseMTP />
       </Paper>
       <Paper
         variant="outlined"
         sx={{
           p: 2,
-          mb: 2,
         }}
       >
-        {/* <DepartmentUpdate /> */}
-      </Paper>
-      <Paper
-        variant="outlined"
-        sx={{
-          // p: 2,
-          mb: 2,
-        }}
-      >
-        <Sectors />
+        <BaseMTPUpdate />
       </Paper>
     </>
   );

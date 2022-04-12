@@ -13,7 +13,8 @@ const BaseMTP = () => {
 
   return (
     <>
-      <div>Department: {baseMTPStore.baseMTP?.title}</div>
+      <div>Title: {baseMTPStore.baseMTP?.title}</div>
+      <div>Product: {baseMTPStore.baseMTP?.product?.title}</div>
     </>
   );
 };

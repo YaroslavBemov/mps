@@ -16,7 +16,9 @@ const ProductUpdate = () => {
     const fetchProduct = async () => {
       await productStore.getProduct(id);
     };
-    fetchProduct();
+    fetchProduct().then(() => {
+      setUpdated(productStore.product.title)
+    })
   }, [productStore.product.title]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

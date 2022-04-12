@@ -4,61 +4,96 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { useStore } from "../../hooks/useStore";
 import { useNavigate, useParams } from "react-router-dom";
+import Box from "@mui/material/Box";
 
 const BaseMTPUpdate = () => {
-  const [updated, setUpdated] = useState("");
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-  const { departmentStore } = useStore();
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [formData, setFormData] = useState({
+    title: "",
+    productId: '',
+  });
   const { id } = useParams();
   const navigate = useNavigate();
+  const { baseMTPStore } = useStore();
 
   useEffect(() => {
-    setUpdated(departmentStore.department?.title);
-  }, [departmentStore.department.title]);
+    const fetchSector = async () => {
+      await baseMTPStore.getBaseMTP(id);
+    };
+    fetchSector().then(() => {
+      setFormData({
+        title: baseMTPStore.baseMTP?.title,
+        productId: String(baseMTPStore.baseMTP?.product?.id),
+      });
+    });
+  }, [
+    baseMTPStore.baseMTP.title,
+  ]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setUpdated(value);
-    setIsSaveDisabled(value === departmentStore.department.title);
-  };
+  useEffect(() => {
+    setIsDisabled(
+      formData.title === baseMTPStore.baseMTP.title
+    );
+  });
 
-  const handleClickSave = async () => {
-    await departmentStore.updateDepartment(id, updated);
-    await departmentStore.getDepartment(id);
-    setUpdated("");
-    setIsSaveDisabled(true);
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleClickDelete = async () => {
-    await departmentStore.deleteDepartment(id);
-    setUpdated("");
-    navigate("/departments");
+    await baseMTPStore.deleteBaseMTP(id);
+    setFormData({
+      title: "",
+      productId: "",
+    });
+    navigate(`/products/${formData.productId}`);
   };
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const title = String(data.get("title"));
+    const productId = Number(formData.productId);
+
+    if (title && productId) {
+      await baseMTPStore.updateBaseMTP(id, title, productId);
+      await baseMTPStore.getBaseMTP(id);
+    }
+  };
+
   return (
-    <>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 2,
+        gap: 1,
+        // maxWidth: 500
+      }}
+    >
       <TextField
-        sx={{ marginBottom: 2 }}
-        fullWidth
-        label="Updated department"
-        id="fullWidth"
-        variant="standard"
-        value={updated}
         onChange={handleChange}
+        value={formData.title}
+        name="title"
+        label="New MTP title"
+        variant="standard"
       />
 
-      <Button
-        color="success"
-        variant="contained"
-        disabled={isSaveDisabled}
-        onClick={handleClickSave}
-      >
+      <Button type="submit" variant="contained" disabled={isDisabled}>
         Save
       </Button>
 
       <Button color="error" variant="contained" onClick={handleClickDelete}>
         Delete
       </Button>
-    </>
+    </Box>
   );
 };
 
