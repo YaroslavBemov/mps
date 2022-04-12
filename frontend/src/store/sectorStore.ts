@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx"
 import SectorService from '../services/SectorService'
 import { IDepartment } from './departmentStore'
 
-interface ISector {
+export interface ISector {
   id: number,
   title: string,
   step: number,

@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Department from 'App/Models/Department'
+import BaseProcedure from './BaseProcedure'
 
 export default class Sector extends BaseModel {
   @column({ isPrimary: true })
@@ -23,4 +24,7 @@ export default class Sector extends BaseModel {
 
   @belongsTo(() => Department)
   public department: BelongsTo<typeof Department>
+
+  @hasMany(() => BaseProcedure)
+  public baseProcedures: HasMany<typeof BaseProcedure>
 }

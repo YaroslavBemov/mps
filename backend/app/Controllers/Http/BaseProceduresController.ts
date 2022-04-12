@@ -5,8 +5,8 @@ import BaseProcedure from 'App/Models/BaseProcedure'
 import Sector from 'App/Models/Sector'
 
 export default class BaseProceduresController {
-  public async index({}: HttpContextContract) {
-    const baseProcedures = await BaseProcedure.all()
+  public async index({ }: HttpContextContract) {
+    const baseProcedures = await BaseProcedure.query().preload('sector')
 
     return baseProcedures
   }
@@ -30,22 +30,20 @@ export default class BaseProceduresController {
       return { message: `There are not MTP with this id - ${payload.baseMtpId}` }
     }
 
-    const position = await BaseMtp.findBy('position', payload.position)
-    if (position) {
-      response.status(409)
-      return { message: `Position with number - ${position} already exist` }
-    }
-
     const sector = await Sector.find(payload.sectorId)
     if (!sector) {
       response.status(409)
       return { message: `There are not sector with this id - ${payload.sectorId}` }
     }
 
-    const baseProcedure = await BaseProcedure.findBy('title', payload.title)
-    if (baseProcedure) {
+    const position = await BaseProcedure
+      .query()
+      .where('position', payload.position)
+      .andWhere('base_mtp_id', payload.baseMtpId)
+
+    if (position.length > 0) {
       response.status(409)
-      return { message: `Procedure with title - ${baseProcedure.title} already exist` }
+      return { message: `Position with number - ${position} already exist` }
     }
 
     const newBaseProcedure = await BaseProcedure.create(payload)
@@ -61,6 +59,9 @@ export default class BaseProceduresController {
       return { message: 'Not found' }
     }
 
+    await baseProcedure.load('baseMtp')
+    await baseProcedure.load('sector')
+
     return baseProcedure
   }
 
@@ -74,9 +75,9 @@ export default class BaseProceduresController {
     }
 
     const newBaseProcedureSchema = schema.create({
-      baseMtpId: schema.number(),
       position: schema.number(),
       title: schema.string({ trim: true }),
+      baseMtpId: schema.number(),
       sectorId: schema.number(),
       timeTotal: schema.number(),
       timePerProduct: schema.number(),
@@ -91,16 +92,20 @@ export default class BaseProceduresController {
       return { message: `There are not MTP with this id - ${payload.baseMtpId}` }
     }
 
-    const position = await BaseMtp.findBy('position', payload.position)
-    if (position) {
-      response.status(409)
-      return { message: `Position with number - ${position} already exist` }
-    }
-
     const sector = await Sector.find(payload.sectorId)
     if (!sector) {
       response.status(409)
       return { message: `There are not sector with this id - ${payload.sectorId}` }
+    }
+
+    const position = await BaseProcedure
+      .query()
+      .where('position', payload.position)
+      .andWhere('base_mtp_id', payload.baseMtpId)
+
+    if (position.length > 0) {
+      response.status(409)
+      return { message: `Position with number - ${position} already exist` }
     }
 
     await baseProcedure.merge(payload).save()

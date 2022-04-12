@@ -10,6 +10,8 @@ import ProductsPage from "../features/product/ProductsPage";
 import ProductPage from "../features/product/ProductPage";
 import BaseMTPPage from '../features/base-mtp/BaseMTPPage'
 import BaseMTPsPage from '../features/base-mtp/BaseMTPsPage'
+import BaseProceduresPage from "../features/base-procedure/BaseProceduresPage";
+import BaseProcedurePage from "../features/base-procedure/BaseProcedurePage";
 
 export const routes = [
   {
@@ -46,11 +48,19 @@ export const routes = [
       },
       {
         path: 'base-mtps',
-        element: <SectorsPage />,
+        element: <BaseMTPsPage />,
       },
       {
         path: 'base-mtps/:id',
         element: <BaseMTPPage />
+      },
+      {
+        path: 'base-procedures',
+        element: <BaseProceduresPage />,
+      },
+      {
+        path: 'base-procedures/:id',
+        element: <BaseProcedurePage />
       }
     ]
   },

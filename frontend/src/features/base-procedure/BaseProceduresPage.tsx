@@ -1,21 +1,18 @@
 import Paper from "@mui/material/Paper";
+import BaseProcedures from "./BaseProcedures";
 
-import Sector from "./Sector";
-import SectorUpdate from "./SectorUpdate";
 
-const SectorPage = () => {
+const BaseProceduresPage = () => {
   return (
     <>
       <Paper
         variant="outlined"
         sx={{
-          p: 2,
+          // p: 2,
           mb: 2,
-          display: "flex",
-          justifyContent: "space-around",
         }}
       >
-        <Sector />
+        <BaseProcedures />
       </Paper>
       <Paper
         variant="outlined"
@@ -24,10 +21,10 @@ const SectorPage = () => {
           mb: 2,
         }}
       >
-        <SectorUpdate />
+        {/* <Sectors /> */}
       </Paper>
     </>
   );
 };
 
-export default SectorPage;
+export default BaseProceduresPage;
