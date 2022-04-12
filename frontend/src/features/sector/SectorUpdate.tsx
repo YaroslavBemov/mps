@@ -13,29 +13,40 @@ const SectorUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     step: 0,
-    title: '',
-    departmentId: 1,
+    title: "",
+    departmentId: "",
   });
   const { id } = useParams();
   const navigate = useNavigate();
-  const { sectorStore } = useStore();
+  const { sectorStore, departmentStore } = useStore();
 
   useEffect(() => {
-    setFormData({
-      step: sectorStore.sector?.step,
-      title: sectorStore.sector?.title,
-      departmentId: 1,
-    })
-  }, [sectorStore.sector.title, sectorStore.sector.step])
+    const fetchSector = async () => {
+      await departmentStore.getAllDepartments();
+      await sectorStore.getSector(id);
+    };
+    fetchSector().then(() => {
+      setFormData({
+        step: sectorStore.sector?.step,
+        title: sectorStore.sector?.title,
+        departmentId: String(sectorStore.sector?.department?.id),
+      });
+    });
+  }, [
+    sectorStore.sector.step,
+    sectorStore.sector.title,
+    sectorStore.sector.department?.id,
+  ]);
 
   useEffect(() => {
     setIsDisabled(
       formData.title === sectorStore.sector.title &&
-      formData.step === sectorStore.sector.step
-    )
-  })
+        formData.step === sectorStore.sector.step &&
+        formData.departmentId === String(sectorStore.sector.department.id)
+    );
+  });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: any) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -47,9 +58,9 @@ const SectorUpdate = () => {
     await sectorStore.deleteSector(id);
     setFormData({
       step: 0,
-      title: '',
-      departmentId: 1,
-    })
+      title: "",
+      departmentId: "",
+    });
     navigate("/sectors");
   };
 
@@ -62,7 +73,7 @@ const SectorUpdate = () => {
 
     if (title && step && departmentId) {
       await sectorStore.updateSector(id, title, step, departmentId);
-      await sectorStore.getSector(id)
+      await sectorStore.getSector(id);
     }
   };
 
@@ -100,16 +111,17 @@ const SectorUpdate = () => {
         labelId="department-id"
         label="Department"
         name="departmentId"
-        defaultValue={1}
+        value={formData.departmentId}
+        onChange={handleChange}
       >
-        <MenuItem value={1}>PKRV</MenuItem>
+        {departmentStore.departments?.map((dep) => (
+          <MenuItem key={dep.id} value={dep.id}>
+            {dep.title}
+          </MenuItem>
+        ))}
       </Select>
 
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={isDisabled}
-      >
+      <Button type="submit" variant="contained" disabled={isDisabled}>
         Save
       </Button>
 

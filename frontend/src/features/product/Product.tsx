@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
-import ProductUpdate from "./ProductUpdate";
 
 const Product = () => {
   const { productStore } = useStore();
@@ -12,8 +11,9 @@ const Product = () => {
     const fetchProduct = async () => {
       await productStore.getProduct(id);
     };
+
     fetchProduct();
-  }, [id]);
+  }, []);
 
   return (
     <>

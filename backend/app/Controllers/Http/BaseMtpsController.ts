@@ -5,7 +5,7 @@ import Product from 'App/Models/Product'
 
 export default class BaseMtpsController {
   public async index({}: HttpContextContract) {
-    const baseMtps = await BaseMtp.all()
+    const baseMtps = await BaseMtp.query().preload('product')
 
     return baseMtps
   }
@@ -24,11 +24,9 @@ export default class BaseMtpsController {
       return { message: `There are not product with this id - ${payload.productId}` }
     }
 
-    const baseMtp = await BaseMtp.findBy('title', payload.title)
-
-    if (baseMtp) {
+    if (product.title === payload.title) {
       response.status(409)
-      return { message: `MTP with title - ${baseMtp.title} already exist` }
+      return { message: `MTP with title - ${payload.title} already exist` }
     }
 
     const newBaseMtp = await BaseMtp.create(payload)
@@ -43,6 +41,8 @@ export default class BaseMtpsController {
       response.status(404)
       return { message: 'Not found' }
     }
+
+    await baseMtp.load('product')
 
     return baseMtp
   }

@@ -11,11 +11,19 @@ import { useState, useEffect } from "react";
 const SectorAdd = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    step: '',
-    title: '',
+    step: "",
+    title: "",
     departmentId: 1,
   });
-  const { sectorStore } = useStore();
+  const { sectorStore, departmentStore } = useStore();
+
+  useEffect(() => {
+    departmentStore.getAllDepartments();
+  }, []);
+
+  useEffect(() => {
+    setIsDisabled(formData.title === "" || formData.step === "");
+  });
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -36,11 +44,6 @@ const SectorAdd = () => {
       sectorStore.storeSector(title, step, departmentId);
     }
   };
-
-  useEffect(() => {
-    setIsDisabled(formData.title === '' || formData.step === '')
-  })
-
 
   return (
     <Box
@@ -75,16 +78,16 @@ const SectorAdd = () => {
         labelId="department-id"
         label="Department"
         name="departmentId"
-        defaultValue={1}
+        value={formData.departmentId}
       >
-        <MenuItem value={1}>PKRV</MenuItem>
+        {departmentStore.departments?.map((dep) => (
+          <MenuItem key={dep.id} value={dep.id}>
+            {dep.title}
+          </MenuItem>
+        ))}
       </Select>
 
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={isDisabled}
-      >
+      <Button type="submit" variant="contained" disabled={isDisabled}>
         Add
       </Button>
     </Box>

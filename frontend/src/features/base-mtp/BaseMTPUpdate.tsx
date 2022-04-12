@@ -5,47 +5,43 @@ import { useEffect, useState } from "react";
 import { useStore } from "../../hooks/useStore";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ProductUpdate = () => {
+const BaseMTPUpdate = () => {
   const [updated, setUpdated] = useState("");
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-  const { productStore } = useStore();
+  const { departmentStore } = useStore();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      await productStore.getProduct(id);
-    };
-    fetchProduct();
-  }, [productStore.product.title]);
+    setUpdated(departmentStore.department?.title);
+  }, [departmentStore.department.title]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setUpdated(value);
-    setIsSaveDisabled(value === productStore.product.title);
+    setIsSaveDisabled(value === departmentStore.department.title);
   };
 
   const handleClickSave = async () => {
-    await productStore.updateProduct(id, updated);
-    await productStore.getProduct(id);
+    await departmentStore.updateDepartment(id, updated);
+    await departmentStore.getDepartment(id);
     setUpdated("");
     setIsSaveDisabled(true);
   };
 
   const handleClickDelete = async () => {
-    await productStore.deleteProduct(id);
+    await departmentStore.deleteDepartment(id);
     setUpdated("");
-    navigate("/products");
+    navigate("/departments");
   };
   return (
     <>
       <TextField
         sx={{ marginBottom: 2 }}
         fullWidth
-        label="Updated product"
+        label="Updated department"
         id="fullWidth"
         variant="standard"
-        // disabled={isInputDisabled}
         value={updated}
         onChange={handleChange}
       />
@@ -66,4 +62,4 @@ const ProductUpdate = () => {
   );
 };
 
-export default observer(ProductUpdate);
+export default observer(BaseMTPUpdate);
