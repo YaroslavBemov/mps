@@ -1,14 +1,31 @@
-import ProductAdd from "./ProductAdd"
-import Products from "./Products"
+import Paper from "@mui/material/Paper";
+
+import ProductAdd from "./ProductAdd";
+import Products from "./Products";
 
 const ProductPage = () => {
   return (
     <>
-      <ProductAdd />
-      <hr />
-      <Products />
+      <Paper
+        variant="outlined"
+        sx={{
+          // p: 2,
+          mb: 2,
+        }}
+      >
+        <ProductAdd />
+      </Paper>
+      <Paper
+        variant="outlined"
+        sx={{
+          p: 2,
+          mb: 2,
+        }}
+      >
+        <Products />
+      </Paper>
     </>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;

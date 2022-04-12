@@ -1,14 +1,31 @@
-import SectorAdd from "./SectorAdd"
-import Sectors from "./Sectors"
+import Paper from "@mui/material/Paper";
+
+import SectorAdd from "./SectorAdd";
+import Sectors from "./Sectors";
 
 const SectorsPage = () => {
   return (
     <>
-      <SectorAdd />
-      <hr />
-      <Sectors />
+      <Paper
+        variant="outlined"
+        sx={{
+          // p: 2,
+          mb: 2,
+        }}
+      >
+        <SectorAdd />
+      </Paper>
+      <Paper
+        variant="outlined"
+        sx={{
+          // p: 2,
+          mb: 2,
+        }}
+      >
+        <Sectors />
+      </Paper>
     </>
-  )
-}
+  );
+};
 
-export default SectorsPage
+export default SectorsPage;

@@ -1,14 +1,31 @@
-import DepartmentAdd from "./DepartmentAdd"
-import Departments from "./Departments"
+import Paper from "@mui/material/Paper";
+
+import DepartmentAdd from "./DepartmentAdd";
+import Departments from "./Departments";
 
 const DepartmentsPage = () => {
   return (
     <>
-      <DepartmentAdd />
-      <hr />
-      <Departments />
+      <Paper
+        variant="outlined"
+        sx={{
+          // p: 2,
+          mb: 2,
+        }}
+      >
+        <DepartmentAdd />
+      </Paper>
+      <Paper
+        variant="outlined"
+        sx={{
+          // p: 2,
+          mb: 2,
+        }}
+      >
+        <Departments />
+      </Paper>
     </>
-  )
-}
+  );
+};
 
-export default DepartmentsPage
+export default DepartmentsPage;
