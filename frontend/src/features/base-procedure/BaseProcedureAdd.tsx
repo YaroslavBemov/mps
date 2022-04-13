@@ -14,7 +14,6 @@ const BaseProcedureAdd = () => {
   const [formData, setFormData] = useState({
     position: '',
     title: '',
-    baseMtpId: 0,
     sectorId: '',
     timeTotal: '',
     timePerProduct: '',
@@ -28,18 +27,23 @@ const BaseProcedureAdd = () => {
   }, []);
 
   useEffect(() => {
-    setIsDisabled(formData.title === "");
+    setIsDisabled(!formData.title ||
+      !formData.position ||
+      !formData.sectorId ||
+      !formData.timeTotal ||
+      !formData.timePerProduct);
   });
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
+
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -47,15 +51,13 @@ const BaseProcedureAdd = () => {
     const title = String(data.get("title"));
     const timeTotal = String(data.get("timeTotal"));
     const timePerProduct = String(data.get("timePerProduct"));
-    const comment = String(data.get("comment"));
-    const baseMtpId = id
+    const baseMtpId = Number(id)
     const sectorId = Number(data.get("sectorId"));
-
-    console.log(formData);
-
+    const comment = String(data.get("comment"));
 
     if (position && title && timeTotal && timePerProduct && baseMtpId && sectorId) {
-      // baseProcedureStore.storeBaseProcedure();
+      baseProcedureStore.storeBaseProcedure({ position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
+      await baseProcedureStore.getAllBaseProcedures()
     }
   };
 
@@ -113,6 +115,7 @@ const BaseProcedureAdd = () => {
             label="Sector"
             name="sectorId"
             value={formData.sectorId}
+            onChange={handleChange}
           >
             {sectorStore.sectors?.map((sector) => (
               <MenuItem key={sector.id} value={sector.id}>

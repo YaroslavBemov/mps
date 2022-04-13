@@ -12,37 +12,49 @@ import { useNavigate, useParams } from "react-router-dom";
 const BaseProcedureUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    step: 0,
-    title: "",
-    departmentId: "",
+    position: '',
+    title: '',
+    sectorId: '',
+    timeTotal: '',
+    timePerProduct: '',
+    comment: '',
   });
   const { id } = useParams();
   const navigate = useNavigate();
-  const { sectorStore, departmentStore } = useStore();
+  const { sectorStore, baseProcedureStore } = useStore();
 
   useEffect(() => {
-    const fetchSector = async () => {
-      await departmentStore.getAllDepartments();
-      await sectorStore.getSector(id);
+    const fetchBaseProcedure = async () => {
+      await sectorStore.getAllSectors();
+      await baseProcedureStore.getBaseProcedure(id);
     };
-    fetchSector().then(() => {
+    fetchBaseProcedure().then(() => {
       setFormData({
-        step: sectorStore.sector?.step,
-        title: sectorStore.sector?.title,
-        departmentId: String(sectorStore.sector?.department?.id),
+        position: String(baseProcedureStore.baseProcedure?.position),
+        title: baseProcedureStore.baseProcedure?.title,
+        sectorId: String(baseProcedureStore.baseProcedure?.sector?.id),
+        timeTotal: baseProcedureStore.baseProcedure?.time_total,
+        timePerProduct: baseProcedureStore.baseProcedure?.time_per_product,
+        comment: String(baseProcedureStore.baseProcedure?.comment ?? '')
       });
     });
   }, [
-    sectorStore.sector.step,
-    sectorStore.sector.title,
-    sectorStore.sector.department?.id,
+    baseProcedureStore.baseProcedure?.position,
+    baseProcedureStore.baseProcedure?.title,
+    baseProcedureStore.baseProcedure?.sector?.id,
+    baseProcedureStore.baseProcedure?.time_total,
+    baseProcedureStore.baseProcedure?.time_per_product,
+    baseProcedureStore.baseProcedure?.comment
   ]);
 
   useEffect(() => {
     setIsDisabled(
-      formData.title === sectorStore.sector.title &&
-      formData.step === sectorStore.sector.step &&
-      formData.departmentId === String(sectorStore.sector.department.id)
+      formData.position === String(baseProcedureStore.baseProcedure.position) &&
+      formData.title === baseProcedureStore.baseProcedure.title &&
+      formData.sectorId === String(baseProcedureStore.baseProcedure.sector.id) &&
+      formData.timeTotal === baseProcedureStore.baseProcedure.time_total &&
+      formData.timePerProduct === baseProcedureStore.baseProcedure.time_per_product &&
+      (formData.comment === baseProcedureStore.baseProcedure.comment || !formData.comment)
     );
   });
 
@@ -55,25 +67,35 @@ const BaseProcedureUpdate = () => {
   };
 
   const handleClickDelete = async () => {
-    await sectorStore.deleteSector(id);
+    await baseProcedureStore.deleteBaseProcedure(id);
     setFormData({
-      step: 0,
-      title: "",
-      departmentId: "",
+      position: '',
+      title: '',
+      sectorId: '',
+      timeTotal: '',
+      timePerProduct: '',
+      comment: '',
     });
-    navigate("/sectors");
+    navigate("/products");
   };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const title = String(data.get("title"));
-    const step = Number(data.get("step"));
-    const departmentId = Number(data.get("departmentId"));
 
-    if (title && step && departmentId) {
-      await sectorStore.updateSector(id, title, step, departmentId);
-      await sectorStore.getSector(id);
+    const position = Number(data.get("position"));
+    const title = String(data.get("title"));
+    const timeTotal = String(data.get("timeTotal"));
+    const timePerProduct = String(data.get("timePerProduct"));
+    const baseMtpId = Number(id)
+    const sectorId = Number(data.get("sectorId"));
+    const comment = String(data.get("comment"));
+
+    if (position && title && timeTotal && timePerProduct && baseMtpId && sectorId) {
+      // baseProcedureStore.storeBaseProcedure({ position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
+      // await baseProcedureStore.getAllBaseProcedures()
+      await baseProcedureStore.updateBaseProcedure(id, { position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
+      await baseProcedureStore.getBaseProcedure(id);
     }
   };
 
@@ -82,52 +104,115 @@ const BaseProcedureUpdate = () => {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 2,
-        gap: 1,
-        // maxWidth: 500
+        // display: "flex",
+        // flexDirection: 'column',
+        // justifyContent: "center",
+        // alignItems: "center",
+
+        // padding: 2,
+        // gap: 1,
       }}
     >
-      <TextField
-        onChange={handleChange}
-        value={formData.step}
-        name="step"
-        label="New sector step"
-        variant="standard"
-      />
+      <Box sx={{
+        display: "flex",
+        // flexDirection: 'column',
+        // justifyContent: "center",
+        // alignItems: "center",
 
-      <TextField
-        onChange={handleChange}
-        value={formData.title}
-        name="title"
-        label="New sector title"
-        variant="standard"
-      />
+        // padding: 2,
+        // gap: 1,
+      }}>
+        <Box sx={{
+          display: "flex",
+          flexDirection: 'column',
+          // justifyContent: "center",
+          // alignItems: "center",
+          flexGrow: 1,
+          padding: 2,
+          gap: 1,
+        }}>
+          <TextField
+            value={formData.position}
+            onChange={handleChange}
+            name="position"
+            label="New procedure position"
+            variant="standard"
+          />
 
-      <InputLabel id="department-id">Department</InputLabel>
-      <Select
-        labelId="department-id"
-        label="Department"
-        name="departmentId"
-        value={formData.departmentId}
-        onChange={handleChange}
-      >
-        {departmentStore.departments?.map((dep) => (
-          <MenuItem key={dep.id} value={dep.id}>
-            {dep.title}
-          </MenuItem>
-        ))}
-      </Select>
+          <TextField
+            value={formData.title}
+            onChange={handleChange}
+            name="title"
+            label="New procedure title"
+            variant="standard"
+          />
 
-      <Button type="submit" variant="contained" disabled={isDisabled}>
-        Save
-      </Button>
+          <InputLabel id="sector-id">Sector</InputLabel>
+          <Select
+            labelId="sector-id"
+            label="Sector"
+            name="sectorId"
+            value={formData.sectorId}
+            onChange={handleChange}
+          >
+            {sectorStore.sectors?.map((sector) => (
+              <MenuItem key={sector.id} value={sector.id}>
+                {sector.title}
+              </MenuItem>
+            ))}
+          </Select>
 
-      <Button color="error" variant="contained" onClick={handleClickDelete}>
-        Delete
-      </Button>
+        </Box>
+        <Box sx={{
+          display: "flex",
+          flexDirection: 'column',
+          // justifyContent: "center",
+          // alignItems: "center",
+          flexGrow: 1,
+          padding: 2,
+          gap: 1,
+        }}>
+          <TextField
+            value={formData.timeTotal}
+            onChange={handleChange}
+            name="timeTotal"
+            label="New procedure time total"
+            variant="standard"
+          />
+
+          <TextField
+            value={formData.timePerProduct}
+            onChange={handleChange}
+            name="timePerProduct"
+            label="New procedure time per product"
+            variant="standard"
+          />
+
+          <TextField
+            value={formData.comment}
+            onChange={handleChange}
+            name="comment"
+            label="New procedure comment"
+            variant="standard"
+          />
+        </Box>
+      </Box>
+      <Box sx={{
+        display: "flex",
+        // flexDirection: 'column',
+        justifyContent: "center",
+        // alignItems: "center",
+
+        padding: 2,
+        gap: 1,
+      }}>
+        <Button type="submit" variant="contained" disabled={isDisabled}>
+          Save
+        </Button>
+        <Button color="error" variant="contained" onClick={handleClickDelete}>
+          Delete
+        </Button>
+      </Box>
     </Box>
   );
 };

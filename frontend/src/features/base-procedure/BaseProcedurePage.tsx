@@ -1,5 +1,6 @@
 import Paper from "@mui/material/Paper";
 import BaseProcedure from "./BaseProcedure";
+import BaseProcedureUpdate from "./BaseProcedureUpdate";
 
 
 const BaseProcedurePage = () => {
@@ -24,7 +25,7 @@ const BaseProcedurePage = () => {
           mb: 2,
         }}
       >
-        {/* <SectorUpdate /> */}
+        <BaseProcedureUpdate />
       </Paper>
     </>
   );

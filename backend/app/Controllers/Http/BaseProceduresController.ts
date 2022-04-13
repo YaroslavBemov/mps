@@ -19,7 +19,7 @@ export default class BaseProceduresController {
       sectorId: schema.number(),
       timeTotal: schema.number(),
       timePerProduct: schema.number(),
-      comment: schema.string({ trim: true }),
+      comment: schema.string.optional(),
     })
 
     const payload = await request.validate({ schema: newBaseProcedureSchema })
