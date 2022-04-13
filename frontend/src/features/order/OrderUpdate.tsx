@@ -17,23 +17,24 @@ const BaseMTPUpdate = () => {
   const { baseMTPStore } = useStore();
 
   useEffect(() => {
-    const fetchSector = async () => {
-      await baseMTPStore.getBaseMTP(id);
-    };
-    fetchSector().then(() => {
-      setFormData({
-        title: baseMTPStore.baseMTP?.title,
-        productId: String(baseMTPStore.baseMTP?.product?.id),
-      });
-    });
+    // const fetchSector = async () => {
+    // await baseMTPStore.getBaseMTP(id);
+    // };
+    // fetchSector()
+    // .then(() => {
+    //   setFormData({
+    //     title: baseMTPStore.baseMTP?.title,
+    //     productId: String(baseMTPStore.baseMTP?.product?.id),
+    //   });
+    // });
   }, [
-    baseMTPStore.baseMTP.title,
+    // baseMTPStore.baseMTP.title
   ]);
 
   useEffect(() => {
-    setIsDisabled(
-      formData.title === baseMTPStore.baseMTP.title
-    );
+    // setIsDisabled(
+    // formData.title === baseMTPStore.baseMTP.title
+    // );
   });
 
   const handleChange = (event: any) => {
