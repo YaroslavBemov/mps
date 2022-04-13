@@ -1,9 +1,8 @@
 import Paper from "@mui/material/Paper";
+import OrderAdd from "./OrderAdd";
+import Orders from "./Orders";
 
-// import DepartmentAdd from "./DepartmentAdd";
-// import Departments from "./Departments";
-
-const BaseMTPsPage = () => {
+const OrdersPage = () => {
   return (
     <>
       <Paper
@@ -13,7 +12,7 @@ const BaseMTPsPage = () => {
           mb: 2,
         }}
       >
-        {/* <DepartmentAdd /> */}
+        <OrderAdd />
       </Paper>
       <Paper
         variant="outlined"
@@ -22,10 +21,10 @@ const BaseMTPsPage = () => {
           mb: 2,
         }}
       >
-        {/* <Departments /> */}
+        <Orders />
       </Paper>
     </>
   );
 };
 
-export default BaseMTPsPage;
+export default OrdersPage;

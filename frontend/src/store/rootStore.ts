@@ -5,6 +5,7 @@ import DepartmentStore from "./departmentStore";
 import ProductStore from "./productStore";
 import SectorStore from "./sectorStore";
 import UIStore from "./uiStore";
+import OrderStore from './orderStore'
 
 export default class RootStore {
   authStore: AuthStore;
@@ -14,6 +15,7 @@ export default class RootStore {
   sectorStore: SectorStore;
   baseMTPStore: BaseMTPStore;
   baseProcedureStore: BaseProcedureStore;
+  orderStore: OrderStore
 
   constructor() {
     this.authStore = new AuthStore(this);
@@ -23,5 +25,6 @@ export default class RootStore {
     this.sectorStore = new SectorStore(this);
     this.baseMTPStore = new BaseMTPStore(this);
     this.baseProcedureStore = new BaseProcedureStore(this);
+    this.orderStore = new OrderStore(this)
   }
 }

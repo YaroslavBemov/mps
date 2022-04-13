@@ -4,8 +4,8 @@ import Order from 'App/Models/Order'
 import Product from 'App/Models/Product'
 
 export default class OrdersController {
-  public async index({}: HttpContextContract) {
-    const orders = await Order.all()
+  public async index({ }: HttpContextContract) {
+    const orders = await Order.query().preload('product')
 
     return orders
   }
@@ -44,6 +44,8 @@ export default class OrdersController {
       response.status(404)
       return { message: 'Not found' }
     }
+
+    await order.load('product')
 
     return order
   }
