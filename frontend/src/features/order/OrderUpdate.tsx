@@ -78,21 +78,24 @@ const BaseMTPUpdate = () => {
         // maxWidth: 500
       }}
     >
-      <TextField
+
+      <div>[ORDER UPDATE]</div>
+
+      {/* <TextField
         onChange={handleChange}
         value={formData.title}
         name="title"
         label="New MTP title"
         variant="standard"
-      />
+      /> */}
 
-      <Button type="submit" variant="contained" disabled={isDisabled}>
+      {/* <Button type="submit" variant="contained" disabled={isDisabled}>
         Save
-      </Button>
+      </Button> */}
 
-      <Button color="error" variant="contained" onClick={handleClickDelete}>
+      {/* <Button color="error" variant="contained" onClick={handleClickDelete}>
         Delete
-      </Button>
+      </Button> */}
     </Box>
   );
 };

@@ -24,7 +24,7 @@ const OrderPage = () => {
           mb: 2,
         }}
       >
-        {/* <OrderUpdate /> */}
+        <OrderUpdate />
       </Paper>
     </>
   );
