@@ -12,26 +12,28 @@ import { useParams } from "react-router-dom";
 const BaseProcedureAdd = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    position: '',
-    title: '',
-    sectorId: '',
-    timeTotal: '',
-    timePerProduct: '',
-    comment: '',
+    position: "",
+    title: "",
+    sectorId: "",
+    timeTotal: "",
+    timePerProduct: "",
+    comment: "",
   });
   const { baseProcedureStore, sectorStore } = useStore();
-  const { id } = useParams()
+  const { id } = useParams();
 
   useEffect(() => {
     sectorStore.getAllSectors();
   }, []);
 
   useEffect(() => {
-    setIsDisabled(!formData.title ||
-      !formData.position ||
-      !formData.sectorId ||
-      !formData.timeTotal ||
-      !formData.timePerProduct);
+    setIsDisabled(
+      !formData.title ||
+        !formData.position ||
+        !formData.sectorId ||
+        !formData.timeTotal ||
+        !formData.timePerProduct
+    );
   });
 
   const handleChange = (event: any) => {
@@ -51,13 +53,28 @@ const BaseProcedureAdd = () => {
     const title = String(data.get("title"));
     const timeTotal = String(data.get("timeTotal"));
     const timePerProduct = String(data.get("timePerProduct"));
-    const baseMtpId = Number(id)
+    const baseMtpId = Number(id);
     const sectorId = Number(data.get("sectorId"));
     const comment = String(data.get("comment"));
 
-    if (position && title && timeTotal && timePerProduct && baseMtpId && sectorId) {
-      baseProcedureStore.storeBaseProcedure({ position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
-      await baseProcedureStore.getAllBaseProcedures()
+    if (
+      position &&
+      title &&
+      timeTotal &&
+      timePerProduct &&
+      baseMtpId &&
+      sectorId
+    ) {
+      await baseProcedureStore.storeBaseProcedure({
+        position,
+        title,
+        baseMtpId,
+        sectorId,
+        timeTotal,
+        timePerProduct,
+        comment,
+      });
+      await baseProcedureStore.getAllBaseProcedures();
     }
   };
 
@@ -65,34 +82,39 @@ const BaseProcedureAdd = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{
-        // display: "flex",
-        // flexDirection: 'column',
-        // justifyContent: "center",
-        // alignItems: "center",
-
-        // padding: 2,
-        // gap: 1,
-      }}
-    >
-      <Box sx={{
-        display: "flex",
-        // flexDirection: 'column',
-        // justifyContent: "center",
-        // alignItems: "center",
-
-        // padding: 2,
-        // gap: 1,
-      }}>
-        <Box sx={{
-          display: "flex",
-          flexDirection: 'column',
+      sx={
+        {
+          // display: "flex",
+          // flexDirection: 'column',
           // justifyContent: "center",
           // alignItems: "center",
-          flexGrow: 1,
-          padding: 2,
-          gap: 1,
-        }}>
+          // padding: 2,
+          // gap: 1,
+        }
+      }
+    >
+      <Box
+        sx={{
+          display: "flex",
+          // flexDirection: 'column',
+          // justifyContent: "center",
+          // alignItems: "center",
+
+          // padding: 2,
+          // gap: 1,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center",
+            flexGrow: 1,
+            padding: 2,
+            gap: 1,
+          }}
+        >
           <TextField
             value={formData.position}
             onChange={handleChange}
@@ -123,17 +145,18 @@ const BaseProcedureAdd = () => {
               </MenuItem>
             ))}
           </Select>
-
         </Box>
-        <Box sx={{
-          display: "flex",
-          flexDirection: 'column',
-          // justifyContent: "center",
-          // alignItems: "center",
-          flexGrow: 1,
-          padding: 2,
-          gap: 1,
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center",
+            flexGrow: 1,
+            padding: 2,
+            gap: 1,
+          }}
+        >
           <TextField
             value={formData.timeTotal}
             onChange={handleChange}

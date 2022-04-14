@@ -48,7 +48,7 @@ const BaseProcedures = () => {
               navigate(`/base-procedures/${params.id}`);
             }
           }}
-          rows={toJS(baseProcedureStore.baseProcedures)}
+          rows={toJS(baseProcedureStore.byBaseMTP)}
           columns={columns}
         />
       </div>

@@ -5,8 +5,8 @@ import BaseProcedure from 'App/Models/BaseProcedure'
 import Sector from 'App/Models/Sector'
 
 export default class BaseProceduresController {
-  public async index({ }: HttpContextContract) {
-    const baseProcedures = await BaseProcedure.query().preload('sector')
+  public async index({}: HttpContextContract) {
+    const baseProcedures = await BaseProcedure.query().preload('sector').preload('baseMtp')
 
     return baseProcedures
   }
@@ -36,8 +36,7 @@ export default class BaseProceduresController {
       return { message: `There are not sector with this id - ${payload.sectorId}` }
     }
 
-    const position = await BaseProcedure
-      .query()
+    const position = await BaseProcedure.query()
       .where('position', payload.position)
       .andWhere('base_mtp_id', payload.baseMtpId)
 
@@ -98,8 +97,7 @@ export default class BaseProceduresController {
       return { message: `There are not sector with this id - ${payload.sectorId}` }
     }
 
-    const position = await BaseProcedure
-      .query()
+    const position = await BaseProcedure.query()
       .where('position', payload.position)
       .andWhere('base_mtp_id', payload.baseMtpId)
 
