@@ -11,6 +11,7 @@ import FactoryIcon from '@mui/icons-material/Factory';
 import CategoryIcon from '@mui/icons-material/Category';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import StorageIcon from '@mui/icons-material/Storage';
 
 const Nav = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -37,20 +38,10 @@ const Nav = () => {
         </ListItemIcon>
         <ListItemText primary='Dashboard' />
       </ListItemButton>
-
+      <hr />
       <ListItemButton
         selected={selectedIndex === 1}
-        onClick={(event) => handleListItemClick(event, 1, 'products')}
-      >
-        <ListItemIcon>
-          <CategoryIcon />
-        </ListItemIcon>
-        <ListItemText primary='Products' />
-      </ListItemButton>
-
-      <ListItemButton
-        selected={selectedIndex === 2}
-        onClick={(event) => handleListItemClick(event, 2, 'departments')}
+        onClick={(event) => handleListItemClick(event, 1, 'departments')}
       >
         <ListItemIcon>
           <FactoryIcon />
@@ -59,8 +50,8 @@ const Nav = () => {
       </ListItemButton>
 
       <ListItemButton
-        selected={selectedIndex === 3}
-        onClick={(event) => handleListItemClick(event, 3, 'sectors')}
+        selected={selectedIndex === 2}
+        onClick={(event) => handleListItemClick(event, 2, 'sectors')}
       >
         <ListItemIcon>
           <AccountTreeIcon />
@@ -69,8 +60,38 @@ const Nav = () => {
       </ListItemButton>
 
       <ListItemButton
+        selected={selectedIndex === 3}
+        onClick={(event) => handleListItemClick(event, 3, 'products')}
+      >
+        <ListItemIcon>
+          <CategoryIcon />
+        </ListItemIcon>
+        <ListItemText primary='Products' />
+      </ListItemButton>
+      <hr />
+      <ListItemButton
         selected={selectedIndex === 4}
-        onClick={(event) => handleListItemClick(event, 4, 'orders')}
+        onClick={(event) => handleListItemClick(event, 4, 'base-mpts')}
+      >
+        <ListItemIcon>
+          <StorageIcon />
+        </ListItemIcon>
+        <ListItemText primary='Base MTPs' />
+      </ListItemButton>
+
+      <ListItemButton
+        selected={selectedIndex === 5}
+        onClick={(event) => handleListItemClick(event, 5, 'base-procedures')}
+      >
+        <ListItemIcon>
+          <StorageIcon />
+        </ListItemIcon>
+        <ListItemText primary='Base procedures' />
+      </ListItemButton>
+      <hr />
+      <ListItemButton
+        selected={selectedIndex === 6}
+        onClick={(event) => handleListItemClick(event, 6, 'orders')}
       >
         <ListItemIcon>
           <ListAltIcon />
@@ -79,18 +100,18 @@ const Nav = () => {
       </ListItemButton>
 
       <ListItemButton
-        selected={selectedIndex === 5}
-        onClick={(event) => handleListItemClick(event, 5, 'mtps')}
+        selected={selectedIndex === 7}
+        onClick={(event) => handleListItemClick(event, 7, 'mtps')}
       >
         <ListItemIcon>
           <ListAltIcon />
         </ListItemIcon>
-        <ListItemText primary='MTP' />
+        <ListItemText primary='MTPs' />
       </ListItemButton>
 
       <ListItemButton
-        selected={selectedIndex === 6}
-        onClick={(event) => handleListItemClick(event, 6, 'procedures')}
+        selected={selectedIndex === 8}
+        onClick={(event) => handleListItemClick(event, 8, 'procedures')}
       >
         <ListItemIcon>
           <ListAltIcon />
@@ -99,23 +120,23 @@ const Nav = () => {
       </ListItemButton>
 
       <ListItemButton
-        selected={selectedIndex === 7}
-        onClick={(event) => handleListItemClick(event, 7, 'workers')}
-      >
-        <ListItemIcon>
-          <ListAltIcon />
-        </ListItemIcon>
-        <ListItemText primary='Workers' />
-      </ListItemButton>
-
-      <ListItemButton
-        selected={selectedIndex === 8}
-        onClick={(event) => handleListItemClick(event, 8, 'processes')}
+        selected={selectedIndex === 9}
+        onClick={(event) => handleListItemClick(event, 9, 'processes')}
       >
         <ListItemIcon>
           <ListAltIcon />
         </ListItemIcon>
         <ListItemText primary='Processes' />
+      </ListItemButton>
+
+      <ListItemButton
+        selected={selectedIndex === 10}
+        onClick={(event) => handleListItemClick(event, 10, 'workers')}
+      >
+        <ListItemIcon>
+          <ListAltIcon />
+        </ListItemIcon>
+        <ListItemText primary='Workers' />
       </ListItemButton>
 
     </>
