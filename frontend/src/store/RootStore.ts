@@ -1,12 +1,13 @@
-import AuthStore from "./authStore";
-import BaseMTPStore from "./baseMTPStore";
-import BaseProcedureStore from "./baseProcedureStore";
-import DepartmentStore from "./departmentStore";
-import ProductStore from "./productStore";
-import SectorStore from "./sectorStore";
-import UIStore from "./uiStore";
-import OrderStore from './orderStore'
-import MtpStore from './mtpStore'
+import AuthStore from "./AuthStore";
+import BaseMTPStore from "./BaseMTPStore";
+import BaseProcedureStore from "./BaseProcedureStore";
+import DepartmentStore from "./DepartmentStore";
+import ProductStore from "./ProductStore";
+import SectorStore from "./SectorStore";
+import UIStore from "./UiStore";
+import OrderStore from './OrderStore'
+import MtpStore from './MtpStore'
+import ProcedureStore from './ProcedureStore'
 
 export default class RootStore {
   authStore: AuthStore;
@@ -16,8 +17,9 @@ export default class RootStore {
   sectorStore: SectorStore;
   baseMTPStore: BaseMTPStore;
   baseProcedureStore: BaseProcedureStore;
-  orderStore: OrderStore
-  mtpStore: MtpStore
+  orderStore: OrderStore;
+  mtpStore: MtpStore;
+  procedureStore: ProcedureStore
 
   constructor() {
     this.authStore = new AuthStore(this);
@@ -29,5 +31,6 @@ export default class RootStore {
     this.baseProcedureStore = new BaseProcedureStore(this);
     this.orderStore = new OrderStore(this)
     this.mtpStore = new MtpStore(this)
+    this.procedureStore = new ProcedureStore(this)
   }
 }

@@ -1,6 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx";
 import OrderService, { IOrderStoreData } from "../services/OrderService";
-import { IProduct } from './productStore'
+import { IProduct } from './ProductStore'
 
 export interface IOrder {
   id: number;

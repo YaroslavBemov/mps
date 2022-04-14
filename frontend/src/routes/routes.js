@@ -16,6 +16,8 @@ import OrdersPage from "../features/order/OrdersPage";
 import OrderPage from "../features/order/OrderPage";
 import MtpPage from "../features/mtp/MtpPage";
 import MtpsPage from "../features/mtp/MtpsPage";
+import ProcedurePage from "../features/procedure/ProcedurePage";
+import ProceduresPage from "../features/procedure/ProceduresPage";
 
 export const routes = [
   {
@@ -81,6 +83,14 @@ export const routes = [
       {
         path: 'mtps/:id',
         element: <MtpsPage />
+      },
+      {
+        path: 'procedures',
+        element: <ProcedurePage />,
+      },
+      {
+        path: 'procedures/:id',
+        element: <ProceduresPage />
       }
     ]
   },

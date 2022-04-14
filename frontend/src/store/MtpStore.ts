@@ -1,8 +1,8 @@
 import { makeAutoObservable, toJS } from "mobx";
 import BaseMTPService from "../services/BaseMTPService";
 import MtpService from "../services/MtpService";
-import { IOrder } from "./orderStore";
-import { IProduct } from './productStore'
+import { IOrder } from "./OrderStore";
+import { IProduct } from './ProductStore'
 
 export interface IMtp {
   id: number;

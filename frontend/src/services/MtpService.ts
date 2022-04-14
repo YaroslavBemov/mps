@@ -1,5 +1,5 @@
 import $api from "../http";
-import { IMtpStoreData } from '../store/mtpStore'
+import { IMtpStoreData } from '../store/MtpStore'
 
 export default class MtpService {
   static async getAllMtps() {
