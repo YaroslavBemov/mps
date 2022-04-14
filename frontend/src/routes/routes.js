@@ -20,6 +20,8 @@ import ProcedurePage from "../features/procedure/ProcedurePage";
 import ProceduresPage from "../features/procedure/ProceduresPage";
 import WorkerPage from "../features/worker/WorkerPage";
 import WorkersPage from "../features/worker/WorkersPage";
+import ProcessPage from "../features/process/ProcessPage";
+import ProcessesPage from "../features/process/ProcessesPage";
 
 export const routes = [
   {
@@ -101,6 +103,14 @@ export const routes = [
       {
         path: 'workers/:id',
         element: <WorkersPage />
+      },
+      {
+        path: 'processes',
+        element: <ProcessPage />,
+      },
+      {
+        path: 'processes/:id',
+        element: <ProcessesPage />
       }
     ]
   },

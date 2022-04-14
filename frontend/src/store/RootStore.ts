@@ -9,6 +9,7 @@ import OrderStore from './OrderStore'
 import MtpStore from './MtpStore'
 import ProcedureStore from './ProcedureStore'
 import WorkerStore from "./WorkerStore";
+import ProcessStore from "./ProcessStore";
 
 export default class RootStore {
   authStore: AuthStore;
@@ -22,6 +23,7 @@ export default class RootStore {
   mtpStore: MtpStore;
   procedureStore: ProcedureStore
   workerStore: WorkerStore
+  processStore: ProcessStore
 
   constructor() {
     this.authStore = new AuthStore(this);
@@ -35,5 +37,6 @@ export default class RootStore {
     this.mtpStore = new MtpStore(this)
     this.procedureStore = new ProcedureStore(this)
     this.workerStore = new WorkerStore(this)
+    this.processStore = new ProcessStore(this)
   }
 }
