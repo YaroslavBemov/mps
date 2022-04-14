@@ -71,7 +71,7 @@ const Nav = () => {
       <hr />
       <ListItemButton
         selected={selectedIndex === 4}
-        onClick={(event) => handleListItemClick(event, 4, 'base-mpts')}
+        onClick={(event) => handleListItemClick(event, 4, 'base-mtps')}
       >
         <ListItemIcon>
           <StorageIcon />

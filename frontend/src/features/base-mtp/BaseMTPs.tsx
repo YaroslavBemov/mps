@@ -4,7 +4,7 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useStore } from "../../hooks/useStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function getProductTitle(params: GridValueGetterParams) {
   return params.row.product.title;
@@ -22,9 +22,10 @@ const columns: GridColDef[] = [
 ];
 
 const BaseMTPs = () => {
-  const { baseMTPStore } = useStore();
+  const { baseMTPStore, productStore } = useStore();
 
   const navigate = useNavigate();
+  const { id } = useParams()
 
   useEffect(() => {
     baseMTPStore.getAllBaseMTPs();
@@ -40,7 +41,7 @@ const BaseMTPs = () => {
               navigate(`/base-mtps/${params.id}`);
             }
           }}
-          rows={toJS(baseMTPStore.byProduct)}
+          rows={toJS(id ? baseMTPStore.byProduct : baseMTPStore.baseMTPs)}
           columns={columns}
         />
       </div>

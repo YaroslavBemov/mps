@@ -1,4 +1,5 @@
 import Paper from "@mui/material/Paper";
+import BaseMTPs from "./BaseMTPs";
 
 // import DepartmentAdd from "./DepartmentAdd";
 // import Departments from "./Departments";
@@ -13,7 +14,7 @@ const BaseMTPsPage = () => {
           mb: 2,
         }}
       >
-        {/* <DepartmentAdd /> */}
+        <BaseMTPs />
       </Paper>
       <Paper
         variant="outlined"
