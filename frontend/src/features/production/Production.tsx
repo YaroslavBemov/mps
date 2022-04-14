@@ -14,6 +14,7 @@ import { observer } from "mobx-react-lite";
 const Production = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
+    orderId: "",
     baseMtpId: "",
     serial: "",
   });
@@ -50,8 +51,9 @@ const Production = () => {
 
     const baseMtpId = Number(data.get("baseMtpId"));
     const serial = Number(data.get("serial"));
+    const orderId = Number(id)
 
-    if (baseMtpId && serial) {
+    if (baseMtpId && serial && orderId) {
       // await baseProcedureStore.storeBaseProcedure({});
       // await baseProcedureStore.getAllBaseProcedures();
     }
