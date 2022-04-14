@@ -1,4 +1,5 @@
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,12 +13,12 @@ import { useNavigate, useParams } from "react-router-dom";
 const BaseProcedureUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    position: '',
-    title: '',
-    sectorId: '',
-    timeTotal: '',
-    timePerProduct: '',
-    comment: '',
+    position: "",
+    title: "",
+    sectorId: "",
+    timeTotal: "",
+    timePerProduct: "",
+    comment: "",
   });
   const { id } = useParams();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const BaseProcedureUpdate = () => {
         sectorId: String(baseProcedureStore.baseProcedure?.sector?.id),
         timeTotal: baseProcedureStore.baseProcedure?.time_total,
         timePerProduct: baseProcedureStore.baseProcedure?.time_per_product,
-        comment: String(baseProcedureStore.baseProcedure?.comment ?? '')
+        comment: String(baseProcedureStore.baseProcedure?.comment ?? ""),
       });
     });
   }, [
@@ -44,17 +45,20 @@ const BaseProcedureUpdate = () => {
     baseProcedureStore.baseProcedure?.sector?.id,
     baseProcedureStore.baseProcedure?.time_total,
     baseProcedureStore.baseProcedure?.time_per_product,
-    baseProcedureStore.baseProcedure?.comment
+    baseProcedureStore.baseProcedure?.comment,
   ]);
 
   useEffect(() => {
     setIsDisabled(
       formData.position === String(baseProcedureStore.baseProcedure.position) &&
-      formData.title === baseProcedureStore.baseProcedure.title &&
-      formData.sectorId === String(baseProcedureStore.baseProcedure.sector.id) &&
-      formData.timeTotal === baseProcedureStore.baseProcedure.time_total &&
-      formData.timePerProduct === baseProcedureStore.baseProcedure.time_per_product &&
-      (formData.comment === baseProcedureStore.baseProcedure.comment || !formData.comment)
+        formData.title === baseProcedureStore.baseProcedure.title &&
+        formData.sectorId ===
+          String(baseProcedureStore.baseProcedure.sector.id) &&
+        formData.timeTotal === baseProcedureStore.baseProcedure.time_total &&
+        formData.timePerProduct ===
+          baseProcedureStore.baseProcedure.time_per_product &&
+        (formData.comment === baseProcedureStore.baseProcedure.comment ||
+          !formData.comment)
     );
   });
 
@@ -69,12 +73,12 @@ const BaseProcedureUpdate = () => {
   const handleClickDelete = async () => {
     await baseProcedureStore.deleteBaseProcedure(id);
     setFormData({
-      position: '',
-      title: '',
-      sectorId: '',
-      timeTotal: '',
-      timePerProduct: '',
-      comment: '',
+      position: "",
+      title: "",
+      sectorId: "",
+      timeTotal: "",
+      timePerProduct: "",
+      comment: "",
     });
     navigate("/products");
   };
@@ -87,14 +91,29 @@ const BaseProcedureUpdate = () => {
     const title = String(data.get("title"));
     const timeTotal = String(data.get("timeTotal"));
     const timePerProduct = String(data.get("timePerProduct"));
-    const baseMtpId = Number(id)
+    const baseMtpId = Number(id);
     const sectorId = Number(data.get("sectorId"));
     const comment = String(data.get("comment"));
 
-    if (position && title && timeTotal && timePerProduct && baseMtpId && sectorId) {
+    if (
+      position &&
+      title &&
+      timeTotal &&
+      timePerProduct &&
+      baseMtpId &&
+      sectorId
+    ) {
       // baseProcedureStore.storeBaseProcedure({ position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
       // await baseProcedureStore.getAllBaseProcedures()
-      await baseProcedureStore.updateBaseProcedure(id, { position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
+      await baseProcedureStore.updateBaseProcedure(id, {
+        position,
+        title,
+        baseMtpId,
+        sectorId,
+        timeTotal,
+        timePerProduct,
+        comment,
+      });
       await baseProcedureStore.getBaseProcedure(id);
     }
   };
@@ -103,34 +122,39 @@ const BaseProcedureUpdate = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{
-        // display: "flex",
-        // flexDirection: 'column',
-        // justifyContent: "center",
-        // alignItems: "center",
-
-        // padding: 2,
-        // gap: 1,
-      }}
-    >
-      <Box sx={{
-        display: "flex",
-        // flexDirection: 'column',
-        // justifyContent: "center",
-        // alignItems: "center",
-
-        // padding: 2,
-        // gap: 1,
-      }}>
-        <Box sx={{
-          display: "flex",
-          flexDirection: 'column',
+      sx={
+        {
+          // display: "flex",
+          // flexDirection: 'column',
           // justifyContent: "center",
           // alignItems: "center",
-          flexGrow: 1,
-          padding: 2,
-          gap: 1,
-        }}>
+          // padding: 2,
+          // gap: 1,
+        }
+      }
+    >
+      <Box
+        sx={{
+          display: "flex",
+          // flexDirection: 'column',
+          // justifyContent: "center",
+          // alignItems: "center",
+
+          // padding: 2,
+          // gap: 1,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center",
+            flexGrow: 1,
+            padding: 2,
+            gap: 1,
+          }}
+        >
           <TextField
             value={formData.position}
             onChange={handleChange}
@@ -147,31 +171,34 @@ const BaseProcedureUpdate = () => {
             variant="standard"
           />
 
-          <InputLabel id="sector-id">Sector</InputLabel>
-          <Select
-            labelId="sector-id"
-            label="Sector"
-            name="sectorId"
-            value={formData.sectorId}
-            onChange={handleChange}
-          >
-            {sectorStore.sectors?.map((sector) => (
-              <MenuItem key={sector.id} value={sector.id}>
-                {sector.title}
-              </MenuItem>
-            ))}
-          </Select>
-
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="sector-id">Sector</InputLabel>
+            <Select
+              labelId="sector-id"
+              label="Sector"
+              name="sectorId"
+              value={formData.sectorId}
+              onChange={handleChange}
+            >
+              {sectorStore.sectors?.map((sector) => (
+                <MenuItem key={sector.id} value={sector.id}>
+                  {sector.title}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
-        <Box sx={{
-          display: "flex",
-          flexDirection: 'column',
-          // justifyContent: "center",
-          // alignItems: "center",
-          flexGrow: 1,
-          padding: 2,
-          gap: 1,
-        }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center",
+            flexGrow: 1,
+            padding: 2,
+            gap: 1,
+          }}
+        >
           <TextField
             value={formData.timeTotal}
             onChange={handleChange}
@@ -197,15 +224,17 @@ const BaseProcedureUpdate = () => {
           />
         </Box>
       </Box>
-      <Box sx={{
-        display: "flex",
-        // flexDirection: 'column',
-        justifyContent: "center",
-        // alignItems: "center",
+      <Box
+        sx={{
+          display: "flex",
+          // flexDirection: 'column',
+          justifyContent: "center",
+          // alignItems: "center",
 
-        padding: 2,
-        gap: 1,
-      }}>
+          padding: 2,
+          gap: 1,
+        }}
+      >
         <Button type="submit" variant="contained" disabled={isDisabled}>
           Save
         </Button>

@@ -1,4 +1,5 @@
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
@@ -73,19 +74,21 @@ const SectorAdd = () => {
         variant="standard"
       />
 
-      <InputLabel id="department-id">Department</InputLabel>
-      <Select
-        labelId="department-id"
-        label="Department"
-        name="departmentId"
-        value={formData.departmentId}
-      >
-        {departmentStore.departments?.map((dep) => (
-          <MenuItem key={dep.id} value={dep.id}>
-            {dep.title}
-          </MenuItem>
-        ))}
-      </Select>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="department-id">Department</InputLabel>
+        <Select
+          labelId="department-id"
+          label="Department"
+          name="departmentId"
+          value={formData.departmentId}
+        >
+          {departmentStore.departments?.map((dep) => (
+            <MenuItem key={dep.id} value={dep.id}>
+              {dep.title}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
       <Button type="submit" variant="contained" disabled={isDisabled}>
         Add

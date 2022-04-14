@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import FormControl from "@mui/material/FormControl";
 
 const SectorUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -106,20 +107,22 @@ const SectorUpdate = () => {
         variant="standard"
       />
 
-      <InputLabel id="department-id">Department</InputLabel>
-      <Select
-        labelId="department-id"
-        label="Department"
-        name="departmentId"
-        value={formData.departmentId}
-        onChange={handleChange}
-      >
-        {departmentStore.departments?.map((dep) => (
-          <MenuItem key={dep.id} value={dep.id}>
-            {dep.title}
-          </MenuItem>
-        ))}
-      </Select>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="department-id">Department</InputLabel>
+        <Select
+          labelId="department-id"
+          label="Department"
+          name="departmentId"
+          value={formData.departmentId}
+          onChange={handleChange}
+        >
+          {departmentStore.departments?.map((dep) => (
+            <MenuItem key={dep.id} value={dep.id}>
+              {dep.title}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
       <Button type="submit" variant="contained" disabled={isDisabled}>
         Save

@@ -30,6 +30,7 @@ const ProductPage = () => {
         variant="outlined"
         sx={{
           p: 2,
+          mb: 2,
         }}
       >
         <BaseMTPAdd />

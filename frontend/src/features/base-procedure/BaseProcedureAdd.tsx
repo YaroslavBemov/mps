@@ -1,4 +1,5 @@
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
@@ -131,20 +132,22 @@ const BaseProcedureAdd = () => {
             variant="standard"
           />
 
-          <InputLabel id="sector-id">Sector</InputLabel>
-          <Select
-            labelId="sector-id"
-            label="Sector"
-            name="sectorId"
-            value={formData.sectorId}
-            onChange={handleChange}
-          >
-            {sectorStore.sectors?.map((sector) => (
-              <MenuItem key={sector.id} value={sector.id}>
-                {sector.title}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="sector-id">Sector</InputLabel>
+            <Select
+              labelId="sector-id"
+              label="Sector"
+              name="sectorId"
+              value={formData.sectorId}
+              onChange={handleChange}
+            >
+              {sectorStore.sectors?.map((sector) => (
+                <MenuItem key={sector.id} value={sector.id}>
+                  {sector.title}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
         <Box
           sx={{

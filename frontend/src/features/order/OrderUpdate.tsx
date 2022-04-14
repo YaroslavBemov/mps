@@ -10,26 +10,29 @@ const BaseMTPUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    productId: '',
+    productId: "",
   });
   const { id } = useParams();
   const navigate = useNavigate();
   const { baseMTPStore } = useStore();
 
-  useEffect(() => {
-    // const fetchSector = async () => {
-    // await baseMTPStore.getBaseMTP(id);
-    // };
-    // fetchSector()
-    // .then(() => {
-    //   setFormData({
-    //     title: baseMTPStore.baseMTP?.title,
-    //     productId: String(baseMTPStore.baseMTP?.product?.id),
-    //   });
-    // });
-  }, [
-    // baseMTPStore.baseMTP.title
-  ]);
+  useEffect(
+    () => {
+      // const fetchSector = async () => {
+      // await baseMTPStore.getBaseMTP(id);
+      // };
+      // fetchSector()
+      // .then(() => {
+      //   setFormData({
+      //     title: baseMTPStore.baseMTP?.title,
+      //     productId: String(baseMTPStore.baseMTP?.product?.id),
+      //   });
+      // });
+    },
+    [
+      // baseMTPStore.baseMTP.title
+    ]
+  );
 
   useEffect(() => {
     // setIsDisabled(
@@ -74,12 +77,11 @@ const BaseMTPUpdate = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: 2,
-        gap: 1,
+        // padding: 2,
+        // gap: 1,
         // maxWidth: 500
       }}
     >
-
       <div>[ORDER UPDATE]</div>
 
       {/* <TextField
