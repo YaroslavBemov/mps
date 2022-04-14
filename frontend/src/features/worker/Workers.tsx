@@ -11,8 +11,6 @@ function getSectorTitle(params: GridValueGetterParams) {
 }
 
 const columns: GridColDef[] = [
-  { field: "mtp_id", headerName: "MTP ID", width: 100 },
-  { field: "position", headerName: "Position", width: 100 },
   { field: "title", headerName: "Title", width: 250 },
   {
     field: "sector_id",
@@ -20,35 +18,28 @@ const columns: GridColDef[] = [
     width: 150,
     // valueGetter: getSectorTitle,
   },
-  { field: "status_id", headerName: "Status ID", width: 100 },
-  { field: "comment", headerName: "Comment", width: 150 },
 ];
 
-const Procedures = () => {
-  const { procedureStore } = useStore();
+const Workers = () => {
+  const { workerStore } = useStore();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    procedureStore.getAllProcedures();
+    workerStore.getAllWorkers();
   }, []);
 
   return (
     <>
       <div style={{ height: 700, width: "100%" }}>
         <DataGrid
-          initialState={{
-            sorting: {
-              sortModel: [{ field: "position", sort: "asc" }],
-            },
-          }}
           onCellClick={(params, event) => {
             if (!event.ctrlKey) {
               event.defaultMuiPrevented = true;
-              navigate(`/procedures/${params.id}`);
+              navigate(`/workers/${params.id}`);
             }
           }}
-          rows={toJS(procedureStore.procedures)}
+          rows={toJS(workerStore.workers)}
           columns={columns}
         />
       </div>
@@ -56,4 +47,4 @@ const Procedures = () => {
   );
 };
 
-export default observer(Procedures);
+export default observer(Workers);

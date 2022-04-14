@@ -98,6 +98,16 @@ const Nav = () => {
         <ListItemText primary='Procedures' />
       </ListItemButton>
 
+      <ListItemButton
+        selected={selectedIndex === 7}
+        onClick={(event) => handleListItemClick(event, 7, 'workers')}
+      >
+        <ListItemIcon>
+          <ListAltIcon />
+        </ListItemIcon>
+        <ListItemText primary='Workers' />
+      </ListItemButton>
+
     </>
   )
 }
