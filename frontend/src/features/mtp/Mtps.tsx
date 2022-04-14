@@ -12,10 +12,10 @@ function getOrderTitle(params: GridValueGetterParams) {
 
 const columns: GridColDef[] = [
   {
-    field: "order",
+    field: "order_id",
     headerName: "Order",
     width: 250,
-    valueGetter: getOrderTitle,
+    // valueGetter: getOrderTitle,
   },
   { field: "serial", headerName: "Serial", width: 250 },
   // { field: "updated_at", headerName: "Updated at", width: 150 },

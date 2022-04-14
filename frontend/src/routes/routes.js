@@ -82,35 +82,35 @@ export const routes = [
       },
       {
         path: 'mtps',
-        element: <MtpPage />,
+        element: <MtpsPage />,
       },
       {
         path: 'mtps/:id',
-        element: <MtpsPage />
+        element: <MtpPage />
       },
       {
         path: 'procedures',
-        element: <ProcedurePage />,
+        element: <ProceduresPage />,
       },
       {
         path: 'procedures/:id',
-        element: <ProceduresPage />
+        element: <ProcedurePage />
       },
       {
         path: 'workers',
-        element: <WorkerPage />,
+        element: <WorkersPage />,
       },
       {
         path: 'workers/:id',
-        element: <WorkersPage />
+        element: <WorkerPage />
       },
       {
         path: 'processes',
-        element: <ProcessPage />,
+        element: <ProcessesPage />,
       },
       {
         path: 'processes/:id',
-        element: <ProcessesPage />
+        element: <ProcessPage />
       }
     ]
   },

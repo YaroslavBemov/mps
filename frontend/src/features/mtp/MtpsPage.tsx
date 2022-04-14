@@ -16,15 +16,6 @@ const MtpsPage = () => {
       >
         <Mtps />
       </Paper>
-      <Paper
-        variant="outlined"
-        sx={{
-          // p: 2,
-          mb: 2,
-        }}
-      >
-        {/* <Departments /> */}
-      </Paper>
     </>
   );
 };

@@ -18,38 +18,6 @@ const MtpPage = () => {
       >
         <Mtp />
       </Paper>
-
-      <Paper
-        variant="outlined"
-        sx={{
-          p: 2,
-          mb: 2,
-        }}
-      >
-        {/* <MtpUpdate /> */}
-      </Paper>
-
-      <Paper
-        variant="outlined"
-        sx={{
-          p: 2,
-          mb: 2,
-        }}
-      >
-        {/* <BaseProcedureAdd /> */}
-      </Paper>
-
-      <Paper
-        variant="outlined"
-        sx={{
-          p: 2,
-          mb: 2,
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        {/* <BaseProcedures /> */}
-      </Paper>
     </>
   );
 };
