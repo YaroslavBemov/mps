@@ -14,6 +14,8 @@ import BaseProceduresPage from "../features/base-procedure/BaseProceduresPage";
 import BaseProcedurePage from "../features/base-procedure/BaseProcedurePage";
 import OrdersPage from "../features/order/OrdersPage";
 import OrderPage from "../features/order/OrderPage";
+import MtpPage from "../features/mtp/MtpPage";
+import MtpsPage from "../features/mtp/MtpsPage";
 
 export const routes = [
   {
@@ -71,6 +73,14 @@ export const routes = [
       {
         path: 'orders/:id',
         element: <OrderPage />
+      },
+      {
+        path: 'mtps',
+        element: <MtpPage />,
+      },
+      {
+        path: 'mtps/:id',
+        element: <MtpsPage />
       }
     ]
   },
