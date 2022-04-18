@@ -9,6 +9,7 @@ export default class Orders extends BaseSchema {
       table.string('title').notNullable()
       table.integer('product_id').unsigned().references('products.id').onDelete('CASCADE').notNullable()
       table.integer('count').unsigned().notNullable()
+      table.integer('base_mtp_id').unsigned().references('base_mtps.id').onDelete('CASCADE').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -6,32 +6,68 @@ import Mtp from 'App/Models/Mtp'
 import Procedure from 'App/Models/Procedure'
 
 export default class ProductionController {
-  public async start({ request }: HttpContextContract) {
+  public async start({ request, response }: HttpContextContract) {
     const newProductionSchema = schema.create({
       orderId: schema.number(),
-      baseMtpId: schema.number(),
       serial: schema.number()
     })
 
     const payload = await request.validate({ schema: newProductionSchema })
 
-    return { production: 'start' }
+    const order = await Order.find(payload.orderId)
+    if (!order) {
+      response.status(404)
+      return { message: 'Order not found' }
+    }
+
+    const baseMtp = await BaseMtp.find(order.baseMtpId)
+    if (!baseMtp) {
+      response.status(404)
+      return { message: 'Base MTP not found' }
+    }
+    await baseMtp.load('baseProcedures')
+
+    // order
+    //
+    // id: 1
+    // base_mtp_id: 1
+    // count: 3
+    // product_id: 1
+    // title: "CRUP1"
+
+    // mtp
+    //
+    // order_id
+    // serial
+
+    // procedure
+    //
+    // mtp_id
+    // position
+    // title
+    // sector_id
+
+    const orderId = payload.orderId
+    let serial = payload.serial
+
+    // create MTPs with serial and orderID
+    for (let i = 0; i < order.count; i++) {
+      const mtp = await Mtp.create({
+        orderId, serial
+      })
+      serial++
+
+      // create procedures with mtp_id, position, title, sector_id
+      for (const procedure of baseMtp.baseProcedures) {
+        await Procedure.create({
+          mtpId: mtp.id,
+          position: procedure.position,
+          title: procedure.title,
+          sectorId: procedure.sectorId
+        })
+      }
+    }
+
+    return order
   }
 }
-
-// public async store({ request, response }: HttpContextContract) {
-//   const newDepartmentSchema = schema.create({
-//     title: schema.string({ trim: true }),
-//   })
-
-//   const payload = await request.validate({ schema: newDepartmentSchema })
-//   const department = await Department.findBy('title', payload.title)
-
-//   if (department) {
-//     response.status(409)
-//     return { message: 'Department already exist' }
-//   }
-
-//   const newDepartment = await Department.create(payload)
-//   return newDepartment
-// }

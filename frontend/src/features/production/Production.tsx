@@ -10,30 +10,29 @@ import { useStore } from "../../hooks/useStore";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import ProductionService from "../../services/ProductionService";
 
 const Production = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     orderId: "",
-    baseMtpId: "",
     serial: "",
   });
 
-  const { baseMTPStore, orderStore, productStore } = useStore();
+  const { orderStore, productStore } = useStore();
   const { id } = useParams();
 
   useEffect(() => {
     const fetch = async () => {
       await orderStore.getOrder(id);
       await productStore.getProduct(orderStore.order.product.id);
-      await baseMTPStore.getAllBaseMTPs();
     };
 
     fetch();
   }, []);
 
   useEffect(() => {
-    setIsDisabled(!formData.baseMtpId || !Number(formData.serial));
+    setIsDisabled(!Number(formData.serial));
   });
 
   const handleChange = (event: any) => {
@@ -49,13 +48,12 @@ const Production = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const baseMtpId = Number(data.get("baseMtpId"));
     const serial = Number(data.get("serial"));
     const orderId = Number(id)
 
-    if (baseMtpId && serial && orderId) {
-      // await baseProcedureStore.storeBaseProcedure({});
-      // await baseProcedureStore.getAllBaseProcedures();
+    if (serial && orderId) {
+      const response = await ProductionService.startProduction({ orderId, serial })
+      console.log(response.data);
     }
   };
 
@@ -66,29 +64,14 @@ const Production = () => {
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={
-          {
-            // display: "flex",
-            // flexDirection: 'column',
-            // justifyContent: "center",
-            // alignItems: "center",
-            // padding: 2,
-            // gap: 1,
-          }
-        }
       >
         <Box
           sx={{
             display: "flex",
-            // flexDirection: 'column',
-            // justifyContent: "center",
             alignItems: "center",
-
-            // padding: 2,
-            // gap: 1,
           }}
         >
-          <FormControl sx={{ m: 1, minWidth: 120 }} variant="standard">
+          {/* <FormControl sx={{ m: 1, minWidth: 120 }} variant="standard">
             <InputLabel id="base-mtp-id">Base MTP</InputLabel>
             <Select
               labelId="base-mtp-id"
@@ -103,7 +86,7 @@ const Production = () => {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
 
           <TextField
             type="number"

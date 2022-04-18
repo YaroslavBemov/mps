@@ -8,6 +8,7 @@ export default class OrderSeeder extends BaseSeeder {
         title: 'CRUP1',
         productId: 1,
         count: 3,
+        baseMtpId: 1
       },
     ])
   }

@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Product from './Product'
+import BaseMtp from './BaseMtp'
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -15,6 +16,9 @@ export default class Order extends BaseModel {
   @column()
   public count: number
 
+  @column()
+  public baseMtpId: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
@@ -22,5 +26,8 @@ export default class Order extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => Product)
-  public product: BelongsTo<typeof Products>
+  public product: BelongsTo<typeof Product>
+
+  @belongsTo(() => BaseMtp)
+  public baseMtp: BelongsTo<typeof BaseMtp>
 }

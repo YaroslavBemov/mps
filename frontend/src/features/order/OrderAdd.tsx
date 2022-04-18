@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
@@ -14,9 +15,10 @@ const BaseMTPAdd = () => {
   const [formData, setFormData] = useState({
     title: "",
     productId: '',
-    count: ''
+    count: '',
+    baseMtpId: ''
   });
-  const { orderStore, productStore } = useStore();
+  const { orderStore, productStore, baseMTPStore } = useStore();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -25,7 +27,11 @@ const BaseMTPAdd = () => {
   }, []);
 
   useEffect(() => {
-    setIsDisabled(formData.title === "" || formData.count === '' || formData.productId === '');
+    productStore.getProduct(formData.productId)
+  }, [formData.productId]);
+
+  useEffect(() => {
+    setIsDisabled(formData.title === "" || formData.count === '' || formData.productId === '' || formData.baseMtpId === '');
   });
 
   const handleChange = (event: any) => {
@@ -43,9 +49,10 @@ const BaseMTPAdd = () => {
     const title = String(data.get("title"));
     const productId = id ? Number(id) : Number(data.get('productId'));
     const count = Number(data.get("count"));
+    const baseMtpId = Number(data.get('baseMtpId'))
 
     if (title && productId && count) {
-      const { id: orderId } = await orderStore.storeOrder({ title, productId, count });
+      const { id: orderId } = await orderStore.storeOrder({ title, productId, count, baseMtpId });
 
       navigate(`/orders/${orderId}`)
 
@@ -78,20 +85,39 @@ const BaseMTPAdd = () => {
         variant="standard"
       />
 
-      <InputLabel id="product-id">Product</InputLabel>
-      <Select
-        labelId="product-id"
-        label="Product"
-        name="productId"
-        value={formData.productId}
-        onChange={handleChange}
-      >
-        {productStore.products?.map((product) => (
-          <MenuItem key={product.id} value={product.id}>
-            {product.title}
-          </MenuItem>
-        ))}
-      </Select>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="product-id">Product</InputLabel>
+        <Select
+          labelId="product-id"
+          label="Product"
+          name="productId"
+          value={formData.productId}
+          onChange={handleChange}
+        >
+          {productStore.products?.map((product) => (
+            <MenuItem key={product.id} value={product.id}>
+              {product.title}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="base-mtp-id">Base MTP</InputLabel>
+        <Select
+          labelId="base-mtp-id"
+          label="BaseMTP"
+          name="baseMtpId"
+          value={formData.baseMtpId}
+          onChange={handleChange}
+        >
+          {baseMTPStore.byProduct?.map((baseMtp) => (
+            <MenuItem key={baseMtp.id} value={baseMtp.id}>
+              {baseMtp.title}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
       <TextField
         value={formData.count}

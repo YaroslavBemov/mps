@@ -1,12 +1,14 @@
 import { makeAutoObservable, toJS } from "mobx";
 import OrderService, { IOrderStoreData } from "../services/OrderService";
 import { IProduct } from './ProductStore'
+import { IBaseMTP } from './BaseMTPStore'
 
 export interface IOrder {
   id: number;
   title: string;
   product: IProduct;
   count: number;
+  baseMtp: IBaseMTP;
   created_at: string;
   updated_at: string;
 }

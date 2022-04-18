@@ -10,6 +10,10 @@ function getProductTitle(params: GridValueGetterParams) {
   return params.row.product.title;
 }
 
+function getBaseMtpTitle(params: GridValueGetterParams) {
+  return params.row.baseMtp.title;
+}
+
 const columns: GridColDef[] = [
   { field: "title", headerName: "Title", width: 250 },
   {
@@ -17,6 +21,12 @@ const columns: GridColDef[] = [
     headerName: "Product",
     width: 250,
     valueGetter: getProductTitle,
+  },
+  {
+    field: "baseMtp",
+    headerName: "Base MTP",
+    width: 250,
+    valueGetter: getBaseMtpTitle,
   },
   { field: "count", headerName: "Count", width: 150 },
 ];
