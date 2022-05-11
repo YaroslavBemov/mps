@@ -15,7 +15,7 @@ const Order = () => {
     <>
       <div>Title: {orderStore.order?.title}</div>
       <div>Product: {orderStore.order?.product?.title}</div>
-      <div>Base MTP: {orderStore.order.baseMtp.title}</div>
+      <div>Base MTP: {orderStore.order?.baseMtp?.title}</div>
       <div>Count: {orderStore.order?.count}</div>
     </>
   );
