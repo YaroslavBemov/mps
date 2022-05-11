@@ -13,7 +13,7 @@ const DepartmentUpdate = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setUpdated(departmentStore.department?.title);
+    departmentStore.department.title && setUpdated(departmentStore.department.title);
   }, [departmentStore.department.title]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

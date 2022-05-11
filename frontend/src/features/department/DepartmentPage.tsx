@@ -32,7 +32,7 @@ const DepartmentPage = () => {
           mb: 2,
         }}
       >
-        <Sectors />
+        {/* <Sectors /> */}
       </Paper>
     </>
   );
