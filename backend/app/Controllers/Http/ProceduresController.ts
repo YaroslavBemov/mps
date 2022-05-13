@@ -7,7 +7,7 @@ import Status from 'App/Models/Status'
 
 export default class ProceduresController {
   public async index({ }: HttpContextContract) {
-    const procedures = await Procedure.all()
+    const procedures = await Procedure.query().preload('sector').preload('status')
 
     return procedures
   }
@@ -57,6 +57,9 @@ export default class ProceduresController {
       response.status(404)
       return { message: 'Not found' }
     }
+
+    await procedure.load('sector')
+    await procedure.load('status')
 
     return procedure
   }

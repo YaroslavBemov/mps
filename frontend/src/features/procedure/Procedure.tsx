@@ -15,8 +15,8 @@ const Procedure = () => {
     <>
       <div>Position: {procedureStore.procedure?.position}</div>
       <div>Title: {procedureStore.procedure?.title}</div>
-      <div>Sector: {procedureStore.procedure?.sector_id}</div>
-      <div>Status: {procedureStore.procedure?.status_id}</div>
+      <div>Sector: {procedureStore.procedure?.sector?.title}</div>
+      <div>Status: {procedureStore.procedure?.status?.title}</div>
       <div>Comment: {procedureStore.procedure?.comment}</div>
     </>
   );

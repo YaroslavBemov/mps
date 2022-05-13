@@ -3,13 +3,20 @@ import ProcedureService from "../services/ProcedureService";
 import { IBaseMTP } from "./BaseMTPStore";
 import { ISector } from "./SectorStore";
 
+export interface IStatus {
+  id: number;
+  title: string;
+}
+
 export interface IProcedure {
   id: number;
   mtp_id: number;
   position: number;
   title: string;
   sector_id: number;
+  sector: ISector;
   status_id: number;
+  status: IStatus;
   comment?: string;
   created_at: string;
   updated_at: string;

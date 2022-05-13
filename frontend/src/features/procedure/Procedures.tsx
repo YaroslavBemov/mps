@@ -10,17 +10,21 @@ function getSectorTitle(params: GridValueGetterParams) {
   return params.row.sector.title ?? "";
 }
 
+function getStatusTitle(params: GridValueGetterParams) {
+  return params.row.status.title ?? "";
+}
+
 const columns: GridColDef[] = [
   { field: "mtp_id", headerName: "MTP ID", width: 100 },
   { field: "position", headerName: "Position", width: 100 },
   { field: "title", headerName: "Title", width: 250 },
   {
-    field: "sector_id",
-    headerName: "Sector ID",
+    field: "sector",
+    headerName: "Sector",
     width: 150,
-    // valueGetter: getSectorTitle,
+    valueGetter: getSectorTitle,
   },
-  { field: "status_id", headerName: "Status ID", width: 100 },
+  { field: "status", headerName: "Status", width: 100, valueGetter: getStatusTitle },
   { field: "comment", headerName: "Comment", width: 150 },
 ];
 

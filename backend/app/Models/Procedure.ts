@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Sector from './Sector'
+import Status from './Status'
 
 export default class Procedure extends BaseModel {
   @column({ isPrimary: true })
@@ -28,4 +30,10 @@ export default class Procedure extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => Sector)
+  public sector: BelongsTo<typeof Sector>
+
+  @belongsTo(() => Status)
+  public status: BelongsTo<typeof Status>
 }
