@@ -25,7 +25,8 @@ const columns: GridColDef[] = [
 ];
 
 const Procedures = () => {
-  const { procedureStore } = useStore();
+  const { procedureStore, mtpStore } = useStore();
+  const { procedures } = mtpStore.mtp
 
   const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ const Procedures = () => {
               navigate(`/procedures/${params.id}`);
             }
           }}
-          rows={toJS(procedureStore.procedures)}
+          rows={procedures ? toJS(procedures) : toJS(procedureStore.procedures)}
           columns={columns}
         />
       </div>

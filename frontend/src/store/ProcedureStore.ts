@@ -3,7 +3,7 @@ import ProcedureService from "../services/ProcedureService";
 import { IBaseMTP } from "./BaseMTPStore";
 import { ISector } from "./SectorStore";
 
-interface IProcedure {
+export interface IProcedure {
   id: number;
   mtp_id: number;
   position: number;
@@ -84,9 +84,4 @@ export default class ProcedureStore {
     this.procedure = procedure;
   }
 
-  // get byMTP() {
-  //   return this.Procedures.filter((bp) => {
-  //     return bp.Mtp.id === this.rootStore.MTPStore.MTP.id;
-  //   });
-  // }
 }

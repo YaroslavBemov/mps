@@ -2,6 +2,7 @@ import { makeAutoObservable, toJS } from "mobx";
 import BaseMTPService from "../services/BaseMTPService";
 import MtpService from "../services/MtpService";
 import { IOrder } from "./OrderStore";
+import { IProcedure } from "./ProcedureStore";
 import { IProduct } from './ProductStore'
 
 export interface IMtp {
@@ -9,6 +10,7 @@ export interface IMtp {
   orderId: number;
   order: IOrder;
   serial: number;
+  procedures: IProcedure[]
   created_at: string;
   updated_at: string;
 }
@@ -46,6 +48,10 @@ export default class MtpStore {
     }
   }
 
+  clearMtp() {
+    this.mtp = {} as IMtp
+  }
+
   async storeMtp(data: IMtpStoreData) {
     try {
       await MtpService.storeMtp(data);
@@ -78,9 +84,9 @@ export default class MtpStore {
     this.mtp = mtp;
   }
 
-  // get byProduct() {
-  //   return this.baseMTPs.filter((mtp) => {
-  //     return mtp.product.id === this.rootStore.productStore.product.id;
-  //   });
-  // }
+  get byOrder() {
+    return this.mtps.filter((mtp) => {
+      return mtp.order.id === this.rootStore.orderStore.order.id;
+    });
+  }
 }

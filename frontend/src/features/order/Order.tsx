@@ -9,6 +9,10 @@ const Order = () => {
 
   useEffect(() => {
     orderStore.getOrder(id);
+
+    return () => {
+      orderStore.clearOrder()
+    }
   }, [id]);
 
   return (

@@ -10,6 +10,8 @@ const Mtp = () => {
 
   useEffect(() => {
     mtpStore.getMtp(id);
+    // TODO rework
+    return () => { mtpStore.clearMtp() }
   }, [id]);
 
   return (

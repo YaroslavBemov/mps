@@ -1,4 +1,5 @@
 import Paper from "@mui/material/Paper";
+import Mtps from "../mtp/Mtps";
 import Production from "../production/Production";
 import Order from "./Order";
 import OrderUpdate from "./OrderUpdate";
@@ -36,6 +37,16 @@ const OrderPage = () => {
         }}
       >
         <Production />
+      </Paper>
+
+      <Paper
+        variant="outlined"
+        sx={{
+          p: 2,
+          mb: 2,
+        }}
+      >
+        <Mtps />
       </Paper>
     </>
   );

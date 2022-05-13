@@ -42,6 +42,10 @@ export default class OrderStore {
     }
   }
 
+  clearOrder() {
+    this.order = {} as IOrder
+  }
+
   async storeOrder(data: IOrderStoreData) {
     try {
       const response = await OrderService.storeOrder(data);

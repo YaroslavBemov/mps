@@ -22,7 +22,9 @@ const columns: GridColDef[] = [
 ];
 
 const Mtps = () => {
-  const { mtpStore } = useStore();
+  const { mtpStore, orderStore } = useStore();
+  // TODO rework
+  const orderId = orderStore.order.id
 
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ const Mtps = () => {
               navigate(`/mtps/${params.id}`);
             }
           }}
-          rows={toJS(mtpStore.mtps)}
+          rows={orderId ? toJS(mtpStore.byOrder) : toJS(mtpStore.mtps)}
           columns={columns}
         />
       </div>
