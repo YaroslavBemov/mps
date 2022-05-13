@@ -2,9 +2,10 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useStore } from "../../hooks/useStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { IProcedure } from "../../store/ProcedureStore";
 
 function getSectorTitle(params: GridValueGetterParams) {
   return params.row.sector?.title ?? "";
@@ -29,16 +30,20 @@ const columns: GridColDef[] = [
 ];
 
 const Procedures = () => {
-  const { procedureStore, mtpStore } = useStore();
-
+  const [rows, setRows] = useState<IProcedure[]>([])
+  const { mtpStore } = useStore();
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetch = async () => {
-      await procedureStore.getAllProcedures();
+    const fetchMtp = async () => {
+      await mtpStore.getMtp(id);
     }
-    fetch();
-  }, []);
+    fetchMtp()
+      .then(() => {
+        setRows(mtpStore.mtp.procedures)
+      })
+  }, [id]);
 
   return (
     <>
@@ -55,7 +60,7 @@ const Procedures = () => {
               navigate(`/procedures/${params.id}`);
             }
           }}
-          rows={toJS(procedureStore.procedures)}
+          rows={rows}
           columns={columns}
         />
       </div>

@@ -9,7 +9,10 @@ const Mtp = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    mtpStore.getMtp(id);
+    const fetchMtp = async () => {
+      await mtpStore.getMtp(id);
+    }
+    fetchMtp()
     // TODO rework
     return () => { mtpStore.clearMtp() }
   }, [id]);
