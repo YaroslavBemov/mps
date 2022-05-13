@@ -23,11 +23,19 @@ const BaseMTPAdd = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    productStore.getAllProducts()
+    const fetchProducts = async () => {
+      await productStore.getAllProducts()
+    }
+    fetchProducts()
   }, []);
 
   useEffect(() => {
-    productStore.getProduct(formData.productId)
+    const fetchProduct = async () => {
+      await productStore.getProduct(formData.productId)
+    }
+    fetchProduct().then(() => {
+      baseMTPStore.getAllBaseMTPs()
+    })
   }, [formData.productId]);
 
   useEffect(() => {
