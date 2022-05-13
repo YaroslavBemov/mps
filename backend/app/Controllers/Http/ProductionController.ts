@@ -20,6 +20,12 @@ export default class ProductionController {
       return { message: 'Order not found' }
     }
 
+    if (order.isStarted) {
+      // TODO replace status
+      response.status(404)
+      return { message: 'Order already started' }
+    }
+
     const baseMtp = await BaseMtp.find(order.baseMtpId)
     if (!baseMtp) {
       response.status(404)
@@ -67,6 +73,9 @@ export default class ProductionController {
         })
       }
     }
+
+    order.isStarted = true
+    await order.save()
 
     return order
   }

@@ -60,16 +60,12 @@ const BaseMTPAdd = () => {
     const baseMtpId = Number(data.get('baseMtpId'))
 
     if (title && productId && count) {
-      const { id: orderId } = await orderStore.storeOrder({ title, productId, count, baseMtpId });
-
-      navigate(`/orders/${orderId}`)
-
-      // await orderStore.getAllOrders();
-      // setFormData({
-      //   title: "",
-      //   productId: '',
-      //   count: ''
-      // });
+      try {
+        const { id: orderId } = await orderStore.storeOrder({ title, productId, count, baseMtpId });
+        navigate(`/orders/${orderId}`)
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

@@ -9,6 +9,7 @@ export interface IOrder {
   product: IProduct;
   count: number;
   baseMtp: IBaseMTP;
+  is_started: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -44,6 +45,8 @@ export default class OrderStore {
   async storeOrder(data: IOrderStoreData) {
     try {
       const response = await OrderService.storeOrder(data);
+      console.log(response.data);
+
       return response.data
     } catch (error) {
       console.log(error);

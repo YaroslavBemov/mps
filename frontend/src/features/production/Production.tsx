@@ -32,7 +32,7 @@ const Production = () => {
   }, []);
 
   useEffect(() => {
-    setIsDisabled(!Number(formData.serial));
+    setIsDisabled(!Number(formData.serial) || orderStore.order.is_started);
   });
 
   const handleChange = (event: any) => {

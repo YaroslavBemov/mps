@@ -19,6 +19,9 @@ export default class Order extends BaseModel {
   @column()
   public baseMtpId: number
 
+  @column()
+  public isStarted: boolean
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
