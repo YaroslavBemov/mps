@@ -49,11 +49,19 @@ const Production = () => {
     const data = new FormData(event.currentTarget);
 
     const serial = Number(data.get("serial"));
-    const orderId = Number(id)
+    const orderId = Number(id);
 
     if (serial && orderId) {
-      const response = await ProductionService.startProduction({ orderId, serial })
-      console.log(response.data);
+      try {
+        const response = await ProductionService.startProduction({
+          orderId,
+          serial,
+        });
+        // TODO refresh mtps after start production
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -61,10 +69,7 @@ const Production = () => {
     <>
       <div>PRODUCTION</div>
 
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-      >
+      <Box component="form" onSubmit={handleSubmit}>
         <Box
           sx={{
             display: "flex",

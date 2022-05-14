@@ -48,6 +48,7 @@ const BaseProcedures = () => {
               navigate(`/base-procedures/${params.id}`);
             }
           }}
+          // TODO rework byBaseMtp and all procedures
           rows={toJS(baseProcedureStore.byBaseMTP)}
           columns={columns}
         />

@@ -4,7 +4,7 @@ import Mtp from 'App/Models/Mtp'
 import Order from 'App/Models/Order'
 
 export default class MtpsController {
-  public async index({ }: HttpContextContract) {
+  public async index({}: HttpContextContract) {
     const mtps = await Mtp.query().preload('order').preload('procedures')
 
     return mtps
@@ -48,7 +48,9 @@ export default class MtpsController {
     }
 
     await mtp.load('order')
-    await mtp.load('procedures')
+    await mtp.load('procedures', (pQuery) => {
+      pQuery.preload('sector').preload('status')
+    })
 
     return mtp
   }

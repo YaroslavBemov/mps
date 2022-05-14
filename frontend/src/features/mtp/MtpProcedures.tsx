@@ -8,11 +8,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IProcedure } from "../../store/ProcedureStore";
 
 function getSectorTitle(params: GridValueGetterParams) {
-  return params.row.sector?.title ?? "";
+  return params.row.sector.title ?? "";
 }
 
 function getStatusTitle(params: GridValueGetterParams) {
-  return params.row.status?.title ?? "";
+  return params.row.status.title ?? "";
 }
 
 const columns: GridColDef[] = [
@@ -25,25 +25,30 @@ const columns: GridColDef[] = [
     width: 150,
     valueGetter: getSectorTitle,
   },
-  { field: "status", headerName: "Status", width: 100, valueGetter: getStatusTitle },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 100,
+    valueGetter: getStatusTitle,
+  },
   { field: "comment", headerName: "Comment", width: 150 },
 ];
 
 const Procedures = () => {
-  const [rows, setRows] = useState<IProcedure[]>([])
+  // const [rows, setRows] = useState<IProcedure[]>([])
   const { mtpStore } = useStore();
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchMtp = async () => {
-      await mtpStore.getMtp(id);
-    }
-    fetchMtp()
-      .then(() => {
-        setRows(mtpStore.mtp.procedures)
-      })
-  }, [id]);
+  // useEffect(() => {
+  //   const fetchMtp = async () => {
+  //     await mtpStore.getMtp(id);
+  //   }
+  //   fetchMtp()
+  //     .then(() => {
+  //       setRows(mtpStore.mtp.procedures)
+  //     })
+  // }, [id]);
 
   return (
     <>
@@ -60,7 +65,7 @@ const Procedures = () => {
               navigate(`/procedures/${params.id}`);
             }
           }}
-          rows={rows}
+          rows={toJS(mtpStore.mtp?.procedures)}
           columns={columns}
         />
       </div>
