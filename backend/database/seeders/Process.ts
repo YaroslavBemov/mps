@@ -5,8 +5,9 @@ export default class ProcessSeeder extends BaseSeeder {
   public async run() {
     await Process.createMany([
       {
-        procedureId: 1,
         workerId: 1,
+        procedureId: 1,
+        statusId: 2,
         comment: 'Text text text...',
       },
     ])

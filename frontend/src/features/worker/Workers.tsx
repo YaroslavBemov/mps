@@ -16,7 +16,7 @@ const columns: GridColDef[] = [
     field: "sector_id",
     headerName: "Sector ID",
     width: 150,
-    // valueGetter: getSectorTitle,
+    valueGetter: getSectorTitle,
   },
 ];
 

@@ -1,14 +1,18 @@
 import { makeAutoObservable, toJS } from "mobx";
 import ProcessService from "../services/ProcessService";
 import { IBaseMTP } from "./BaseMTPStore";
+import { IProcedure, IStatus } from "./ProcedureStore";
 import { ISector } from "./SectorStore";
+import { IWorker } from "./WorkerStore";
 
 interface IProcess {
   id: number;
-  procedure_id: number;
   worker_id: number;
-  time_begin: string;
-  time_finish: string;
+  worker: IWorker;
+  procedure_id: number;
+  procedure: IProcedure;
+  status_id: number;
+  status: IStatus;
   comment?: string;
   created_at: string;
   updated_at: string;
@@ -17,8 +21,7 @@ interface IProcess {
 export interface IProcessStoreData {
   procedure_id: number;
   worker_id: number;
-  time_begin: string;
-  time_finish: string;
+  status_id: number;
   comment?: string;
 }
 

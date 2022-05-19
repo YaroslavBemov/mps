@@ -51,6 +51,7 @@ Route.group(() => {
     // Production
     Route.post('production/create', 'ProductionController.create')
     Route.put('production/start', 'ProductionController.start')
+    Route.get('desktops', 'DesktopsController.index')
   }).prefix('api/v1')
 }).middleware('auth')
 

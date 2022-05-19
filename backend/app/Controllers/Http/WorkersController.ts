@@ -5,7 +5,7 @@ import Sector from 'App/Models/Sector'
 
 export default class WorkersController {
   public async index({}: HttpContextContract) {
-    const workers = await Worker.all()
+    const workers = await Worker.query().preload('sector')
 
     return workers
   }
@@ -43,6 +43,8 @@ export default class WorkersController {
       response.status(404)
       return { message: 'Not found' }
     }
+
+    await worker.load('sector')
 
     return worker
   }

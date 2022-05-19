@@ -5,11 +5,12 @@ import DepartmentStore from "./DepartmentStore";
 import ProductStore from "./ProductStore";
 import SectorStore from "./SectorStore";
 import UIStore from "./UiStore";
-import OrderStore from './OrderStore'
-import MtpStore from './MtpStore'
-import ProcedureStore from './ProcedureStore'
+import OrderStore from "./OrderStore";
+import MtpStore from "./MtpStore";
+import ProcedureStore from "./ProcedureStore";
 import WorkerStore from "./WorkerStore";
 import ProcessStore from "./ProcessStore";
+import DesktopStore from "./DesktopStore";
 
 export default class RootStore {
   authStore: AuthStore;
@@ -21,9 +22,10 @@ export default class RootStore {
   baseProcedureStore: BaseProcedureStore;
   orderStore: OrderStore;
   mtpStore: MtpStore;
-  procedureStore: ProcedureStore
-  workerStore: WorkerStore
-  processStore: ProcessStore
+  procedureStore: ProcedureStore;
+  workerStore: WorkerStore;
+  processStore: ProcessStore;
+  desktopStore: DesktopStore;
 
   constructor() {
     this.authStore = new AuthStore(this);
@@ -33,10 +35,11 @@ export default class RootStore {
     this.sectorStore = new SectorStore(this);
     this.baseMTPStore = new BaseMTPStore(this);
     this.baseProcedureStore = new BaseProcedureStore(this);
-    this.orderStore = new OrderStore(this)
-    this.mtpStore = new MtpStore(this)
-    this.procedureStore = new ProcedureStore(this)
-    this.workerStore = new WorkerStore(this)
-    this.processStore = new ProcessStore(this)
+    this.orderStore = new OrderStore(this);
+    this.mtpStore = new MtpStore(this);
+    this.procedureStore = new ProcedureStore(this);
+    this.workerStore = new WorkerStore(this);
+    this.processStore = new ProcessStore(this);
+    this.desktopStore = new DesktopStore(this);
   }
 }

@@ -13,10 +13,9 @@ const Process = () => {
 
   return (
     <>
-      <div>Procedure: {processStore.process?.procedure_id}</div>
-      <div>Worker: {processStore.process?.worker_id}</div>
-      <div>Time begin: {processStore.process?.time_begin}</div>
-      <div>Time finish: {processStore.process?.time_finish}</div>
+      <div>Worker: {processStore.process?.worker?.title}</div>
+      <div>Procedure: {processStore.process?.procedure?.title}</div>
+      <div>Status: {processStore.process?.status?.title}</div>
       <div>Comment: {processStore.process?.comment}</div>
     </>
   );

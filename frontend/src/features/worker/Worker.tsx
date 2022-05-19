@@ -14,7 +14,7 @@ const Worker = () => {
   return (
     <>
       <div>Title: {workerStore.worker?.title}</div>
-      <div>Sector: {workerStore.worker?.sector_id}</div>
+      <div>Sector: {workerStore.worker?.sector?.title}</div>
     </>
   );
 };

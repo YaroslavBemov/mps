@@ -6,19 +6,36 @@ import React, { useEffect } from "react";
 import { useStore } from "../../hooks/useStore";
 import { useNavigate } from "react-router-dom";
 
-function getSectorTitle(params: GridValueGetterParams) {
-  return params.row.sector.title ?? "";
+function getWorkerTitle(params: GridValueGetterParams) {
+  return params.row.worker.title ?? "";
+}
+
+function getProcedureTitle(params: GridValueGetterParams) {
+  return params.row.procedure.title ?? "";
+}
+
+function getStatusTitle(params: GridValueGetterParams) {
+  return params.row.status.title ?? "";
 }
 
 const columns: GridColDef[] = [
-  { field: "procedure_id", headerName: "PROCEDURE ID", width: 100 },
-  { field: "worker_id", headerName: "WORKER ID", width: 100 },
-  { field: "time_begin", headerName: "Begin", width: 250 },
   {
-    field: "time_finish",
-    headerName: "Finish",
+    field: "worker",
+    headerName: "Worker",
     width: 150,
-    // valueGetter: getSectorTitle,
+    valueGetter: getWorkerTitle,
+  },
+  {
+    field: "procedure",
+    headerName: "Procedure",
+    width: 150,
+    valueGetter: getProcedureTitle,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 150,
+    valueGetter: getStatusTitle,
   },
   { field: "comment", headerName: "Comment", width: 150 },
 ];

@@ -3,10 +3,11 @@ import WorkerService from "../services/WorkerService";
 import { IBaseMTP } from "./BaseMTPStore";
 import { ISector } from "./SectorStore";
 
-interface IWorker {
+export interface IWorker {
   id: number;
   title: string;
   sector_id: number;
+  sector: ISector;
   created_at: string;
   updated_at: string;
 }

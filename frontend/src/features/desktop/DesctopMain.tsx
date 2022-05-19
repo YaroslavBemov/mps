@@ -12,12 +12,12 @@ const columns: GridColDef[] = [
 ];
 
 const DesktopMain = () => {
-  const { sectorStore } = useStore();
+  const { desktopStore } = useStore();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
-      await sectorStore.getAllSectors();
+      await desktopStore.getAllDesktops();
     };
     fetch();
   }, []);
@@ -29,10 +29,10 @@ const DesktopMain = () => {
           onCellClick={(params, event) => {
             if (!event.ctrlKey) {
               event.defaultMuiPrevented = true;
-              navigate(`/desktop/${params.id}`);
+              navigate(`/desktops/${params.id}`);
             }
           }}
-          rows={toJS(sectorStore.sectors)}
+          rows={toJS(desktopStore.desktops)}
           columns={columns}
         />
       </div>
