@@ -49,7 +49,8 @@ Route.group(() => {
     // Process
     Route.resource('processes', 'ProcessesController').apiOnly()
     // Production
-    Route.post('production/create', 'ProductionController.start')
+    Route.post('production/create', 'ProductionController.create')
+    Route.put('production/start', 'ProductionController.start')
   }).prefix('api/v1')
 }).middleware('auth')
 

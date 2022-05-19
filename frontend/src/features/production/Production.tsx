@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import ProductionService from "../../services/ProductionService";
+import { toJS } from "mobx";
 
 const Production = () => {
   const [isCreateDisabled, setIsCreateDisabled] = useState(true);
@@ -29,14 +30,26 @@ const Production = () => {
       await productStore.getProduct(orderStore.order.product.id);
     };
 
-    fetch();
+    fetch().then(() => {
+      setIsCreateDisabled(
+        !Number(formData.serial) || orderStore.order.is_created
+      );
+      setIsStartDisabled(
+        !orderStore.order.is_created ||
+          (orderStore.order.is_created && orderStore.order.is_started)
+      );
+    });
   }, []);
 
   useEffect(() => {
     setIsCreateDisabled(
       !Number(formData.serial) || orderStore.order.is_created
     );
-  });
+    setIsStartDisabled(
+      !orderStore.order.is_created ||
+        (orderStore.order.is_created && orderStore.order.is_started)
+    );
+  }, [orderStore.order, formData.serial]);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -61,6 +74,7 @@ const Production = () => {
           serial,
         });
         mtpStore.getAllMtps();
+        await orderStore.getOrder(id);
         console.log(response.data);
       } catch (error) {
         console.log(error);
@@ -68,7 +82,16 @@ const Production = () => {
     }
   };
 
-  const handleStartProduction = async () => {};
+  const handleStartProduction = async () => {
+    const orderId = Number(id);
+    try {
+      const response = await ProductionService.startProduction({ orderId });
+      await orderStore.getOrder(id);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>

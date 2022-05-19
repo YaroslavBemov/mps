@@ -33,26 +33,6 @@ export default class ProductionController {
     }
     await baseMtp.load('baseProcedures')
 
-    // order
-    //
-    // id: 1
-    // base_mtp_id: 1
-    // count: 3
-    // product_id: 1
-    // title: "CRUP1"
-
-    // mtp
-    //
-    // order_id
-    // serial
-
-    // procedure
-    //
-    // mtp_id
-    // position
-    // title
-    // sector_id
-
     const orderId = payload.orderId
     let serial = payload.serial
 
@@ -74,6 +54,56 @@ export default class ProductionController {
         })
       }
     }
+
+    order.isCreated = true
+    await order.save()
+
+    return order
+  }
+
+  public async start({ request, response }: HttpContextContract) {
+    const newProductionSchema = schema.create({
+      orderId: schema.number(),
+    })
+
+    const payload = await request.validate({ schema: newProductionSchema })
+
+    const order = await Order.find(payload.orderId)
+    if (!order) {
+      response.status(404)
+      return { message: 'Order not found' }
+    }
+
+    if (!order.isCreated) {
+      // TODO replace status
+      response.status(404)
+      return { message: 'Order not created' }
+    }
+
+    if (order.isStarted) {
+      // TODO replace status
+      response.status(404)
+      return { message: 'Order already started' }
+    }
+
+    await order.load('mtps', (mtpQuery) => {
+      mtpQuery.preload('procedures')
+    })
+
+    // find procedure with minimum position value in each mtp
+    // and change status to waiting
+    const proceduresId: number[] = []
+    order.mtps.forEach((mtp) => {
+      proceduresId.push(mtp.procedures[0].id)
+    })
+
+    proceduresId.forEach(async (procedureId) => {
+      const procedure = await Procedure.find(procedureId)
+      if (procedure) {
+        procedure.statusId = 2
+        await procedure.save()
+      }
+    })
 
     order.isStarted = true
     await order.save()

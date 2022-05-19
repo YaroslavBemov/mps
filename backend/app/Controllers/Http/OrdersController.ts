@@ -5,7 +5,7 @@ import Order from 'App/Models/Order'
 import Product from 'App/Models/Product'
 
 export default class OrdersController {
-  public async index({ }: HttpContextContract) {
+  public async index({}: HttpContextContract) {
     const orders = await Order.query().preload('product').preload('baseMtp')
 
     return orders
@@ -16,7 +16,7 @@ export default class OrdersController {
       title: schema.string({ trim: true }),
       productId: schema.number(),
       count: schema.number(),
-      baseMtpId: schema.number()
+      baseMtpId: schema.number(),
     })
 
     const payload = await request.validate({ schema: newOrderSchema })
@@ -71,7 +71,7 @@ export default class OrdersController {
       title: schema.string({ trim: true }),
       productId: schema.number(),
       count: schema.number(),
-      baseMtpId: schema.number()
+      baseMtpId: schema.number(),
     })
 
     const payload = await request.validate({ schema: newOrderSchema })

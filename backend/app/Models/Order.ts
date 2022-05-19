@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Product from './Product'
 import BaseMtp from './BaseMtp'
+import Mtp from './Mtp'
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -36,4 +37,7 @@ export default class Order extends BaseModel {
 
   @belongsTo(() => BaseMtp)
   public baseMtp: BelongsTo<typeof BaseMtp>
+
+  @hasMany(() => Mtp)
+  public mtps: HasMany<typeof Mtp>
 }
