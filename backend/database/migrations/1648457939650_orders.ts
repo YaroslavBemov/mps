@@ -7,9 +7,20 @@ export default class Orders extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('title').notNullable()
-      table.integer('product_id').unsigned().references('products.id').onDelete('CASCADE').notNullable()
+      table
+        .integer('product_id')
+        .unsigned()
+        .references('products.id')
+        .onDelete('CASCADE')
+        .notNullable()
       table.integer('count').unsigned().notNullable()
-      table.integer('base_mtp_id').unsigned().references('base_mtps.id').onDelete('CASCADE').notNullable()
+      table
+        .integer('base_mtp_id')
+        .unsigned()
+        .references('base_mtps.id')
+        .onDelete('CASCADE')
+        .notNullable()
+      table.boolean('is_created').defaultTo('false')
       table.boolean('is_started').defaultTo('false')
 
       /**

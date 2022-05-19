@@ -9,7 +9,16 @@ export default class OrderSeeder extends BaseSeeder {
         productId: 1,
         count: 3,
         baseMtpId: 1,
-        isStarted: true
+        isCreated: true,
+        isStarted: false,
+      },
+      {
+        title: 'CRUP2',
+        productId: 1,
+        count: 1,
+        baseMtpId: 1,
+        isCreated: true,
+        isStarted: false,
       },
     ])
   }

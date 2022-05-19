@@ -1,7 +1,7 @@
 import { makeAutoObservable, toJS } from "mobx";
 import OrderService, { IOrderStoreData } from "../services/OrderService";
-import { IProduct } from './ProductStore'
-import { IBaseMTP } from './BaseMTPStore'
+import { IProduct } from "./ProductStore";
+import { IBaseMTP } from "./BaseMTPStore";
 
 export interface IOrder {
   id: number;
@@ -9,6 +9,7 @@ export interface IOrder {
   product: IProduct;
   count: number;
   baseMtp: IBaseMTP;
+  is_created: boolean;
   is_started: boolean;
   created_at: string;
   updated_at: string;
@@ -43,7 +44,7 @@ export default class OrderStore {
   }
 
   clearOrder() {
-    this.order = {} as IOrder
+    this.order = {} as IOrder;
   }
 
   async storeOrder(data: IOrderStoreData) {
@@ -51,7 +52,7 @@ export default class OrderStore {
       const response = await OrderService.storeOrder(data);
       console.log(response.data);
 
-      return response.data
+      return response.data;
     } catch (error) {
       console.log(error);
     }

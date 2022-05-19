@@ -6,10 +6,10 @@ import Mtp from 'App/Models/Mtp'
 import Procedure from 'App/Models/Procedure'
 
 export default class ProductionController {
-  public async start({ request, response }: HttpContextContract) {
+  public async create({ request, response }: HttpContextContract) {
     const newProductionSchema = schema.create({
       orderId: schema.number(),
-      serial: schema.number()
+      serial: schema.number(),
     })
 
     const payload = await request.validate({ schema: newProductionSchema })
@@ -20,7 +20,7 @@ export default class ProductionController {
       return { message: 'Order not found' }
     }
 
-    if (order.isStarted) {
+    if (order.isCreated) {
       // TODO replace status
       response.status(404)
       return { message: 'Order already started' }
@@ -59,7 +59,8 @@ export default class ProductionController {
     // create MTPs with serial and orderID
     for (let i = 0; i < order.count; i++) {
       const mtp = await Mtp.create({
-        orderId, serial
+        orderId,
+        serial,
       })
       serial++
 
@@ -69,7 +70,7 @@ export default class ProductionController {
           mtpId: mtp.id,
           position: procedure.position,
           title: procedure.title,
-          sectorId: procedure.sectorId
+          sectorId: procedure.sectorId,
         })
       }
     }

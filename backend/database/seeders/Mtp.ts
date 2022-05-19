@@ -16,6 +16,10 @@ export default class MtpSeeder extends BaseSeeder {
         orderId: 1,
         serial: 3,
       },
+      {
+        orderId: 2,
+        serial: 4,
+      },
     ])
   }
 }

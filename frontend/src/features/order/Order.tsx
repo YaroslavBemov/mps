@@ -11,8 +11,8 @@ const Order = () => {
     orderStore.getOrder(id);
 
     return () => {
-      orderStore.clearOrder()
-    }
+      orderStore.clearOrder();
+    };
   }, [id]);
 
   return (
@@ -21,7 +21,8 @@ const Order = () => {
       <div>Product: {orderStore.order?.product?.title}</div>
       <div>Base MTP: {orderStore.order?.baseMtp?.title}</div>
       <div>Count: {orderStore.order?.count}</div>
-      <div>Started: {orderStore.order?.is_started ? 'YES' : 'NO'}</div>
+      <div>Created: {orderStore.order?.is_created ? "YES" : "NO"}</div>
+      <div>Started: {orderStore.order?.is_started ? "YES" : "NO"}</div>
     </>
   );
 };

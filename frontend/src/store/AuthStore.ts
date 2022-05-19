@@ -29,9 +29,7 @@ export default class AuthStore {
   }
 
   setRole(role: string) {
-    console.log(this.role);
     this.role = role;
-    console.log(this.role);
   }
 
   async login(name: string, password: string) {

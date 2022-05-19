@@ -49,7 +49,7 @@ Route.group(() => {
     // Process
     Route.resource('processes', 'ProcessesController').apiOnly()
     // Production
-    Route.post('production/start', 'ProductionController.start')
+    Route.post('production/create', 'ProductionController.start')
   }).prefix('api/v1')
 }).middleware('auth')
 

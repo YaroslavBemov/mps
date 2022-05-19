@@ -5,7 +5,7 @@ export default class StatusSeeder extends BaseSeeder {
   public async run() {
     await Status.createMany([
       {
-        title: 'not_started',
+        title: 'created',
       },
       {
         title: 'waiting',

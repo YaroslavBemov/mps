@@ -13,13 +13,14 @@ import { observer } from "mobx-react-lite";
 import ProductionService from "../../services/ProductionService";
 
 const Production = () => {
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isCreateDisabled, setIsCreateDisabled] = useState(true);
+  const [isStartDisabled, setIsStartDisabled] = useState(true);
   const [formData, setFormData] = useState({
     orderId: "",
     serial: "",
   });
 
-  const { orderStore, productStore } = useStore();
+  const { orderStore, productStore, mtpStore } = useStore();
   const { id } = useParams();
 
   useEffect(() => {
@@ -32,7 +33,9 @@ const Production = () => {
   }, []);
 
   useEffect(() => {
-    setIsDisabled(!Number(formData.serial) || orderStore.order.is_started);
+    setIsCreateDisabled(
+      !Number(formData.serial) || orderStore.order.is_created
+    );
   });
 
   const handleChange = (event: any) => {
@@ -53,17 +56,19 @@ const Production = () => {
 
     if (serial && orderId) {
       try {
-        const response = await ProductionService.startProduction({
+        const response = await ProductionService.createMtps({
           orderId,
           serial,
         });
-        // TODO refresh mtps after start production
+        mtpStore.getAllMtps();
         console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     }
   };
+
+  const handleStartProduction = async () => {};
 
   return (
     <>
@@ -103,8 +108,17 @@ const Production = () => {
           />
         </Box>
 
-        <Button type="submit" variant="contained" disabled={isDisabled}>
-          Start
+        <Button type="submit" variant="contained" disabled={isCreateDisabled}>
+          Create MTPs
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={handleStartProduction}
+          disabled={isStartDisabled}
+          sx={{ ml: 1 }}
+        >
+          Start production
         </Button>
       </Box>
     </>
