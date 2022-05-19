@@ -17,7 +17,7 @@ export default class AuthStore {
   constructor(rootStore: any) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
-    this.role = "admin";
+    this.role = "compl";
   }
 
   setAuth(state: boolean) {

@@ -1,7 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import DesktopService from "../services/DesktopService";
+import { IProcedure } from "./ProcedureStore";
 
-export interface IDesktop {}
+export interface IDesktop {
+  stoppedMtps: IProcedure[];
+  wipMtps: IProcedure[];
+  waitingMtps: IProcedure[];
+}
 
 export default class DesktopStore {
   rootStore;
@@ -13,10 +18,27 @@ export default class DesktopStore {
     this.rootStore = rootStore;
   }
 
-  async getAllDesktops() {
+  async getDesktop() {
     try {
-      const response = await DesktopService.getAllDesktops();
-      this.setDesktops(response.data);
+      const role = this.rootStore.authStore.role;
+      let workerId = "10";
+      switch (role) {
+        case "compl":
+          workerId = "1";
+          break;
+        case "oper":
+          workerId = "2";
+          break;
+        case "otk":
+          workerId = "3";
+          break;
+
+        default:
+          break;
+      }
+      const response = await DesktopService.getDesktop(workerId);
+      this.setDesktop(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

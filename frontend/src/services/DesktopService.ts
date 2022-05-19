@@ -1,7 +1,7 @@
 import $api from "../http";
 
 export default class DesktopService {
-  static async getAllDesktops() {
-    return $api.get("desktops");
+  static async getDesktop(worker: string = "admin") {
+    return $api.get(`desktops/?worker=${worker}`);
   }
 }

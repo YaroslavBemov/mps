@@ -110,4 +110,25 @@ export default class ProductionController {
 
     return order
   }
+
+  public async change({ request, response }: HttpContextContract) {
+    const newProductionSchema = schema.create({
+      workerId: schema.number(),
+      mtpId: schema.number(),
+      statusId: schema.number(),
+    })
+
+    const payload = await request.validate({ schema: newProductionSchema })
+
+    const mtp = await Mtp.find(payload.mtpId)
+    if (!mtp) {
+      response.status(404)
+      return { message: 'MTP not found' }
+    }
+
+    // find procedure where worker.sector_id === mtp.procedures.sector_id
+    // change procedure status
+    // create new process with worker ID, procedure ID, status ID
+    const procedure = await Procedure.query()
+  }
 }
