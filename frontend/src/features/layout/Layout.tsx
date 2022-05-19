@@ -1,105 +1,108 @@
-import * as React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom'
+import * as React from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
-import { styled } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import { styled } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import MuiDrawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
+import Container from "@mui/material/Container";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-import Copyright from '../../components/copyright/Copyright';
+import Copyright from "../../components/copyright/Copyright";
 
-import { routes } from '../../routes/routes'
+import { routes } from "../../routes/routes";
 
-import { useStore } from '../../hooks/useStore';
-import Nav from '../../components/nav/Nav';
+import { useStore } from "../../hooks/useStore";
+import Nav from "../../components/nav/Nav";
+import { Role } from "../../store/AuthStore";
+import { observer } from "mobx-react-lite";
 
 const drawerWidth: number = 240;
+
+const roles: Role[] = ["admin", "compl", "oper", "otk", "tech"];
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
+  transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    '& .MuiDrawer-paper': {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  "& .MuiDrawer-paper": {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: "border-box",
+    ...(!open && {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
+        duration: theme.transitions.duration.leavingScreen,
       }),
-      boxSizing: 'border-box',
-      ...(!open && {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9),
-        },
-      }),
-    },
-  }),
-);
+      width: theme.spacing(7),
+      [theme.breakpoints.up("sm")]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
 
-
-function DashboardContent() {
+const DashboardContent = () => {
   const [open, setOpen] = React.useState(true);
 
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { authStore, uiStore } = useStore()
-  const { mode } = uiStore
-
+  const { authStore, uiStore } = useStore();
+  const { mode } = uiStore;
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
-
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -109,13 +112,17 @@ function DashboardContent() {
     setAnchorEl(null);
   };
 
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    authStore.setRole(event.target.value);
+  };
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
-            pr: '24px', // keep right padding when drawer closed
+            pr: "24px", // keep right padding when drawer closed
           }}
         >
           <IconButton
@@ -124,8 +131,8 @@ function DashboardContent() {
             aria-label="open drawer"
             onClick={toggleDrawer}
             sx={{
-              marginRight: '36px',
-              ...(open && { display: 'none' }),
+              marginRight: "36px",
+              ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
@@ -139,13 +146,11 @@ function DashboardContent() {
           >
             Dashboard
           </Typography>
-
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
-
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -160,13 +165,13 @@ function DashboardContent() {
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             open={Boolean(anchorEl)}
             onClose={handleClose}
@@ -175,20 +180,38 @@ function DashboardContent() {
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={() => authStore.logout()}>Logout</MenuItem>
           </Menu>
-
-          <IconButton sx={{ ml: 1 }} onClick={() => uiStore.toggleMode()} color="inherit">
-            {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={() => uiStore.toggleMode()}
+            color="inherit"
+          >
+            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
           {mode} mode
-
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={authStore.role}
+              label="Role"
+              onChange={handleRoleChange}
+            >
+              {roles.map((role) => (
+                <MenuItem key={role} value={role}>
+                  {role}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <Toolbar
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
             px: [1],
           }}
         >
@@ -205,12 +228,12 @@ function DashboardContent() {
         component="main"
         sx={{
           backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
+            theme.palette.mode === "light"
               ? theme.palette.grey[100]
               : theme.palette.grey[900],
           flexGrow: 1,
-          height: '100vh',
-          overflow: 'auto',
+          height: "100vh",
+          overflow: "auto",
         }}
       >
         <Toolbar />
@@ -221,8 +244,10 @@ function DashboardContent() {
       </Box>
     </Box>
   );
-}
+};
 
-export default function Dashboard() {
+const Dashboard = () => {
   return <DashboardContent />;
-}
+};
+
+export default observer(DashboardContent);

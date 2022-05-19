@@ -1,6 +1,6 @@
 import Home from "../features/home/Home"
 
-import Layout from '../features/layout/Layout'
+import DashboardContent from '../features/layout/Layout'
 import NoMatch from '../features/no-match/No-match';
 import DepartmentsPage from "../features/department/DepartmentsPage";
 import DepartmentPage from "../features/department/DepartmentPage";
@@ -22,11 +22,13 @@ import WorkerPage from "../features/worker/WorkerPage";
 import WorkersPage from "../features/worker/WorkersPage";
 import ProcessPage from "../features/process/ProcessPage";
 import ProcessesPage from "../features/process/ProcessesPage";
+import DesktopMain from "../features/desktop/DesctopMain";
+import DesktopWorker from "../features/desktop/DesktopWorker";
 
 export const routes = [
   {
     path: '/',
-    element: <Layout />,
+    element: <DashboardContent />,
     children: [
       {
         index: true,
@@ -111,6 +113,14 @@ export const routes = [
       {
         path: 'processes/:id',
         element: <ProcessPage />
+      },
+      {
+        path: 'desktop',
+        element: <DesktopMain />,
+      },
+      {
+        path: 'desktop/:id',
+        element: <DesktopWorker />
       }
     ]
   },
