@@ -3,7 +3,7 @@ import ProductionService from "../services/ProductionService";
 
 export interface ITodayProduction {
   time: string;
-  amount: number | undefined;
+  amount: number;
 }
 
 export interface ITotalProduction {
@@ -21,7 +21,7 @@ export interface IRecentProcesses {
 
 export default class ProductionStore {
   rootStore;
-  todayProduction = {} as ITodayProduction;
+  todayProduction: ITodayProduction[] = [];
   totalProduction = {} as ITotalProduction;
   recentProcesses: IRecentProcesses[] = [];
 
@@ -33,7 +33,6 @@ export default class ProductionStore {
   async getTotalProduction() {
     try {
       const { roleId } = this.rootStore.authStore;
-
       const response = await ProductionService.getTotalProduction(roleId);
       this.setTotalProduction(response.data);
     } catch (error) {
@@ -56,5 +55,19 @@ export default class ProductionStore {
 
   setRecentProcesses(processes: IRecentProcesses[]) {
     this.recentProcesses = processes;
+  }
+
+  async getTodayProduction() {
+    try {
+      const { roleId } = this.rootStore.authStore;
+      const response = await ProductionService.getTodayProduction(roleId);
+      this.setTodayProduction(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  setTodayProduction(today: ITodayProduction[]) {
+    this.todayProduction = today;
   }
 }
