@@ -22,7 +22,7 @@ function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Today Production</Title>
       <ResponsiveContainer>
         <LineChart
           data={productionStore.todayProduction}
