@@ -38,7 +38,6 @@ export default class DesktopStore {
       }
       const response = await DesktopService.getDesktop(workerId);
       this.setDesktop(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

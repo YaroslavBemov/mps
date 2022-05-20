@@ -27,7 +27,9 @@ export default class DesktopsController {
       .whereHas('procedures', (proceduresQuery) => {
         proceduresQuery.where('sector_id', workerSector).andWhere('status_id', 4)
       })
-      .preload('order')
+      .preload('order', (orderQuery) => {
+        orderQuery.preload('product')
+      })
       .preload('procedures', (proceduresQuery) => {
         proceduresQuery.where('status_id', 4)
       })
@@ -36,7 +38,9 @@ export default class DesktopsController {
       .whereHas('procedures', (proceduresQuery) => {
         proceduresQuery.where('sector_id', workerSector).andWhere('status_id', 3)
       })
-      .preload('order')
+      .preload('order', (orderQuery) => {
+        orderQuery.preload('product')
+      })
       .preload('procedures', (proceduresQuery) => {
         proceduresQuery.where('status_id', 3)
       })
@@ -45,7 +49,9 @@ export default class DesktopsController {
       .whereHas('procedures', (proceduresQuery) => {
         proceduresQuery.where('sector_id', workerSector).andWhere('status_id', 2)
       })
-      .preload('order')
+      .preload('order', (orderQuery) => {
+        orderQuery.preload('product')
+      })
       .preload('procedures', (proceduresQuery) => {
         proceduresQuery.where('status_id', 2)
       })

@@ -11,9 +11,8 @@ interface IStartProductionData {
 
 export interface IChangeProductionData {
   workerId: number;
-  mtpId: number;
+  procedureId: number;
   statusId: number;
-  newStatus: number;
 }
 
 export default class ProductionService {
@@ -26,6 +25,6 @@ export default class ProductionService {
   }
 
   static async changeProduction(data: IChangeProductionData) {
-    return $api.put("production/change", data);
+    return $api.post("production/change", data);
   }
 }
