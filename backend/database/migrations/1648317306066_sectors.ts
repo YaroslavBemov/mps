@@ -8,7 +8,12 @@ export default class Sectors extends BaseSchema {
       table.increments('id')
       table.string('title').notNullable()
       table.integer('step').unsigned()
-      table.integer('department_id').unsigned().references('departments.id').onDelete('CASCADE').notNullable()
+      table
+        .integer('department_id')
+        .unsigned()
+        .references('departments.id')
+        .onDelete('CASCADE')
+        .notNullable()
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
