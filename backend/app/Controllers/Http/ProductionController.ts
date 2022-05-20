@@ -7,6 +7,11 @@ import Procedure from 'App/Models/Procedure'
 import Process from 'App/Models/Process'
 import Worker from 'App/Models/Worker'
 
+interface TodayProduction {
+  time: string
+  amount: number
+}
+
 export default class ProductionController {
   public async create({ request, response }: HttpContextContract) {
     const newProductionSchema = schema.create({
@@ -224,5 +229,42 @@ export default class ProductionController {
     })
 
     return response
+  }
+
+  public async today({ request, response }: HttpContextContract) {
+    const { workerId: qsWorker } = request.qs()
+
+    if (!qsWorker) {
+      response.status(404)
+      return { message: 'Worker not found' }
+    }
+
+    const worker = await Worker.find(qsWorker)
+    if (!worker) {
+      response.status(404)
+      return { message: 'Worker not found' }
+    }
+
+    const workerSector = worker.sectorId
+
+    const completedProcedures = await Procedure.query()
+      .where('sector_id', workerSector)
+      .andWhere('status_id', 5)
+      .andWhereRaw("to_char(updated_at, 'YYYY-MM-DD')  = to_char(now(), 'YYYY-MM-DD' )")
+
+    const todayProduction: TodayProduction[] = []
+    for (let index = 0; index <= 24; index = index + 3) {
+      const filtered = completedProcedures.filter((procedure) => {
+        const time = +procedure.updatedAt.toFormat('H')
+        return time >= index && time < index + 3
+      })
+
+      todayProduction.push({
+        time: String(`${index}:00`),
+        amount: filtered.length,
+      })
+    }
+
+    return todayProduction
   }
 }
