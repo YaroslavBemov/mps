@@ -16,13 +16,14 @@ export interface IRecentProcesses {
   sector: string;
   name: string;
   product: string;
+  status: string;
 }
 
 export default class ProductionStore {
   rootStore;
   todayProduction = {} as ITodayProduction;
   totalProduction = {} as ITotalProduction;
-  recentProcesses = {} as IRecentProcesses;
+  recentProcesses: IRecentProcesses[] = [];
 
   constructor(rootStore: any) {
     makeAutoObservable(this);
@@ -44,7 +45,16 @@ export default class ProductionStore {
     this.totalProduction = total;
   }
 
-  // setDesktop(desktop: any) {
-  //   this.desktop = desktop;
-  // }
+  async getRecentProcesses() {
+    try {
+      const response = await ProductionService.getRecentProcesses();
+      this.setRecentProcesses(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  setRecentProcesses(processes: IRecentProcesses[]) {
+    this.recentProcesses = processes;
+  }
 }

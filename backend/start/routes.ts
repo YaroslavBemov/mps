@@ -53,6 +53,7 @@ Route.group(() => {
     Route.put('production/start', 'ProductionController.start')
     Route.post('production/change', 'ProductionController.change')
     Route.get('production/total', 'ProductionController.total')
+    Route.get('production/recent', 'ProductionController.recent')
     Route.get('desktops', 'DesktopsController.index')
   }).prefix('api/v1')
 }).middleware('auth')

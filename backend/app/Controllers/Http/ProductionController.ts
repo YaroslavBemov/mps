@@ -193,4 +193,35 @@ export default class ProductionController {
 
     return { total: completedProcedures[0].$extras.total }
   }
+
+  public async recent() {
+    const recentProcesses = await Process.query()
+      .orderBy('created_at', 'desc')
+      .preload('worker', (workerQuery) => {
+        workerQuery.preload('sector')
+      })
+      .preload('procedure', (procedureQuery) => {
+        procedureQuery
+          .preload('mtp', (mtpQuery) => {
+            mtpQuery.preload('order', (orderQuery) => {
+              orderQuery.preload('product')
+            })
+          })
+          .preload('status')
+      })
+      .limit(5)
+
+    const response = recentProcesses.map((process) => {
+      return {
+        id: process.id,
+        date: process.createdAt.toFormat('dd LLL, T'),
+        sector: process.worker.sector.title,
+        name: process.worker.title,
+        product: process.procedure.mtp.order.product.title,
+        status: process.procedure.status.title,
+      }
+    })
+
+    return response
+  }
 }

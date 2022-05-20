@@ -31,4 +31,8 @@ export default class ProductionService {
   static async getTotalProduction(workerId: string) {
     return $api.get(`production/total/?workerId=${workerId}`);
   }
+
+  static async getRecentProcesses() {
+    return $api.get("production/recent");
+  }
 }
