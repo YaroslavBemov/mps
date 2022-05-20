@@ -14,10 +14,6 @@ export default class WorkerSeeder extends BaseSeeder {
       },
       {
         title: 'Worker 3',
-        sectorId: 2,
-      },
-      {
-        title: 'Worker 4',
         sectorId: 3,
       },
     ])

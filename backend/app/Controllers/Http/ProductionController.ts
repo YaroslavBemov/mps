@@ -130,6 +130,34 @@ export default class ProductionController {
     prodecure.statusId = payload.statusId
     await prodecure.save()
 
+    if (payload.statusId === 5) {
+      const newProcedure = await Procedure.query()
+        .where('id', payload.procedureId)
+        .preload('mtp', (mtpQuery) => {
+          mtpQuery.preload('procedures')
+        })
+
+      const sortedProcedures = newProcedure[0].mtp.procedures.sort((a, b) => {
+        return a.position - b.position
+      })
+
+      const index = sortedProcedures.findIndex((procedure) => {
+        return procedure.id === payload.procedureId
+      })
+
+      if (index > -1) {
+        if (index + 1 < sortedProcedures.length) {
+          const id = sortedProcedures[index + 1].id
+          const nextProcedure = await Procedure.find(id)
+
+          if (nextProcedure) {
+            nextProcedure.statusId = 2
+            await nextProcedure.save()
+          }
+        }
+      }
+    }
+
     const newProcess = await Process.createMany([
       {
         workerId: payload.workerId,
