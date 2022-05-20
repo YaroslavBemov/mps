@@ -6,7 +6,7 @@ import ProductionService, {
 } from "../../services/ProductionService";
 import Button from "@mui/material/Button";
 
-const Actions = (params: GridRenderCellParams) => {
+const StoppedActions = (params: GridRenderCellParams) => {
   const { authStore, desktopStore } = useStore();
   const role = authStore.role;
   let workerId = 10;
@@ -36,16 +36,6 @@ const Actions = (params: GridRenderCellParams) => {
     await ProductionService.changeProduction(data);
     await desktopStore.getDesktop();
   };
-  const handleStopClick = async () => {
-    data.statusId = 4;
-    await ProductionService.changeProduction(data);
-    await desktopStore.getDesktop();
-  };
-  const handleDoneClick = async () => {
-    data.statusId = 5;
-    await ProductionService.changeProduction(data);
-    await desktopStore.getDesktop();
-  };
 
   return (
     <>
@@ -57,24 +47,8 @@ const Actions = (params: GridRenderCellParams) => {
       >
         Take to work
       </Button>
-      <Button
-        variant="outlined"
-        color="error"
-        sx={{ ml: 2 }}
-        onClick={handleStopClick}
-      >
-        Stop
-      </Button>
-      <Button
-        variant="outlined"
-        color="success"
-        sx={{ ml: 2 }}
-        onClick={handleDoneClick}
-      >
-        Done
-      </Button>
     </>
   );
 };
 
-export default Actions;
+export default StoppedActions;

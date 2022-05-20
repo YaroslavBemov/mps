@@ -4,7 +4,9 @@ import { useStore } from "../../hooks/useStore";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { toJS } from "mobx";
 import Paper from "@mui/material/Paper";
-import Actions from "./Actions";
+import StoppedActions from "./StoppedActions";
+import WipActions from "./WipActions";
+import WaitingActions from "./WaitingActions";
 
 function getOrderTitle(params: GridValueGetterParams) {
   return params.row.order.title;
@@ -14,7 +16,7 @@ function getProductTitle(params: GridValueGetterParams) {
   return params.row.order.product.title;
 }
 
-const columns: GridColDef[] = [
+const stoppedColumns: GridColDef[] = [
   {
     field: "order",
     headerName: "Order",
@@ -32,7 +34,51 @@ const columns: GridColDef[] = [
     field: "actions",
     headerName: "Actions",
     width: 350,
-    renderCell: Actions,
+    renderCell: StoppedActions,
+  },
+];
+
+const wipColumns: GridColDef[] = [
+  {
+    field: "order",
+    headerName: "Order",
+    width: 150,
+    valueGetter: getOrderTitle,
+  },
+  {
+    field: "product",
+    headerName: "Product",
+    width: 250,
+    valueGetter: getProductTitle,
+  },
+  { field: "serial", headerName: "Serial", width: 150 },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 350,
+    renderCell: WipActions,
+  },
+];
+
+const waitingColumns: GridColDef[] = [
+  {
+    field: "order",
+    headerName: "Order",
+    width: 150,
+    valueGetter: getOrderTitle,
+  },
+  {
+    field: "product",
+    headerName: "Product",
+    width: 250,
+    valueGetter: getProductTitle,
+  },
+  { field: "serial", headerName: "Serial", width: 150 },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 350,
+    renderCell: WaitingActions,
   },
 ];
 
@@ -58,7 +104,7 @@ const DesktopMain = () => {
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={toJS(desktopStore.desktop.stoppedMtps) || []}
-            columns={columns}
+            columns={stoppedColumns}
           />
         </div>
       </Paper>
@@ -72,7 +118,7 @@ const DesktopMain = () => {
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={toJS(desktopStore.desktop.wipMtps) || []}
-            columns={columns}
+            columns={wipColumns}
           />
         </div>
       </Paper>
@@ -86,7 +132,7 @@ const DesktopMain = () => {
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={toJS(desktopStore.desktop.waitingMtps) || []}
-            columns={columns}
+            columns={waitingColumns}
           />
         </div>
       </Paper>
