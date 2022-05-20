@@ -11,15 +11,18 @@ const Mtp = () => {
   useEffect(() => {
     const fetchMtp = async () => {
       await mtpStore.getMtp(id);
-    }
-    fetchMtp()
+    };
+    fetchMtp();
     // TODO rework
-    return () => { mtpStore.clearMtp() }
+    return () => {
+      mtpStore.clearMtp();
+    };
   }, [id]);
 
   return (
     <>
       <div>Order title: {mtpStore.mtp?.order?.title}</div>
+      <div>Product title: {mtpStore.mtp?.order?.product?.title}</div>
       <div>Serial: {mtpStore.mtp?.serial}</div>
     </>
   );

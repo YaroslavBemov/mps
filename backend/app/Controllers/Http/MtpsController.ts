@@ -5,7 +5,11 @@ import Order from 'App/Models/Order'
 
 export default class MtpsController {
   public async index({}: HttpContextContract) {
-    const mtps = await Mtp.query().preload('order').preload('procedures')
+    const mtps = await Mtp.query()
+      .preload('order', (orderQuery) => {
+        orderQuery.preload('product')
+      })
+      .preload('procedures')
 
     return mtps
   }
@@ -47,7 +51,9 @@ export default class MtpsController {
       return { message: 'Not found' }
     }
 
-    await mtp.load('order')
+    await mtp.load('order', (orderQuery) => {
+      orderQuery.preload('product')
+    })
     await mtp.load('procedures', (pQuery) => {
       pQuery.preload('sector').preload('status')
     })

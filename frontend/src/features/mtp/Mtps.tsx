@@ -10,6 +10,10 @@ function getOrderTitle(params: GridValueGetterParams) {
   return params.row.order.title;
 }
 
+function getProductTitle(params: GridValueGetterParams) {
+  return params.row.order.product.title;
+}
+
 const columns: GridColDef[] = [
   {
     field: "order_id",
@@ -18,13 +22,18 @@ const columns: GridColDef[] = [
     valueGetter: getOrderTitle,
   },
   { field: "serial", headerName: "Serial", width: 250 },
-  // { field: "updated_at", headerName: "Updated at", width: 150 },
+  {
+    field: "product",
+    headerName: "Product",
+    width: 250,
+    valueGetter: getProductTitle,
+  },
 ];
 
 const Mtps = () => {
   const { mtpStore, orderStore } = useStore();
   // TODO rework
-  const orderId = orderStore.order.id
+  const orderId = orderStore.order.id;
 
   const navigate = useNavigate();
 
