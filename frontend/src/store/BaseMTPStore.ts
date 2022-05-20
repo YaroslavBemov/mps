@@ -1,6 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx";
 import BaseMTPService from "../services/BaseMTPService";
-import { IProduct } from './ProductStore'
+import { IProduct } from "./ProductStore";
 
 export interface IBaseMTP {
   id: number;
@@ -68,6 +68,10 @@ export default class BaseMTPStore {
 
   setBaseMTP(baseMTP: IBaseMTP) {
     this.baseMTP = baseMTP;
+  }
+
+  clearBaseMTP() {
+    this.baseMTP = {} as IBaseMTP;
   }
 
   get byProduct() {

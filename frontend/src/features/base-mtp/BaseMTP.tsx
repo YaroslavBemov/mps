@@ -9,6 +9,10 @@ const BaseMTP = () => {
 
   useEffect(() => {
     baseMTPStore.getBaseMTP(id);
+
+    return () => {
+      baseMTPStore.clearBaseMTP();
+    };
   }, [id]);
 
   return (

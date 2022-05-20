@@ -25,7 +25,7 @@ const columns: GridColDef[] = [
 ];
 
 const BaseProcedures = () => {
-  const { baseProcedureStore } = useStore();
+  const { baseProcedureStore, baseMTPStore } = useStore();
 
   const navigate = useNavigate();
 
@@ -48,8 +48,11 @@ const BaseProcedures = () => {
               navigate(`/base-procedures/${params.id}`);
             }
           }}
-          // TODO rework byBaseMtp and all procedures
-          rows={toJS(baseProcedureStore.byBaseMTP)}
+          rows={
+            baseMTPStore.baseMTP.id
+              ? toJS(baseProcedureStore.byBaseMTP)
+              : toJS(baseProcedureStore.baseProcedures)
+          }
           columns={columns}
         />
       </div>
