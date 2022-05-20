@@ -37,14 +37,14 @@ const columns: GridColDef[] = [
 ];
 
 const DesktopMain = () => {
-  const { desktopStore } = useStore();
+  const { desktopStore, authStore } = useStore();
 
   useEffect(() => {
     const fetch = async () => {
       await desktopStore.getDesktop();
     };
     fetch();
-  }, []);
+  }, [authStore.role]);
 
   return (
     <>
