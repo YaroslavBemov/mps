@@ -27,4 +27,8 @@ export default class ProductionService {
   static async changeProduction(data: IChangeProductionData) {
     return $api.post("production/change", data);
   }
+
+  static async getTotalProduction(workerId: string) {
+    return $api.get(`production/total/?workerId=${workerId}`);
+  }
 }

@@ -11,6 +11,7 @@ import ProcedureStore from "./ProcedureStore";
 import WorkerStore from "./WorkerStore";
 import ProcessStore from "./ProcessStore";
 import DesktopStore from "./DesktopStore";
+import ProductionStore from "./ProductionStore";
 
 export default class RootStore {
   authStore: AuthStore;
@@ -26,6 +27,7 @@ export default class RootStore {
   workerStore: WorkerStore;
   processStore: ProcessStore;
   desktopStore: DesktopStore;
+  productionStore: ProductionStore;
 
   constructor() {
     this.authStore = new AuthStore(this);
@@ -41,5 +43,6 @@ export default class RootStore {
     this.workerStore = new WorkerStore(this);
     this.processStore = new ProcessStore(this);
     this.desktopStore = new DesktopStore(this);
+    this.productionStore = new ProductionStore(this);
   }
 }

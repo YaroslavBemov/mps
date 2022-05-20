@@ -8,7 +8,7 @@ export default class DesktopsController {
     // worker.sector_id === procedure.sector_id && procedure.status_id === 4 ('stopped)
     // worker.sector_id === procedure.sector_id && procedure.status_id === 3 ('work_in_progress)
     // worker.sector_id === procedure.sector_id && procedure.status_id === 2 ('waiting)
-    const { worker: qsWorker } = request.qs()
+    const { workerId: qsWorker } = request.qs()
 
     if (!qsWorker) {
       response.status(404)

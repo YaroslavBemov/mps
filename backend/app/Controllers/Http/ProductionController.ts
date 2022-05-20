@@ -5,6 +5,7 @@ import BaseMtp from 'App/Models/BaseMtp'
 import Mtp from 'App/Models/Mtp'
 import Procedure from 'App/Models/Procedure'
 import Process from 'App/Models/Process'
+import Worker from 'App/Models/Worker'
 
 export default class ProductionController {
   public async create({ request, response }: HttpContextContract) {
@@ -167,5 +168,29 @@ export default class ProductionController {
     ])
 
     return newProcess
+  }
+
+  public async total({ request, response }: HttpContextContract) {
+    const { workerId: qsWorker } = request.qs()
+
+    if (!qsWorker) {
+      response.status(404)
+      return { message: 'Worker not found' }
+    }
+
+    const worker = await Worker.find(qsWorker)
+    if (!worker) {
+      response.status(404)
+      return { message: 'Worker not found' }
+    }
+
+    const workerSector = worker.sectorId
+
+    const completedProcedures = await Procedure.query()
+      .where('sector_id', workerSector)
+      .andWhere('status_id', 5)
+      .count('* as total')
+
+    return { total: completedProcedures[0].$extras.total }
   }
 }

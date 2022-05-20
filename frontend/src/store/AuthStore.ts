@@ -6,18 +6,18 @@ interface IUser {
   name: string;
 }
 
-export type Role = "admin" | "tech" | "compl" | "oper" | "otk" | "";
+export type Role = "admin" | "compl" | "oper" | "otk" | "";
 
 export default class AuthStore {
   user = {} as IUser;
-  role: string;
+  role: Role = "compl";
+  roleId: string = "1";
   isAuth: boolean = false;
   rootStore: any;
 
   constructor(rootStore: any) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
-    this.role = "compl";
   }
 
   setAuth(state: boolean) {
@@ -28,8 +28,23 @@ export default class AuthStore {
     this.user = user;
   }
 
-  setRole(role: string) {
+  setRole(role: Role) {
     this.role = role;
+    switch (role) {
+      case "compl":
+        this.roleId = "1";
+        break;
+      case "oper":
+        this.roleId = "2";
+        break;
+      case "otk":
+        this.roleId = "3";
+        break;
+
+      default:
+        this.roleId = "10";
+        break;
+    }
   }
 
   async login(name: string, password: string) {

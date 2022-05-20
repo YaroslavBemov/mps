@@ -20,61 +20,13 @@ export default class DesktopStore {
 
   async getDesktop() {
     try {
-      const role = this.rootStore.authStore.role;
-      let workerId = "10";
-      switch (role) {
-        case "compl":
-          workerId = "1";
-          break;
-        case "oper":
-          workerId = "2";
-          break;
-        case "otk":
-          workerId = "3";
-          break;
-
-        default:
-          break;
-      }
-      const response = await DesktopService.getDesktop(workerId);
+      const { roleId } = this.rootStore.authStore;
+      const response = await DesktopService.getDesktop(roleId);
       this.setDesktop(response.data);
     } catch (error) {
       console.log(error);
     }
   }
-
-  // async getDepartment(id: any) {
-  //   try {
-  //     const response = await DepartmentService.getDepartment(id);
-  //     this.setDepartment(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // async storeDepartment(title: string) {
-  //   try {
-  //     await DepartmentService.storeDepartment(title);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // async updateDepartment(id: any, title: string) {
-  //   try {
-  //     await DepartmentService.updateDepartment(id, title);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  // async deleteDepartment(id: any) {
-  //   try {
-  //     await DepartmentService.deleteDepartment(id);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   setDesktops(desktops: any) {
     this.desktops = desktops;

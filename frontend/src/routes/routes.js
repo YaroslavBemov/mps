@@ -1,5 +1,4 @@
 import Home from "../features/home/Home"
-
 import DashboardContent from '../features/layout/Layout'
 import NoMatch from '../features/no-match/No-match';
 import DepartmentsPage from "../features/department/DepartmentsPage";

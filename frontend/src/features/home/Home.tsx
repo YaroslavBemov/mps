@@ -1,9 +1,9 @@
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
-import Chart from '../dashboard/Chart';
-import Deposits from '../dashboard/Deposits';
-import Orders from '../dashboard/Orders';
+import Chart from "../dashboard/Chart";
+import Deposits from "../dashboard/Deposits";
+import Orders from "../dashboard/Orders";
 
 export default function Home() {
   return (
@@ -13,8 +13,8 @@ export default function Home() {
         <Paper
           sx={{
             p: 2,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             height: 240,
           }}
         >
@@ -26,8 +26,8 @@ export default function Home() {
         <Paper
           sx={{
             p: 2,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             height: 240,
           }}
         >
@@ -36,10 +36,10 @@ export default function Home() {
       </Grid>
       {/* Recent Orders */}
       <Grid item xs={12}>
-        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
           <Orders />
         </Paper>
       </Grid>
     </Grid>
-  )
+  );
 }

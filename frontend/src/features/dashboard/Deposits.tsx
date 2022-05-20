@@ -1,27 +1,33 @@
-import * as React from 'react';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
-import Title from './Title';
+import * as React from "react";
+import Typography from "@mui/material/Typography";
+import Title from "./Title";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../hooks/useStore";
 
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
+const date = new Date();
+const dd = String(date.getDate()).padStart(2, "0");
+const mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
+const yyyy = date.getFullYear();
 
-export default function Deposits() {
+const today = mm + "/" + dd + "/" + yyyy;
+
+function Deposits() {
+  const { productionStore, authStore } = useStore();
+
+  React.useEffect(() => {
+    productionStore.getTotalProduction();
+  }, [authStore.roleId]);
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
+      <Title>Total</Title>
+      <Typography component="p" variant="h2" sx={{ mt: 4 }}>
+        {productionStore.totalProduction.total}
       </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+      <Typography color="text.secondary" sx={{ flex: 1, mt: 4 }}>
+        {today}
       </Typography>
-      <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link>
-      </div>
     </React.Fragment>
   );
 }
+
+export default observer(Deposits);
