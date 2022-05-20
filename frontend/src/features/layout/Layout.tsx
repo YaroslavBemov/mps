@@ -43,7 +43,7 @@ import { observer } from "mobx-react-lite";
 
 const drawerWidth: number = 240;
 
-const roles: Role[] = ["admin", "compl", "oper", "otk", "tech"];
+const roles: Role[] = ["admin", "compl", "oper", "otk"];
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -113,7 +113,7 @@ const DashboardContent = () => {
   };
 
   const handleRoleChange = (event: SelectChangeEvent) => {
-    authStore.setRole(event.target.value);
+    authStore.setRole(event.target.value as Role);
   };
 
   return (
