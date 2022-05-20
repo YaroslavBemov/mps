@@ -189,6 +189,7 @@ export default class ProductionController {
     const completedProcedures = await Procedure.query()
       .where('sector_id', workerSector)
       .andWhere('status_id', 5)
+      .andWhereRaw("to_char(updated_at, 'YYYY-MM-DD')  = to_char( now(), 'YYYY-MM-DD' )")
       .count('* as total')
 
     return { total: completedProcedures[0].$extras.total }

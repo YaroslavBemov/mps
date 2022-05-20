@@ -19,7 +19,7 @@ function Deposits() {
   }, [authStore.roleId]);
   return (
     <React.Fragment>
-      <Title>Total</Title>
+      <Title>Today Total</Title>
       <Typography component="p" variant="h2" sx={{ mt: 4 }}>
         {productionStore.totalProduction.total}
       </Typography>
