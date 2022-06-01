@@ -72,7 +72,6 @@ export default class AuthStore {
   async refresh() {
     try {
       const response = await AuthService.refresh();
-      // console.log(response);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (error) {

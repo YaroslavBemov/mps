@@ -1,6 +1,5 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import ProcedureService from "../services/ProcedureService";
-import { IBaseMTP } from "./BaseMTPStore";
 import { ISector } from "./SectorStore";
 
 export interface IStatus {
@@ -90,5 +89,4 @@ export default class ProcedureStore {
   setProcedure(procedure: IProcedure) {
     this.procedure = procedure;
   }
-
 }

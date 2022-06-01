@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
+
 import { useStore } from "../../hooks/useStore";
-import { useNavigate, useParams } from "react-router-dom";
 
 const DepartmentUpdate = () => {
   const [updated, setUpdated] = useState("");
@@ -13,7 +15,8 @@ const DepartmentUpdate = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    departmentStore.department.title && setUpdated(departmentStore.department.title);
+    departmentStore.department.title &&
+      setUpdated(departmentStore.department.title);
   }, [departmentStore.department.title]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

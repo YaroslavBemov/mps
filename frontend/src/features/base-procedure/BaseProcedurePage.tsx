@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper";
 import BaseProcedure from "./BaseProcedure";
 import BaseProcedureUpdate from "./BaseProcedureUpdate";
 
-
 const BaseProcedurePage = () => {
   return (
     <>
@@ -12,7 +11,7 @@ const BaseProcedurePage = () => {
           p: 2,
           mb: 2,
           display: "flex",
-          flexDirection: 'column',
+          flexDirection: "column",
           alignItems: "flex-start",
         }}
       >
@@ -21,7 +20,6 @@ const BaseProcedurePage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >

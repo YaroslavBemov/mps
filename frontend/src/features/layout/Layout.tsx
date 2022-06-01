@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,28 +19,17 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import FormControlLabel from "@mui/material/FormControlLabel";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-import Copyright from "../../components/copyright/Copyright";
-
-import { routes } from "../../routes/routes";
-
-import { useStore } from "../../hooks/useStore";
 import Nav from "../../components/nav/Nav";
+import { useStore } from "../../hooks/useStore";
 import { Role } from "../../store/AuthStore";
-import { observer } from "mobx-react-lite";
 
 const drawerWidth: number = 240;
 
@@ -239,15 +229,10 @@ const DashboardContent = () => {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Outlet />
-          {/* <Copyright sx={{ pt: 4 }} /> */}
         </Container>
       </Box>
     </Box>
   );
-};
-
-const Dashboard = () => {
-  return <DashboardContent />;
 };
 
 export default observer(DashboardContent);

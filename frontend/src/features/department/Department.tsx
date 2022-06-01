@@ -1,9 +1,7 @@
-import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
-import Sectors from "../sector/Sectors";
-import DepartmentUpdate from "./DepartmentUpdate";
 
 const Department = () => {
   const { departmentStore } = useStore();

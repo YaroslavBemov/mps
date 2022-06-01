@@ -1,7 +1,7 @@
 import * as React from "react";
+import { observer } from "mobx-react-lite";
 import Typography from "@mui/material/Typography";
 import Title from "./Title";
-import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 
 const date = new Date();

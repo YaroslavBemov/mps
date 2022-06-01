@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+
 import { useStore } from "../../hooks/useStore";
 
 const DepartmentAdd = () => {
@@ -18,7 +20,7 @@ const DepartmentAdd = () => {
 
   const handleClick = async () => {
     await departmentStore.storeDepartment(newDepartment);
-    await departmentStore.getAllDepartments()
+    await departmentStore.getAllDepartments();
     setNewDepartment("");
     setIsDisabled(true);
   };

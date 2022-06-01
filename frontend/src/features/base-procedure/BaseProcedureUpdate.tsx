@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
@@ -5,10 +9,8 @@ import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { observer } from "mobx-react-lite";
+
 import { useStore } from "../../hooks/useStore";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
 const BaseProcedureUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -103,8 +105,6 @@ const BaseProcedureUpdate = () => {
       baseMtpId &&
       sectorId
     ) {
-      // baseProcedureStore.storeBaseProcedure({ position, title, baseMtpId, sectorId, timeTotal, timePerProduct, comment });
-      // await baseProcedureStore.getAllBaseProcedures()
       await baseProcedureStore.updateBaseProcedure(id, {
         position,
         title,
@@ -119,37 +119,16 @@ const BaseProcedureUpdate = () => {
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={
-        {
-          // display: "flex",
-          // flexDirection: 'column',
-          // justifyContent: "center",
-          // alignItems: "center",
-          // padding: 2,
-          // gap: 1,
-        }
-      }
-    >
+    <Box component="form" onSubmit={handleSubmit}>
       <Box
         sx={{
           display: "flex",
-          // flexDirection: 'column',
-          // justifyContent: "center",
-          // alignItems: "center",
-
-          // padding: 2,
-          // gap: 1,
         }}
       >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            // justifyContent: "center",
-            // alignItems: "center",
             flexGrow: 1,
             padding: 2,
             gap: 1,
@@ -192,8 +171,6 @@ const BaseProcedureUpdate = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            // justifyContent: "center",
-            // alignItems: "center",
             flexGrow: 1,
             padding: 2,
             gap: 1,
@@ -227,10 +204,7 @@ const BaseProcedureUpdate = () => {
       <Box
         sx={{
           display: "flex",
-          // flexDirection: 'column',
           justifyContent: "center",
-          // alignItems: "center",
-
           padding: 2,
           gap: 1,
         }}

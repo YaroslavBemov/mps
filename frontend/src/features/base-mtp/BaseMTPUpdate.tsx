@@ -1,16 +1,18 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
-import { useStore } from "../../hooks/useStore";
-import { useNavigate, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
+
+import { useStore } from "../../hooks/useStore";
 
 const BaseMTPUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    productId: '',
+    productId: "",
   });
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,14 +28,10 @@ const BaseMTPUpdate = () => {
         productId: String(baseMTPStore.baseMTP?.product?.id),
       });
     });
-  }, [
-    baseMTPStore.baseMTP.title,
-  ]);
+  }, [baseMTPStore.baseMTP.title]);
 
   useEffect(() => {
-    setIsDisabled(
-      formData.title === baseMTPStore.baseMTP.title
-    );
+    setIsDisabled(formData.title === baseMTPStore.baseMTP.title);
   });
 
   const handleChange = (event: any) => {
@@ -75,7 +73,6 @@ const BaseMTPUpdate = () => {
         alignItems: "center",
         padding: 2,
         gap: 1,
-        // maxWidth: 500
       }}
     >
       <TextField

@@ -1,23 +1,28 @@
-import $api from '../http'
+import $api from "../http";
 
 export default class SectorService {
   static async getAllSectors() {
-    return $api.get('sectors')
+    return $api.get("sectors");
   }
 
   static async getSector(id: any) {
-    return $api.get(`sectors/${id}`)
+    return $api.get(`sectors/${id}`);
   }
 
   static async storeSector(title: string, step: number, departmentId: number) {
-    return $api.post('sectors', { title, step, departmentId })
+    return $api.post("sectors", { title, step, departmentId });
   }
 
-  static async updateSector(id: any, title: string, step: number, departmentId: number) {
-    return $api.put(`sectors/${id}`, { title, step, departmentId })
+  static async updateSector(
+    id: any,
+    title: string,
+    step: number,
+    departmentId: number
+  ) {
+    return $api.put(`sectors/${id}`, { title, step, departmentId });
   }
 
   static async deleteSector(id: any) {
-    return $api.delete(`sectors/${id}`)
+    return $api.delete(`sectors/${id}`);
   }
 }

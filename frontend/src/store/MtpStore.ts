@@ -1,16 +1,14 @@
-import { makeAutoObservable, toJS } from "mobx";
-import BaseMTPService from "../services/BaseMTPService";
+import { makeAutoObservable } from "mobx";
 import MtpService from "../services/MtpService";
 import { IOrder } from "./OrderStore";
 import { IProcedure } from "./ProcedureStore";
-import { IProduct } from './ProductStore'
 
 export interface IMtp {
   id: number;
   orderId: number;
   order: IOrder;
   serial: number;
-  procedures: IProcedure[]
+  procedures: IProcedure[];
   created_at: string;
   updated_at: string;
 }
@@ -49,7 +47,7 @@ export default class MtpStore {
   }
 
   clearMtp() {
-    this.mtp = {} as IMtp
+    this.mtp = {} as IMtp;
   }
 
   async storeMtp(data: IMtpStoreData) {

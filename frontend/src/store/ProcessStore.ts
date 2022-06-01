@@ -1,8 +1,6 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import ProcessService from "../services/ProcessService";
-import { IBaseMTP } from "./BaseMTPStore";
 import { IProcedure, IStatus } from "./ProcedureStore";
-import { ISector } from "./SectorStore";
 import { IWorker } from "./WorkerStore";
 
 interface IProcess {
@@ -84,10 +82,4 @@ export default class ProcessStore {
   setProcess(process: IProcess) {
     this.process = process;
   }
-
-  // get byMTP() {
-  //   return this.process.filter((bp) => {
-  //     return bp.Mtp.id === this.rootStore.MTPStore.MTP.id;
-  //   });
-  // }
 }

@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import BaseProcedureService from "../services/BaseProcedureService";
 import { IBaseMTP } from "./BaseMTPStore";
 import { ISector } from "./SectorStore";

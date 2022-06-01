@@ -1,16 +1,14 @@
-import React, { createContext } from 'react';
-import { BrowserRouter } from 'react-router-dom'
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { createContext } from "react";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-import RootStore from './store/RootStore'
+import RootStore from "./store/RootStore";
+const store = new RootStore();
 
-
-const store = new RootStore()
-
-export const RootStoreContext = createContext(store)
+export const RootStoreContext = createContext(store);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,7 +18,7 @@ ReactDOM.render(
       </BrowserRouter>
     </RootStoreContext.Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

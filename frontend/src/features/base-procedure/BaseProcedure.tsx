@@ -1,6 +1,6 @@
-import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 import { useStore } from "../../hooks/useStore";
 
 const BaseProcedure = () => {
@@ -18,7 +18,9 @@ const BaseProcedure = () => {
       <div>Position: {baseProcedureStore.baseProcedure?.position}</div>
       <div>Title: {baseProcedureStore.baseProcedure?.title}</div>
       <div>Time total: {baseProcedureStore.baseProcedure?.time_total}</div>
-      <div>Time per product: {baseProcedureStore.baseProcedure?.time_per_product}</div>
+      <div>
+        Time per product: {baseProcedureStore.baseProcedure?.time_per_product}
+      </div>
       <div>Comment: {baseProcedureStore.baseProcedure?.comment}</div>
     </>
   );

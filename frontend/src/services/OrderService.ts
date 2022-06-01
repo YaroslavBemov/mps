@@ -1,10 +1,10 @@
 import $api from "../http";
 
 export interface IOrderStoreData {
-  title: string
-  productId: number
-  count: number
-  baseMtpId: number
+  title: string;
+  productId: number;
+  count: number;
+  baseMtpId: number;
 }
 
 export default class OrderService {

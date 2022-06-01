@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useState, useEffect } from "react";
+
 import { useStore } from "../../hooks/useStore";
 import { useParams } from "react-router-dom";
 
@@ -14,10 +16,6 @@ const BaseMTPAdd = () => {
   });
   const { baseMTPStore } = useStore();
   const { id } = useParams();
-
-  useEffect(() => {
-    // departmentStore.getAllDepartments();
-  }, []);
 
   useEffect(() => {
     setIsDisabled(formData.title === "");

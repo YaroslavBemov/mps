@@ -1,6 +1,5 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import WorkerService from "../services/WorkerService";
-import { IBaseMTP } from "./BaseMTPStore";
 import { ISector } from "./SectorStore";
 
 export interface IWorker {
@@ -76,10 +75,4 @@ export default class WorkerStore {
   setWorker(worker: IWorker) {
     this.worker = worker;
   }
-
-  // get byMTP() {
-  //   return this.Workers.filter((bp) => {
-  //     return bp.Mtp.id === this.rootStore.MTPStore.MTP.id;
-  //   });
-  // }
 }

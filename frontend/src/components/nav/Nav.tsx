@@ -154,18 +154,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-// {
-//   routes.map((route, index) => (
-//     <ListItemButton
-//       selected={selectedIndex === route.path}
-//       onClick={(event) => handleListItemClick(event, route.path, route.sidebarName)}
-//       key={index}
-//     >
-//       <ListItemIcon>
-//         {<route.icon />}
-//       </ListItemIcon>
-//       <ListItemText primary={route.sidebarName} />
-//     </ListItemButton>
-//   ))
-// }
