@@ -46,6 +46,7 @@ export default class BaseProceduresController {
     }
 
     const newBaseProcedure = await BaseProcedure.create(payload)
+
     return newBaseProcedure
   }
 

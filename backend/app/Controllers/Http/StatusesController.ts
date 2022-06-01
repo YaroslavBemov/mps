@@ -24,6 +24,7 @@ export default class StatusesController {
     }
 
     const newStatus = await Status.create(payload)
+
     return newStatus
   }
 

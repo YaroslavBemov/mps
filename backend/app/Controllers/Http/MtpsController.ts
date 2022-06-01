@@ -39,6 +39,7 @@ export default class MtpsController {
     }
 
     const newMtp = await Mtp.create(payload)
+
     return newMtp
   }
 

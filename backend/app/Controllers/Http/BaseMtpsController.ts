@@ -30,6 +30,7 @@ export default class BaseMtpsController {
     }
 
     const newBaseMtp = await BaseMtp.create(payload)
+
     return newBaseMtp
   }
 
@@ -62,7 +63,6 @@ export default class BaseMtpsController {
     })
 
     const payload = await request.validate({ schema: newBaseMtpSchema })
-
     const product = await Product.find(payload.productId)
 
     if (!product) {

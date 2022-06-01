@@ -47,6 +47,7 @@ export default class ProcessesController {
     }
 
     const newProcess = await Process.create(payload)
+
     return newProcess
   }
 

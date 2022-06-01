@@ -32,6 +32,7 @@ export default class WorkersController {
     }
 
     const newWorker = await Worker.create(payload)
+
     return newWorker
   }
 

@@ -6,7 +6,7 @@ import Sector from 'App/Models/Sector'
 import Status from 'App/Models/Status'
 
 export default class ProceduresController {
-  public async index({ }: HttpContextContract) {
+  public async index({}: HttpContextContract) {
     const procedures = await Procedure.query().preload('sector').preload('status')
 
     return procedures
@@ -18,7 +18,7 @@ export default class ProceduresController {
       position: schema.number(),
       title: schema.string({ trim: true }),
       sectorId: schema.number(),
-      comment: schema.string.optional({ trim: true })
+      comment: schema.string.optional({ trim: true }),
     })
 
     const payload = await request.validate({ schema: newProcedureSchema })
@@ -46,6 +46,7 @@ export default class ProceduresController {
     }
 
     const procedure = await Procedure.create(payload)
+
     return procedure
   }
 
@@ -79,7 +80,7 @@ export default class ProceduresController {
       title: schema.string({ trim: true }),
       sectorId: schema.number(),
       statusId: schema.number(),
-      comment: schema.string({ trim: true })
+      comment: schema.string({ trim: true }),
     })
 
     const payload = await request.validate({ schema: newProcedureSchema })

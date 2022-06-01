@@ -40,6 +40,7 @@ export default class OrdersController {
     }
 
     const newOrder = await Order.create(payload)
+
     return newOrder
   }
 

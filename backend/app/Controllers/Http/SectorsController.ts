@@ -4,9 +4,9 @@ import Sector from 'App/Models/Sector'
 import Department from 'App/Models/Department'
 
 export default class SectorsController {
-  public async index({ }: HttpContextContract) {
-    // const sectors = await Sector.all()
+  public async index({}: HttpContextContract) {
     const sectors = await Sector.query().preload('department')
+
     return sectors
   }
 
@@ -33,6 +33,7 @@ export default class SectorsController {
     }
 
     const newSector = await Sector.create(payload)
+
     return newSector
   }
 

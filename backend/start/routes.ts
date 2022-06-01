@@ -55,13 +55,12 @@ Route.group(() => {
     Route.get('production/total', 'ProductionController.total')
     Route.get('production/recent', 'ProductionController.recent')
     Route.get('production/today', 'ProductionController.today')
+    // Desktop
     Route.get('desktops', 'DesktopsController.index')
   }).prefix('api/v1')
 }).middleware('auth')
 
 Route.group(() => {
-  Route.post('reg', 'AuthController.reg')
-  Route.post('test', 'AuthController.test')
   Route.post('login', 'AuthController.login')
   Route.post('logout', 'AuthController.logout').middleware('auth')
   Route.post('refresh', 'AuthController.refresh').middleware('auth')

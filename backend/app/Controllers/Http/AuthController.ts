@@ -3,18 +3,6 @@ import User from 'App/Models/User'
 // TODO rework
 export default class AuthController {
   public async login({ auth, request, response }) {
-    // const name = request.input('name')
-    // const password = request.input('password')
-
-    // try {
-    //   const token = await auth.use('api').attempt(name, password, {
-    //     expiresIn: '7days'
-    //   })
-    //   return token
-    // } catch {
-    //   return response.badRequest('Invalid credentials')
-    // }
-
     const name = request.input('name')
     const password = request.input('password')
 
@@ -42,22 +30,6 @@ export default class AuthController {
     return {
       revoked: true,
     }
-  }
-
-  public async reg({ request }: HttpContextContract) {
-    const name = request.input('name')
-    const password = request.input('password')
-
-    const user = await User.create({ name, password })
-    return user
-  }
-
-  public async test({ request }: HttpContextContract) {
-    const name = request.input('name')
-    // const password = request.input('password')
-
-    const user = await User.query().where('name', name).firstOrFail()
-    return user
   }
 
   public async refresh({ auth }) {

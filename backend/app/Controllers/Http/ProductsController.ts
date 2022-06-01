@@ -19,6 +19,7 @@ export default class ProductsController {
     }
 
     const newProduct = await Product.create(payload)
+
     return newProduct
   }
 
