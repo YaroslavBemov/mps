@@ -1,17 +1,13 @@
-import FormControl from "@mui/material/FormControl";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 
 import { useStore } from "../../hooks/useStore";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
 import ProductionService from "../../services/ProductionService";
-import { toJS } from "mobx";
 
 const Production = () => {
   const [isCreateDisabled, setIsCreateDisabled] = useState(true);
@@ -69,13 +65,12 @@ const Production = () => {
 
     if (serial && orderId) {
       try {
-        const response = await ProductionService.createMtps({
+        await ProductionService.createMtps({
           orderId,
           serial,
         });
         mtpStore.getAllMtps();
         await orderStore.getOrder(id);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -85,9 +80,8 @@ const Production = () => {
   const handleStartProduction = async () => {
     const orderId = Number(id);
     try {
-      const response = await ProductionService.startProduction({ orderId });
+      await ProductionService.startProduction({ orderId });
       await orderStore.getOrder(id);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -104,23 +98,6 @@ const Production = () => {
             alignItems: "center",
           }}
         >
-          {/* <FormControl sx={{ m: 1, minWidth: 120 }} variant="standard">
-            <InputLabel id="base-mtp-id">Base MTP</InputLabel>
-            <Select
-              labelId="base-mtp-id"
-              label="Product base MTP"
-              name="baseMtpId"
-              value={formData.baseMtpId}
-              onChange={handleChange}
-            >
-              {baseMTPStore.byProduct?.map((mtp) => (
-                <MenuItem key={mtp.id} value={mtp.id}>
-                  {mtp.title}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
-
           <TextField
             type="number"
             value={formData.serial}

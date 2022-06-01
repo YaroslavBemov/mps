@@ -1,12 +1,14 @@
-import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
-import { useStore } from "../../hooks/useStore";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
+
+import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
+
 import StoppedActions from "./StoppedActions";
 import WipActions from "./WipActions";
 import WaitingActions from "./WaitingActions";
+import { useStore } from "../../hooks/useStore";
 
 function getOrderTitle(params: GridValueGetterParams) {
   return params.row.order.title;

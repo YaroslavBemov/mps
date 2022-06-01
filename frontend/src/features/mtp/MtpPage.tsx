@@ -1,10 +1,6 @@
 import Paper from "@mui/material/Paper";
-import BaseProcedureAdd from "../base-procedure/BaseProcedureAdd";
-import BaseProcedures from "../base-procedure/BaseProcedures";
 import Procedures from "../procedure/Procedures";
 import Mtp from "./Mtp";
-import MtpProcedures from "./MtpProcedures";
-import MtpUpdate from "./MtpUpdate";
 
 const MtpPage = () => {
   return (
