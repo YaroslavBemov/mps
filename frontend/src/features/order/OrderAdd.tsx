@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
@@ -6,17 +9,16 @@ import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useState, useEffect } from "react";
+
 import { useStore } from "../../hooks/useStore";
-import { useParams, useNavigate } from "react-router-dom";
 
 const BaseMTPAdd = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    productId: '',
-    count: '',
-    baseMtpId: ''
+    productId: "",
+    count: "",
+    baseMtpId: ""
   });
   const { orderStore, productStore, baseMTPStore } = useStore();
   const { id } = useParams();
@@ -24,22 +26,27 @@ const BaseMTPAdd = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      await productStore.getAllProducts()
-    }
-    fetchProducts()
+      await productStore.getAllProducts();
+    };
+    fetchProducts();
   }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      await productStore.getProduct(formData.productId)
-    }
+      await productStore.getProduct(formData.productId);
+    };
     fetchProduct().then(() => {
-      baseMTPStore.getAllBaseMTPs()
-    })
+      baseMTPStore.getAllBaseMTPs();
+    });
   }, [formData.productId]);
 
   useEffect(() => {
-    setIsDisabled(formData.title === "" || formData.count === '' || formData.productId === '' || formData.baseMtpId === '');
+    setIsDisabled(
+      formData.title === "" ||
+      formData.count === "" ||
+      formData.productId === "" ||
+      formData.baseMtpId === ""
+    );
   });
 
   const handleChange = (event: any) => {
@@ -57,12 +64,12 @@ const BaseMTPAdd = () => {
     const title = String(data.get("title"));
     const productId = id ? Number(id) : Number(data.get('productId'));
     const count = Number(data.get("count"));
-    const baseMtpId = Number(data.get('baseMtpId'))
+    const baseMtpId = Number(data.get('baseMtpId'));
 
     if (title && productId && count) {
       try {
         const { id: orderId } = await orderStore.storeOrder({ title, productId, count, baseMtpId });
-        navigate(`/orders/${orderId}`)
+        navigate(`/orders/${orderId}`);
       } catch (error) {
         console.log(error);
       }

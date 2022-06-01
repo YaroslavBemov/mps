@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
+
 import { useStore } from "../../hooks/useStore";
-import { useNavigate, useParams } from "react-router-dom";
 
 const ProductUpdate = () => {
   const [updated, setUpdated] = useState("");
@@ -17,8 +19,8 @@ const ProductUpdate = () => {
       await productStore.getProduct(id);
     };
     fetchProduct().then(() => {
-      setUpdated(productStore.product.title)
-    })
+      setUpdated(productStore.product.title);
+    });
   }, [productStore.product.title]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +49,6 @@ const ProductUpdate = () => {
         label="Updated product"
         id="fullWidth"
         variant="standard"
-        // disabled={isInputDisabled}
         value={updated}
         onChange={handleChange}
       />

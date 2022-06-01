@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper";
 import Worker from "./Worker";
 import WorkerUpdate from "./WorkerUpdate";
 
-
 const WorkerPage = () => {
   return (
     <>
@@ -21,7 +20,6 @@ const WorkerPage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >

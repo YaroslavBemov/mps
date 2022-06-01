@@ -1,5 +1,4 @@
 import Paper from "@mui/material/Paper";
-
 import Sector from "./Sector";
 import SectorUpdate from "./SectorUpdate";
 
@@ -20,7 +19,6 @@ const SectorPage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >

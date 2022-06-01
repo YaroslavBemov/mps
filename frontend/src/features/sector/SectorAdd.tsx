@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
@@ -5,9 +8,8 @@ import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { observer } from "mobx-react-lite";
+
 import { useStore } from "../../hooks/useStore";
-import { useState, useEffect } from "react";
 
 const SectorAdd = () => {
   const [isDisabled, setIsDisabled] = useState(true);

@@ -1,11 +1,11 @@
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+
+import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+
 import { useStore } from "../../hooks/useStore";
-import { useNavigate } from "react-router-dom";
-import ProductAdd from "./ProductAdd";
 
 const rows: GridRowsProp = [
   { id: 1, col1: "Hello", col2: "World" },
@@ -15,8 +15,6 @@ const rows: GridRowsProp = [
 
 const columns: GridColDef[] = [
   { field: "title", headerName: "Title", width: 150 },
-  // { field: "created_at", headerName: "Created at", width: 150 },
-  // { field: "updated_at", headerName: "Updated at", width: 150 },
 ];
 
 const Products = () => {

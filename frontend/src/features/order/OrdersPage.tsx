@@ -8,7 +8,6 @@ const OrdersPage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >
@@ -17,7 +16,6 @@ const OrdersPage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >

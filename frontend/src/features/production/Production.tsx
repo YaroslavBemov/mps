@@ -32,7 +32,7 @@ const Production = () => {
       );
       setIsStartDisabled(
         !orderStore.order.is_created ||
-          (orderStore.order.is_created && orderStore.order.is_started)
+        (orderStore.order.is_created && orderStore.order.is_started)
       );
     });
   }, []);
@@ -43,7 +43,7 @@ const Production = () => {
     );
     setIsStartDisabled(
       !orderStore.order.is_created ||
-        (orderStore.order.is_created && orderStore.order.is_started)
+      (orderStore.order.is_created && orderStore.order.is_started)
     );
   }, [orderStore.order, formData.serial]);
 

@@ -1,5 +1,4 @@
 import Paper from "@mui/material/Paper";
-
 import ProductAdd from "./ProductAdd";
 import Products from "./Products";
 
@@ -9,7 +8,6 @@ const ProductPage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >

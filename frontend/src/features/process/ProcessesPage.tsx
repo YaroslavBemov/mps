@@ -1,7 +1,6 @@
 import Paper from "@mui/material/Paper";
 import Processes from "./Processes";
 
-
 const ProcessesPage = () => {
   return (
     <>
@@ -17,11 +16,9 @@ const ProcessesPage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >
-        {/* <Sectors /> */}
       </Paper>
     </>
   );

@@ -21,7 +21,6 @@ const ProcedurePage = () => {
       <Paper
         variant="outlined"
         sx={{
-          // p: 2,
           mb: 2,
         }}
       >

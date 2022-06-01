@@ -1,11 +1,11 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
+
+import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+
 import { useStore } from "../../hooks/useStore";
-import { useNavigate } from "react-router-dom";
-import SectorAdd from "./SectorAdd";
 
 function getDepartmentTitle(params: GridValueGetterParams) {
   return params.row.department.title ?? "";
@@ -20,8 +20,6 @@ const columns: GridColDef[] = [
     width: 250,
     valueGetter: getDepartmentTitle,
   },
-  // { field: "created_at", headerName: "Created at", width: 150 },
-  // { field: "updated_at", headerName: "Updated at", width: 150 },
 ];
 
 const Sectors = () => {

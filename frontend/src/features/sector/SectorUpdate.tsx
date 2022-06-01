@@ -1,14 +1,16 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { observer } from "mobx-react-lite";
-import { useStore } from "../../hooks/useStore";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import FormControl from "@mui/material/FormControl";
+
+import { useStore } from "../../hooks/useStore";
 
 const SectorUpdate = () => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -42,8 +44,8 @@ const SectorUpdate = () => {
   useEffect(() => {
     setIsDisabled(
       formData.title === sectorStore.sector.title &&
-        formData.step === sectorStore.sector.step &&
-        formData.departmentId === String(sectorStore.sector.department.id)
+      formData.step === sectorStore.sector.step &&
+      formData.departmentId === String(sectorStore.sector.department.id)
     );
   });
 
@@ -88,7 +90,6 @@ const SectorUpdate = () => {
         alignItems: "center",
         padding: 2,
         gap: 1,
-        // maxWidth: 500
       }}
     >
       <TextField
